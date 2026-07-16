@@ -33,7 +33,8 @@ they are kept apart.
 
 Outputs are written to data/experiments_TB/<model>_<mode>_<timestamp>/Prob<NNNNN>/,
 one directory per problem, containing the original Verilog inputs alongside the
-generated VHDL and a logs.log summary.
+generated VHDL, plus a logs.jsonl recording every attempt: its issue code, the
+code it produced, and the simulator report fed back for repair.
 
 Prerequisites:
     * GHDL + VUnit installed (see src/simulation/run.py)
@@ -45,6 +46,7 @@ Run from the repository root:
     python src/construction/translate_verilogeval.py
 """
 
+import json
 import os
 import re
 import subprocess
@@ -275,7 +277,14 @@ def test_all(client, model_name, benchmark_name, mode_name, example_num=EXAMPLE_
     folder_name.mkdir(parents=True, exist_ok=True)
 
     error_list = []
+
+    # Every attempt is appended to logs.jsonl as it happens, so an interrupted
+    # sweep keeps its results. Reload any existing records first.
+    logs_file = folder_name / "logs.jsonl"
     logs = []
+    if logs_file.exists():
+        with open(logs_file, "r", encoding="utf-8") as f:
+            logs = [json.loads(line) for line in f]
 
     for i in range(1, NUM_PROBLEMS + 1):
         test_file, ref_file, description = document_search(
@@ -328,6 +337,8 @@ def test_all(client, model_name, benchmark_name, mode_name, example_num=EXAMPLE_
         issue = 0
 
         for round_idx in range(max_repair_rounds):
+            need_to_be_logged = False
+
             # summary.txt is written by the VHDL testbench itself into the
             # working directory; clear it so a stale file from the previous
             # round cannot be mistaken for this round's result.
@@ -344,6 +355,7 @@ def test_all(client, model_name, benchmark_name, mode_name, example_num=EXAMPLE_
                     round_idx=round_idx, last=last, errors=errors,
                 )
                 last = ""
+                need_to_be_logged = True
 
                 blocks = extract_code(generated_code[0])
                 stimulus_code = blocks.get("stimulus", "")
@@ -376,23 +388,16 @@ def test_all(client, model_name, benchmark_name, mode_name, example_num=EXAMPLE_
 
             accuracy[2] += 1
 
-            if accuracy[0] > 0:
-                error_list.pop(-1)
-                break
-
-            # Feed the failed attempt back for the next repair round.
+            # Read back what this round produced: needed both for the log record
+            # and, on failure, to show the model its own work in the next round.
             with open(gen_file_path, "r", encoding="utf-8") as f:
                 gen_text = f.read()
-                last += "```stimulus\n" + gen_text + "\n```"
             with open(tb_file_path, "r", encoding="utf-8") as f:
                 tb_text = f.read()
-                last += "```testbench\n" + tb_text + "\n```"
             with open(ref_vhd_path, "r", encoding="utf-8") as f:
                 ref_text = f.read()
-                last += "```reference\n" + ref_text + "\n```"
             with open(dut_file_path, "r", encoding="utf-8") as f:
                 dut_text = f.read()
-                last += "```dut\n" + dut_text + "\n```"
 
             # Append rather than assign: an earlier revision overwrote `errors`
             # here, discarding the simulator output the model needs to repair.
@@ -402,20 +407,35 @@ def test_all(client, model_name, benchmark_name, mode_name, example_num=EXAMPLE_
                     "fix the possible errors in the code but also add to the lacked blocks.\n"
                 )
 
-        log_line = f"{model_name}, {mode_name}, Prob{i:05d}: Ended"
-        print(log_line)
-        logs.append(log_line)
+            if need_to_be_logged:
+                logs.append({
+                    "id": i,
+                    "attempt": round_idx + 1,
+                    "issue": issue,
+                    "stimulus": gen_text,
+                    "testbench": tb_text,
+                    "reference": ref_text,
+                    "dut": dut_text,
+                    "report": errors,
+                })
+                with open(logs_file, "a", encoding="utf-8") as f:
+                    f.write(json.dumps(logs[-1], ensure_ascii=False) + "\n")
+
+            if accuracy[0] > 0:
+                error_list.pop(-1)
+                break
+
+            # Feed the failed attempt back for the next repair round.
+            last += "```stimulus\n" + gen_text + "\n```"
+            last += "```testbench\n" + tb_text + "\n```"
+            last += "```reference\n" + ref_text + "\n```"
+            last += "```dut\n" + dut_text + "\n```"
+
+        print(f"{model_name}, {mode_name}, Prob{i:05d}: Ended")
 
         for x in range(len(all_accuracy)):
             all_accuracy[x] += 1 if accuracy[x] > 0 else 0
         print("Now the accuracy is:", all_accuracy)
-
-    logs = "\n".join(logs)
-    with open(folder_name / "logs.log", "w") as f:
-        f.write(logs)
-        f.write("\n")
-        for value in all_accuracy:
-            f.write(str(value) + "\n")
 
     return all_accuracy, logs, error_list
 

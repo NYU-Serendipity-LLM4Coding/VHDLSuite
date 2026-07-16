@@ -202,8 +202,7 @@ def test_once(client, model_name, system_prompt, prompt, examples,
 # Refinement driver
 # ---------------------------------------------------------------------------
 
-def test_all(client, model_name, benchmark_name, num_problems, run_dir,
-             mode_name, task_name,
+def test_all(client, model_name, benchmark_name, num_problems, run_dir, task_name,
              max_tokens=MAX_TOKENS, temp=0.85, top_p=0.95,
              stop=["<|end▁of▁sentence|>"], stream=False):
     """
@@ -283,7 +282,7 @@ def test_all(client, model_name, benchmark_name, num_problems, run_dir,
             print(f"Warning: empty {task_name} for Prob{i:05d}")
             error_list.append(i)
 
-        print(f"{model_name}, {mode_name}, {task_name}, Prob{i:05d}: Ended")
+        print(f"{model_name}, {benchmark_name}, {task_name}, Prob{i:05d}: Ended")
 
     return error_list
 
@@ -304,33 +303,30 @@ def main():
     client = OpenAI(api_key=api_key, base_url=API_BASE_URL)
 
     models = ["anthropic/claude-sonnet-4.5"]
-    mode_list = ["code-complete-iccad2023"]
+
 
     print("TESTING")
     for model_name in models:
         print(model_name, end="\n\n\n")
-        for mode_name in mode_list:
-            print(mode_name, end="\n\n\n")
-            if mode_name not in ("code-complete-iccad2023", "spec-to-rtl"):
-                raise ValueError(f"Unsupported mode: {mode_name}")
+       
 
-            for benchmark_name, num_problems, run_dir in BENCHMARK_RUNS:
-                print(benchmark_name, end="\n\n\n")
+        for benchmark_name, num_problems, run_dir in BENCHMARK_RUNS:
+            print(benchmark_name, end="\n\n\n")
 
-                for task_name in TASKS:
-                    print(task_name, end="\n\n\n")
-                    error_list = test_all(
-                        client, model_name, benchmark_name, num_problems,
-                        run_dir, mode_name, task_name,
-                        max_tokens=MAX_TOKENS, temp=0.85, top_p=0.95,
+            for task_name in TASKS:
+                print(task_name, end="\n\n\n")
+                error_list = test_all(
+                    client, model_name, benchmark_name, num_problems,
+                    run_dir, task_name,
+                    max_tokens=MAX_TOKENS, temp=0.85, top_p=0.95,
+                )
+                if error_list:
+                    print(
+                        f"{benchmark_name}: problems with empty "
+                        f"{task_name}:", error_list
                     )
-                    if error_list:
-                        print(
-                            f"{benchmark_name}: problems with empty "
-                            f"{task_name}:", error_list
-                        )
-                    else:
-                        print(f"{benchmark_name}: all {task_name} outputs generated.")
+                else:
+                    print(f"{benchmark_name}: all {task_name} outputs generated.")
 
 
 if __name__ == "__main__":
