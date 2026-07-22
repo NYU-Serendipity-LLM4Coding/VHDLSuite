@@ -1,0 +1,24 @@
+Please act as a professional VHDL designer.
+
+Implement a module that controls two independent binary decision outputs based on simple combinational logic conditions.
+
+Module name:  
+    TopModule
+
+Input ports:
+    cpu_overheated: Single-bit signal indicating whether the CPU has overheated (active high)
+    arrived: Single-bit signal indicating whether a destination has been reached (active high)
+    gas_tank_empty: Single-bit signal indicating whether the gas tank is empty (active high)
+
+Output ports:
+    shut_off_computer: Single-bit signal that commands the computer to shut down (active high)
+    keep_driving: Single-bit signal that commands continued driving operation (active high)
+
+Implementation:
+    The module implements two independent combinational logic blocks using separate processes. Each process is purely combinational and evaluates its outputs based solely on the current input values.
+
+    The first process controls the shut_off_computer output. It monitors the cpu_overheated input. When cpu_overheated is asserted high, the shut_off_computer output is driven high to indicate that the computer should be shut down. When cpu_overheated is deasserted, the shut_off_computer output is driven low. This ensures the output is always defined and prevents the creation of unintended latches.
+
+    The second process controls the keep_driving output. It monitors both the arrived and gas_tank_empty inputs. When the arrived signal is low (indicating the destination has not been reached), the keep_driving output is set to the inverse of gas_tank_empty. This means driving should continue only if the gas tank is not empty. When the arrived signal is high (indicating the destination has been reached), the keep_driving output is forced low, stopping the driving operation regardless of fuel status. This complete specification of all input conditions ensures proper combinational behavior without latches.
+
+    Both processes use complete conditional structures with explicit else clauses to guarantee that all outputs are assigned under all possible input combinations, following best practices for combinational logic design in VHDL.

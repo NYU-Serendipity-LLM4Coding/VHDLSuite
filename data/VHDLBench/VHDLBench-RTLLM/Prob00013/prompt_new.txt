@@ -1,0 +1,23 @@
+Please act as a professional VHDL designer.
+
+Implement an entity that performs 8-bit signed multiplication using a sequential shift-and-add algorithm based on the Booth multiplication approach. The entity uses a clock signal and an asynchronous reset, and provides a 16-bit product output along with a ready signal to indicate completion of the operation.
+
+Entity name:
+    multi_booth_8bit
+
+Input ports:
+    clk: Clock signal used for synchronous operation.
+    reset: Asynchronous reset signal (active high) used to initialize the multiplier entity.
+    a: 8-bit input representing the signed multiplicand.
+    b: 8-bit input representing the signed multiplier.
+
+Output ports:
+    p: 16-bit output representing the signed product of the multiplication.
+    rdy: Ready signal (active high) indicating the completion of the multiplication operation.
+
+Implementation:
+    The entity operates on the rising edge of the clock signal and responds asynchronously to the reset signal. Upon assertion of the reset signal, all internal registers are initialized: the ready signal is cleared, the product accumulator is zeroed, and a 5-bit counter is reset to zero. The two 8-bit signed inputs are sign-extended to 16 bits and stored in internal multiplier and multiplicand registers.
+
+    During normal operation, when the counter is less than 16, the entity performs iterative shift-and-add operations. In each clock cycle, the multiplicand register is left-shifted by one bit position. The current bit of the multiplier register, indexed by the counter value, is examined. If this bit is logic high, the current value of the multiplicand is added to the product accumulator. The counter is then incremented by one.
+
+    Once the counter reaches 16, indicating that all bits of the multiplier have been processed, the ready signal is asserted to indicate that the multiplication operation is complete and the final product is available on the output port. The product output is derived from the internal signed product accumulator converted to a standard logic vector.

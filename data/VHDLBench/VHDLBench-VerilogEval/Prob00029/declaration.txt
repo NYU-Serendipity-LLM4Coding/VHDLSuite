@@ -1,0 +1,2 @@
+Declaration:
+This VHDL design requires the IEEE standard logic library to support the fundamental digital logic types and operations used throughout the implementation. Specifically, the design relies on the std_logic_1164 package, which provides the std_logic type for representing individual signal values and enables the use of basic logical operators including XOR and NOT operations. These standard components are essential for implementing the combinational logic behavior described in this module.

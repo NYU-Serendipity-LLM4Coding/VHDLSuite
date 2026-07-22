@@ -1,0 +1,2 @@
+Declaration:
+    This VHDL design requires the IEEE standard logic library to support multi-valued logic types and Boolean operations. The ieee.std_logic_1164 package provides the std_logic type used for all input and output ports, enabling representation of digital signals with values such as logic high, logic low, and undefined states. This package also supplies the logical operators (and, or, not) and conditional signal assignment constructs necessary to implement the combinational control logic for the thermostat system.

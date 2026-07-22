@@ -1,0 +1,2 @@
+Declaration:
+    This VHDL design requires the IEEE standard logic library to support digital logic types and operations. Specifically, the `std_logic_1164` package is needed to define the `std_logic` type for individual signals and the `std_logic_vector` type for multi-bit buses. These types enable the representation of digital signals with multiple logic states and provide support for logical operations such as XOR and NOT, which are essential for implementing the feedback mechanism in this pseudo-random sequence generator.

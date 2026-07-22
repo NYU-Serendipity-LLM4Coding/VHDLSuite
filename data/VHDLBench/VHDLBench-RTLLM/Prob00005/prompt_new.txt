@@ -1,0 +1,28 @@
+Please act as a professional VHDL designer.
+
+Implement an entity of a 4-bit BCD adder for decimal arithmetic operations.
+
+Entity name:  
+    adder_bcd
+
+Input ports:
+    A (3 downto 0): First BCD input (4-bit std_logic_vector, representing a decimal digit from 0 to 9).
+    B (3 downto 0): Second BCD input (4-bit std_logic_vector, representing a decimal digit from 0 to 9).
+    Cin: Carry-in input (1-bit std_logic).
+
+Output ports:
+    Sum (3 downto 0): 4-bit std_logic_vector output representing the sum of the two BCD inputs, corrected to be a valid BCD digit (0–9).
+    Cout: Carry-out output (1-bit std_logic), asserted when the sum exceeds the decimal value of 9.
+
+Implementation:
+    The entity performs BCD addition using the following approach:
+    
+    - Binary Addition: The design first computes the binary sum of the two 4-bit BCD inputs A and B along with the carry-in Cin. This initial sum is stored in a 5-bit unsigned signal to accommodate potential overflow beyond the 4-bit range.
+    
+    - BCD Correction Logic: After the initial binary addition, the design evaluates whether the result exceeds 9 (the maximum valid BCD digit). If the sum is greater than 9, the design applies a correction by adding 6 to the result. This correction converts the binary result back into a valid BCD representation, as BCD encoding skips the binary values 10 through 15.
+    
+    - Carry Generation: Whenever the initial sum exceeds 9, the carry-out signal Cout is asserted to indicate that the result overflows into the next decimal digit position. This carry-out can be propagated to higher-order BCD adder stages in multi-digit arithmetic circuits.
+    
+    - Output Assignment: The final corrected sum is extracted from the lower 4 bits of the corrected result and assigned to the Sum output. The carry-out signal is assigned to Cout.
+    
+    The design uses the ieee.numeric_std library for unsigned arithmetic operations and conditional signal assignments to implement the correction logic concisely.

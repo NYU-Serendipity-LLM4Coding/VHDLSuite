@@ -1,0 +1,31 @@
+Please act as a professional VHDL designer.
+
+Implement a module representing one stage of an n-bit shift register with load and enable control functionality.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit, active on rising edge
+    w: Data input to the shift register stage, 1-bit
+    R: Load value, 1-bit, the value to be loaded when load control is asserted
+    E: Enable signal, 1-bit, active high, enables shifting operation
+    L: Load control signal, 1-bit, active high, triggers loading of value R
+
+Output ports:
+    Q: Output of the shift register stage, 1-bit
+
+Implementation:
+    This module implements a single stage of a shift register with priority-based control logic. The design operates synchronously on the rising edge of the clock signal.
+
+    The module includes two primary operating modes controlled by the L and E signals:
+    
+    - Load Mode: When L is asserted high, the module loads the value from input R into the internal register, regardless of the state of other control signals. This operation has the highest priority.
+    
+    - Shift Mode: When L is not asserted but E is asserted high, the module performs a shift operation by capturing the value from input w into the internal register. This allows data to propagate through the shift register chain.
+    
+    - Hold Mode: When neither L nor E is asserted, the register maintains its current value.
+
+    The priority hierarchy ensures that load operations take precedence over shift operations. The output Q reflects the current state of the internal register. This stage can be cascaded with other identical stages to form a complete n-bit shift register, where the output of one stage connects to the w input of the next stage.
+
+    The design uses synchronous logic exclusively, with all state updates occurring on the rising edge of the clock, ensuring predictable timing behavior and easy integration into larger synchronous systems.

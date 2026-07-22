@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs a logical AND operation with an inverted second input.
+
+Module name:
+    TopModule
+
+Input ports:
+    in1: First input operand to the AND gate, 1-bit wide, std_logic type
+    in2: Second input operand to the AND gate (inverted before ANDing), 1-bit wide, std_logic type
+
+Output ports:
+    signal_out: Result of the AND operation between in1 and the inverted in2, 1-bit wide, std_logic type
+
+Implementation:
+    This module implements a simple combinational logic function. The design takes two single-bit inputs and produces a single-bit output. The output signal_out is the result of a logical AND operation where the first operand is in1 and the second operand is the logical negation (inversion) of in2. This is equivalent to an AND gate with a bubble (inversion symbol) on the in2 input terminal. The circuit is purely combinational with no clock or reset signals, meaning the output responds immediately to changes in the input signals. When in1 is high and in2 is low, the output will be high. For all other input combinations, the output will be low.

@@ -1,0 +1,21 @@
+Please act as a professional VHDL designer.
+
+Implement a D flip-flop with active high synchronous reset.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal (1-bit, rising edge sensitive)
+    d: Data input (1-bit)
+    r: Synchronous reset signal (1-bit, active high)
+
+Output ports:
+    q: Registered output (1-bit)
+
+Implementation:
+    This module implements a simple edge-triggered D flip-flop with synchronous reset functionality. The flip-flop captures the value present on the data input and transfers it to the output on each rising edge of the clock signal.
+
+    The synchronous reset takes priority over normal data capture. When the reset signal is asserted high, the output is forced to logic low on the next rising clock edge. When the reset signal is deasserted, the flip-flop operates normally, sampling the data input and updating the output on each rising clock edge.
+
+    The reset is synchronous, meaning it only takes effect at the clock edge, ensuring that the reset operation is synchronized with the system clock domain. This helps avoid metastability issues and maintains proper timing relationships in the design.

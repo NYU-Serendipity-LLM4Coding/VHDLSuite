@@ -1,0 +1,17 @@
+Please act as a professional VHDL designer.
+
+Implement a module that functions as an 8-bit wide 2-to-1 multiplexer.
+
+Module name:
+    TopModule
+
+Input ports:
+    sel: Selection control signal, 1-bit, std_logic. When sel is '1', input a is selected; when sel is '0', input b is selected.
+    a: First data input, 8-bit wide, std_logic_vector(7 downto 0).
+    b: Second data input, 8-bit wide, std_logic_vector(7 downto 0).
+
+Output ports:
+    signal_out: Multiplexer output, 8-bit wide, std_logic_vector(7 downto 0). Carries the selected 8-bit input value based on the sel signal.
+
+Implementation:
+    This module implements a straightforward 2-to-1 multiplexer with 8-bit wide data paths. The multiplexer uses a conditional signal assignment to route one of two 8-bit input vectors to the output based on the selection control signal. When the sel input is high ('1'), the 8-bit vector a is routed to signal_out. When sel is low ('0'), the 8-bit vector b is routed to signal_out instead. The design is purely combinational with no registers or clocked elements, providing immediate propagation of the selected input to the output whenever the sel signal or the selected input changes. All data paths maintain the full 8-bit width throughout the selection process, ensuring no bit truncation occurs.

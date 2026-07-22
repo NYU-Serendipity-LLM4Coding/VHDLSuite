@@ -1,0 +1,34 @@
+Please act as a professional VHDL designer.
+
+Implement a module for parallel-to-serial conversion, where every four input bits are converted to a serial one-bit output (from MSB to LSB). The output signal valid_out is set to 1 to indicate the availability of valid serial output. When valid_out equals 1, the most significant bit of d is output, and the remaining three bits are output sequentially in the following 3 cycles.
+
+Module name:  
+    parallel2serial     
+
+Input ports:
+    clk: Clock signal used for synchronous operations.
+    rst_n: Asynchronous active-low reset signal. When rst_n equals 0, the module is reset; when rst_n equals 1, the reset is inactive.
+    d: 4-bit parallel data input.
+
+Output ports:
+    valid_out: Valid signal indicating the availability of serial output (1-bit).
+    dout: Serial output representing the converted data (1-bit).
+
+Implementation:
+The module operates on the rising edge of the clock with asynchronous active-low reset. It maintains an internal 4-bit data register and a 2-bit counter to track the serialization progress.
+
+The serial output dout continuously presents the most significant bit (bit 3) of the internal data register. The valid_out signal mirrors an internal valid flag that indicates when fresh parallel data has been loaded.
+
+On reset (rst_n equals 0), the data register is cleared to all zeros, the counter is reset to zero, and the valid flag is cleared to 0.
+
+During normal operation, the module uses the counter to sequence through four states. When the counter reaches 3 (binary "11"), indicating the completion of a serialization cycle, the module performs the following actions on the next clock edge:
+- Loads the parallel input d into the data register
+- Resets the counter to 0
+- Sets the valid flag to 1 to indicate new data is being presented
+
+For all other counter values (0, 1, 2), the module:
+- Increments the counter by 1
+- Clears the valid flag to 0
+- Rotates the data register left by one bit position, with bit 3 wrapping around to bit 0
+
+This rotation mechanism ensures that each bit of the loaded parallel data appears sequentially at the dout output over four consecutive clock cycles, starting from the most significant bit.

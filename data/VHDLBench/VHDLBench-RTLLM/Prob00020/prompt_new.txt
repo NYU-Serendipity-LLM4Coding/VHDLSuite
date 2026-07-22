@@ -1,0 +1,17 @@
+Please act as a professional VHDL designer.
+
+Implement a module of a counter design that counts from 0 to 11. The counting can be controlled by the input signal valid_count. That is, the count is paused if valid_count is 0. The counter increments on each clock cycle when the valid_count signal is active and resets to 0 when the reset signal (rst_n) is active.
+
+Module name:  
+    counter_12
+
+Input ports:
+    rst_n: Reset signal (active low)
+    clk: Clock signal
+    valid_count: Signal to enable counting (active high, 1-bit)
+
+Output ports:
+    out_port: 4-bit output representing the current count value
+
+Implementation:
+The counter operates synchronously on the rising edge of the clock signal. When the reset signal is active (rst_n equals 0), the counter asynchronously resets to 0, setting the internal count register to all zeros. During normal operation, if the valid_count signal is high (1), the counter increments on each rising clock edge. The design checks whether the current count value has reached 11 (the maximum count value). If the count equals 11, it wraps around to 0 on the next increment. Otherwise, the count value increases by 1. When valid_count is low (0), the counter pauses and holds its current value without incrementing. The internal count register is converted to a standard logic vector before being assigned to the output port.

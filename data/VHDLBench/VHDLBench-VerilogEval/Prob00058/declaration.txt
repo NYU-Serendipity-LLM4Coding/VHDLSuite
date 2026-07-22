@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the fundamental logic types and operations used throughout the module. Specifically, the std_logic_1164 package is needed to provide the std_logic type for representing individual digital signals with multiple logic states, including the XOR logical operation. These standard components enable the description of both combinational logic and synchronous sequential elements that respond to clock edges.

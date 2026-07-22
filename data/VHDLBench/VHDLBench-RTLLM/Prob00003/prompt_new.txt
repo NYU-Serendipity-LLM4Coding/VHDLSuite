@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a module of a carry-lookahead 32-bit adder that uses the Carry-Lookahead Adder (CLA) architecture.
+
+Module name:  
+    adder_32bit
+
+Input ports:
+    A: 32-bit input operand A (std_logic_vector, 31 downto 0).
+    B: 32-bit input operand B (std_logic_vector, 31 downto 0).
+
+Output ports:
+    S: 32-bit output representing the sum of A and B (std_logic_vector, 31 downto 0).
+    C32: Carry-out output (std_logic, active high).
+
+Implementation:
+The top-level entity adder_32bit implements a hierarchical carry-lookahead adder architecture by instantiating two 16-bit CLA blocks. The design uses a bottom-up approach with multiple levels of hierarchy to achieve fast carry propagation.
+
+The first 16-bit block processes the lower half of the inputs (bits 15 downto 0) with an initial carry-in of logic zero. The second 16-bit block processes the upper half (bits 31 downto 16) with a carry-in derived from the propagate and generate signals of the first block. Each 16-bit block produces partial sum outputs and block-level propagate and generate signals.
+
+The carry between the two 16-bit blocks is computed using the generate signal from the first block combined with its propagate signal. The final carry-out C32 is computed similarly using the generate and propagate signals from the second block along with the intermediate carry.
+
+Each 16-bit CLA block is further subdivided into four 4-bit adder blocks. Within each 4-bit block, individual bit positions compute local propagate and generate signals, which are then fed into a dedicated CLA unit that calculates intermediate carries using lookahead logic. The 4-bit blocks also produce block-level propagate and generate signals that enable carry lookahead at the 16-bit level.
+
+At the lowest level, single-bit full adders compute sum and carry-out for each bit position using XOR logic for the sum and a combination of AND and OR gates for the carry. The hierarchical structure minimizes carry propagation delay by computing carries in parallel at multiple levels rather than rippling through all 32 bits sequentially.

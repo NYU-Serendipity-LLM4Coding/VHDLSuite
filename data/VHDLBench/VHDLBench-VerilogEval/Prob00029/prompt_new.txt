@@ -1,0 +1,21 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs a two-stage logical operation combining XNOR and XOR gates.
+
+Module name:
+    TopModule
+
+Input ports:
+    in1: First input to the XNOR gate, 1-bit signal
+    in2: Second input to the XNOR gate, 1-bit signal
+    in3: Second input to the final XOR gate, 1-bit signal
+
+Output ports:
+    signal_out: Final output of the cascaded logic operation, 1-bit signal
+
+Implementation:
+    This module implements a combinational logic circuit consisting of two cascaded logic gates. The first stage performs an XNOR operation on the two inputs in1 and in2. The result of this XNOR operation is then fed into a second stage XOR gate, where it is combined with the third input in3. The output of this final XOR gate drives the module's output port signal_out.
+
+    The XNOR operation produces a logic high when both inputs are equal (both 0 or both 1), and a logic low when the inputs differ. This intermediate result is stored internally and then XORed with in3 to produce the final output. The XOR operation produces a logic high when its two inputs differ, and a logic low when they are the same.
+
+    The entire circuit is purely combinational with no clock or reset signals. Any change on any of the three input ports will propagate through the logic gates and update the output signal_out accordingly.

@@ -1,0 +1,24 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs a logical XNOR operation on two single-bit inputs.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    x: Single-bit input operand (std_logic)
+    y: Single-bit input operand (std_logic)
+
+Output ports:
+    z: Single-bit output result (std_logic), representing the XNOR of x and y
+
+Implementation:
+    This module implements a combinational logic function that produces the XNOR (exclusive-NOR) of two input signals. The XNOR operation returns a high logic level when both inputs have the same value (both 0 or both 1), and returns a low logic level when the inputs differ.
+
+    The behavior can be summarized as follows:
+    - When x and y are both 0, the output z is 1
+    - When x is 0 and y is 1, the output z is 0
+    - When x is 1 and y is 0, the output z is 0
+    - When x and y are both 1, the output z is 1
+
+    This is a purely combinational design with no registers, clock, or reset signals. The output responds immediately to any change in the input signals, implementing the logical equivalence function.

@@ -1,0 +1,23 @@
+Please act as a professional VHDL designer.
+
+Implement a module that combines a falling-edge-triggered D flip-flop and a transparent latch controlled by a clock signal.
+
+Module name:  
+    TopModule
+
+Input ports:
+    clock: Clock signal used to control both the flip-flop (falling edge) and the latch (level-sensitive high)
+    a: Data input signal, 1-bit
+
+Output ports:
+    p: Latch output, 1-bit
+    q: D flip-flop output, 1-bit
+
+Implementation:
+    This module implements two distinct storage elements driven by the same clock signal:
+
+    The output q is driven by a falling-edge-triggered D flip-flop. On each falling edge of the clock signal, the current value of input a is captured and stored in an internal register. This stored value is then continuously assigned to output q. The flip-flop maintains its state between falling edges, providing edge-sensitive storage.
+
+    The output p is driven by a transparent latch. When the clock signal is high (logic level '1'), the latch is transparent, meaning output p directly follows input a. Any changes to input a are immediately reflected on output p during this transparent phase. When the clock signal transitions to low (logic level '0'), the latch becomes opaque and holds the last value of a that was present when the clock was high. This provides level-sensitive storage.
+
+    These two storage mechanisms operate independently but are synchronized to the same clock signal. The flip-flop provides predictable, edge-triggered behavior suitable for synchronous sequential logic, while the latch provides level-sensitive storage that can be useful in certain timing-critical paths or legacy designs. There is no reset signal, so initial states are undefined until the first clock edge or high level occurs.

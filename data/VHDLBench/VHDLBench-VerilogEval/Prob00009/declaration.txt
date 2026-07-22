@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types including std_logic and std_logic_vector for representing digital signals and buses. Additionally, the numeric_std package is required to enable arithmetic operations on unsigned vector types, including addition and type conversion functions such as resize and unsigned casting. These libraries provide the necessary support for implementing arithmetic operations on bit vectors and converting between logic vector and unsigned numeric representations.

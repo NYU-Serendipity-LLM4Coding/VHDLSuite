@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs reduction operations on a 100-bit input vector.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    signal_in: 100-bit input vector, std_logic_vector(99 downto 0)
+
+Output ports:
+    out_and: single-bit output representing the reduction AND of all 100 input bits
+    out_or: single-bit output representing the reduction OR of all 100 input bits
+    out_xor: single-bit output representing the reduction XOR of all 100 input bits
+
+Implementation:
+    This is a purely combinational circuit that performs three parallel reduction operations on the 100-bit input vector signal_in.
+
+    The reduction AND output (out_and) produces a logic '1' only when all 100 bits of signal_in are '1'. If any bit is '0', the output is '0'.
+
+    The reduction OR output (out_or) produces a logic '1' when at least one bit of signal_in is '1'. The output is '0' only when all 100 bits are '0'.
+
+    The reduction XOR output (out_xor) computes the parity of the input vector by XORing all 100 bits together sequentially. This operation results in '1' if an odd number of bits in signal_in are '1', and '0' if an even number of bits are '1'.
+
+    All three outputs are computed concurrently and respond combinationally to changes in the input vector. There is no clock or reset signal, making this a pure combinational logic block suitable for datapath operations requiring bit-wise analysis of wide vectors.

@@ -1,0 +1,24 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs either addition or subtraction on two 8-bit operands and indicates whether the result is zero.
+
+Module name:  
+    TopModule
+
+Input ports:
+    do_sub: 1-bit control signal that selects the operation (active high for subtraction, low for addition)
+    a: 8-bit unsigned operand
+    b: 8-bit unsigned operand
+
+Output ports:
+    signal_out: 8-bit result of the arithmetic operation
+    result_is_zero: 1-bit flag indicating whether the output is zero (active high)
+
+Implementation:
+    This module implements a configurable arithmetic unit that can perform either addition or subtraction based on a control input. The design operates purely combinationally with no clock or reset signals.
+
+    The module uses a single process sensitive to all three inputs. Based on the value of the control signal do_sub, the process selects between two operations: when do_sub is low, the module adds the two operands; when do_sub is high, the module subtracts operand b from operand a. All arithmetic is performed using unsigned interpretation of the input vectors.
+
+    To ensure proper combinational behavior, the process employs an internal variable to hold the intermediate calculation result. This variable is then assigned to the output port and simultaneously checked for the zero condition. The zero detection compares the arithmetic result against zero and drives the result_is_zero flag high when the comparison is true, and low otherwise.
+
+    This implementation ensures that both the arithmetic output and the zero flag are updated consistently within the same combinational process, guaranteeing that the zero flag accurately reflects the current state of the output for any given combination of inputs.

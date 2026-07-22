@@ -1,0 +1,2 @@
+Declaration:
+    This VHDL design requires the IEEE standard logic library to support digital logic types and operations. Specifically, the std_logic_1164 package is necessary to provide the std_logic type for representing individual signal states and logic values used throughout the design, including clock, reset, control inputs, and output signals. This package enables the representation of multi-valued logic states essential for modeling synchronous digital circuits with clock edges, reset conditions, and combinational logic evaluation.

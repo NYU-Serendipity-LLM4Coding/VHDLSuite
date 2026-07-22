@@ -1,0 +1,2 @@
+Declaration:
+This VHDL design requires the IEEE standard logic library to support multi-valued logic types and vector operations. Specifically, the design uses the `std_logic` type for single-bit signals and the `std_logic_vector` type for multi-bit bus signals. The `std_logic_1164` package provides the necessary type definitions and logical operators (AND, OR, NOT) used in the combinational logic expressions that compute the next-state signals based on the current state encoding and input conditions.

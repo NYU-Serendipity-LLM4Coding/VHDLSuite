@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to provide the fundamental digital logic types and operations used throughout the implementation. Specifically, it uses the std_logic_1164 package, which defines the std_logic type for representing individual signal states and the std_logic_vector type for representing buses and multi-bit values. These types support the logical operations, signal assignments, and vector manipulations necessary to implement the cellular automaton's state transitions and boundary condition handling.

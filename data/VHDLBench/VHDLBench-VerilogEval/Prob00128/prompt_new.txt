@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a module to detect message boundaries in a PS/2 mouse protocol byte stream using a finite state machine.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, rising edge triggered
+    signal_in: 8-bit input byte stream from PS/2 mouse (7 downto 0)
+    reset: Synchronous reset signal, active high
+
+Output ports:
+    done: Message completion indicator, active high for one clock cycle
+
+Implementation:
+    The module implements a finite state machine that identifies and validates three-byte messages from a continuous PS/2 mouse data stream. The PS/2 mouse protocol requires that the first byte of each three-byte message always has bit 3 set to high, while bits 3 of the second and third bytes may vary depending on the data content.
+
+    The FSM operates through four distinct states to track message reception progress. It begins by monitoring the input stream and discarding bytes until it detects a byte with bit 3 set high, which indicates a potential message start. Once this marker byte is identified, the FSM assumes it represents the first byte of a message and advances through subsequent states to count the remaining two bytes.
+
+    The state transitions follow this pattern: The initial state waits for bit 3 to be high before advancing to track the second byte. After receiving the second byte, the FSM unconditionally progresses to await the third byte. Upon receiving the third byte, it enters a completion state. From the completion state, the FSM immediately checks the next incoming byte—if bit 3 is high, it treats this as the start of a new message; otherwise, it returns to the initial waiting state.
+
+    The done output signal asserts high for exactly one clock cycle when the FSM reaches the completion state, occurring immediately after the third byte of a message has been successfully received. This provides a clear indication that a complete three-byte message is available.
+
+    The synchronous reset forces the FSM back to its initial waiting state when asserted high, allowing the system to restart message boundary detection from a known state. All state updates occur on the rising edge of the clock, ensuring synchronous operation throughout the design.

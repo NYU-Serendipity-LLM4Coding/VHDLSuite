@@ -1,0 +1,21 @@
+Please act as a professional VHDL designer.
+
+Implement a combinational logic circuit that realizes a specific Boolean function defined by a Karnaugh map.
+
+Module name:
+    TopModule
+
+Input ports:
+    a: Single-bit input signal (std_logic), represents the first variable in the Boolean function
+    b: Single-bit input signal (std_logic), represents the second variable in the Boolean function
+    c: Single-bit input signal (std_logic), represents the third variable in the Boolean function
+
+Output ports:
+    signal_out: Single-bit output signal (std_logic), produces the result of the Boolean function
+
+Implementation:
+    This module implements a simple three-input combinational logic function. The output signal_out is computed as the logical OR of the three input signals a, b, and c. 
+
+    The Boolean function produces a logic high (1) whenever at least one of the three inputs is high, and produces a logic low (0) only when all three inputs are simultaneously low. This corresponds to a Karnaugh map where the output is 1 for all input combinations except when a=0, b=0, and c=0.
+
+    The design is purely combinational with no clock, reset, or state elements. The output responds immediately to any change in the input signals according to the OR gate propagation delay.

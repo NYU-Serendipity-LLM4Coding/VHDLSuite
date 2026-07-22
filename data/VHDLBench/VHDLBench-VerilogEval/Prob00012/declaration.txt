@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library, which provides the fundamental logic types and operators for VHDL synthesis. Specifically, the std_logic_1164 package is needed to support the std_logic type for representing digital signal values and to enable logical operations including negation and exclusive-or functionality on these signals.

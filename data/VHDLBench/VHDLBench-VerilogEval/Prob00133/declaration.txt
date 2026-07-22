@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types for digital signals and ports. Additionally, the numeric standard package is necessary to enable representation and manipulation of unsigned integer values used in state encoding, as well as conversion functions between different numeric representations. These libraries provide the fundamental types and operations needed for synthesizable hardware description in VHDL.

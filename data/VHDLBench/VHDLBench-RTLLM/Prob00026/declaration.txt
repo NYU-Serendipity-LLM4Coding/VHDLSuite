@@ -1,0 +1,2 @@
+Declaration:
+This design requires the IEEE standard logic library to support fundamental digital logic types including single-bit and multi-bit logic values. The numeric standard library is needed to perform arithmetic operations on vector types, including unsigned integer arithmetic for address and pointer manipulation. Additionally, the mathematical real functions library is necessary to compute logarithmic values for determining address bit widths based on the configurable FIFO depth parameter.

@@ -1,0 +1,21 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a 6-to-1 multiplexer with 4-bit wide data paths.
+
+Module name:
+    TopModule
+
+Input ports:
+    sel: 3-bit selection input that determines which data input is routed to the output
+    data0: 4-bit data input corresponding to selection value 0
+    data1: 4-bit data input corresponding to selection value 1
+    data2: 4-bit data input corresponding to selection value 2
+    data3: 4-bit data input corresponding to selection value 3
+    data4: 4-bit data input corresponding to selection value 4
+    data5: 4-bit data input corresponding to selection value 5
+
+Output ports:
+    signal_out: 4-bit output that presents the selected data input or a default value
+
+Implementation:
+    The module implements a combinational 6-to-1 multiplexer. The sel input acts as a selection control that determines which of the six 4-bit data inputs is routed to the signal_out output. When sel has a value from 0 to 5, the corresponding data input (data0 through data5) is selected and driven onto the output. For any sel value outside the range 0 to 5 (i.e., values 6 and 7), the output is driven to a default value of binary 0000. The multiplexing logic is purely combinational, meaning the output responds immediately to changes in either the sel input or any of the data inputs, with no clock or registered state involved.

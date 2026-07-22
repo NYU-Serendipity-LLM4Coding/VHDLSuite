@@ -1,0 +1,28 @@
+Please act as a professional VHDL designer.
+
+Implement a module to control the water flow rate into a large reservoir based on three vertically-placed water level sensors, maintaining an appropriate water level through a finite state machine that regulates nominal and supplemental flow valves.
+
+Module name:  
+    TopModule
+
+Input ports:
+    clk: Clock signal for synchronous operation (1-bit, rising edge active)
+    reset: Synchronous reset signal (1-bit, active high)
+    s: Water level sensor inputs (3-bit vector, indexed 3 downto 1, active high)
+
+Output ports:
+    fr3: Nominal flow valve control signal 3 (1-bit, active high)
+    fr2: Nominal flow valve control signal 2 (1-bit, active high)
+    fr1: Nominal flow valve control signal 1 (1-bit, active high)
+    dfr: Supplemental flow valve control signal (1-bit, active high)
+
+Implementation:
+    The module implements a finite state machine with six states to manage water flow based on sensor readings and historical water level trends. The three sensors are positioned at 5-inch vertical intervals, with sensor s(1) being the lowest and s(3) being the highest.
+
+    The state machine operates synchronously with the clock signal. On each rising clock edge, if the reset signal is asserted, the FSM transitions to the initial state representing a historically low water level condition. Otherwise, it transitions according to the next state logic.
+
+    The next state logic determines state transitions based on the current state and sensor inputs. When water is below the lowest sensor (none asserted), the system remains in or enters the state with maximum flow. As sensors become asserted indicating rising water levels, the FSM transitions through intermediate states. Each state encodes both the current water level range and the direction from which that level was reached (rising or falling), which affects whether the supplemental flow valve should be engaged.
+
+    The output logic decodes the current state into four control signals. The three nominal flow rate signals (fr1, fr2, fr3) are activated in combinations corresponding to the water level ranges as follows: when water is above the highest sensor, no flow valves are opened; when between the upper sensors, only fr1 is activated; when between the middle sensors, fr1 and fr2 are activated; when below all sensors, all three nominal valves (fr1, fr2, fr3) are activated. The supplemental flow signal (dfr) is asserted in states representing situations where the previous water level was lower than the current level, providing additional flow to help raise the water level more quickly.
+
+    Upon reset, all four output signals are asserted high, corresponding to maximum flow rate as if the water level had been critically low for an extended period, ensuring rapid reservoir filling from a safe initial condition.

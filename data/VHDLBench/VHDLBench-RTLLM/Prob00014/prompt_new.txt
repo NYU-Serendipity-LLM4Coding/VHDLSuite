@@ -1,0 +1,39 @@
+Please act as a professional VHDL designer.
+
+Implement a module for a 4-bit unsigned number pipeline multiplier. The design employs a two-stage pipeline architecture to compute the product of two 4-bit unsigned numbers, using intermediate registers to store partial results and improve throughput.
+
+Module name:  
+    multi_pipe_4bit
+
+Input ports:
+    clk: Clock signal used for synchronous operation of the pipeline stages.
+    rst_n: Active-low asynchronous reset signal. When '0', the module resets all internal registers to zero; when '1', normal operation proceeds.
+    mul_a: 4-bit unsigned multiplicand input signal (bit width determined by generic parameter size, default 4 bits).
+    mul_b: 4-bit unsigned multiplier input signal (bit width determined by generic parameter size, default 4 bits).
+
+Output ports:
+    mul_out: 8-bit unsigned product output signal (bit width is 2*size bits, default 8 bits).
+
+Generic parameter:
+    size: Defines the bit width of the input operands (default value is 4).
+
+Implementation:
+
+The multiplier implements a pipelined multiplication algorithm organized into two sequential stages:
+
+**Input Extension:**
+Both input operands are extended from their original bit width to double the width (8 bits for default size of 4) by zero-padding the most significant bits. This extension prevents overflow during the multiplication process.
+
+**Partial Product Generation:**
+The module generates partial products using a parallel structure. For each bit position in the multiplier operand, a corresponding partial product is computed. When a multiplier bit is '1', the extended multiplicand is left-shifted by the bit position index. When the multiplier bit is '0', the partial product is set to zero. This generates four partial products for a 4-bit multiplier.
+
+**First Pipeline Stage:**
+On the rising edge of the clock signal, the first pipeline stage sums pairs of partial products. Specifically, it computes two intermediate sums: the sum of the first two partial products and the sum of the remaining two partial products. These intermediate results are stored in pipeline registers. During reset, these registers are cleared to zero.
+
+**Second Pipeline Stage:**
+On the subsequent clock cycle, the second pipeline stage adds the two intermediate sums from the first stage to produce the final product. This result is registered and presented on the output port. During reset, the output register is cleared to zero.
+
+**Reset Behavior:**
+The asynchronous active-low reset signal immediately clears all pipeline registers and the output register to zero, regardless of the clock state. This ensures the module starts in a known state after reset.
+
+The two-stage pipeline architecture allows the module to accept new input operands every clock cycle after an initial latency of two cycles, providing improved throughput compared to a purely combinational multiplier.

@@ -1,0 +1,28 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a combinational logic function defined by a Karnaugh map with don't-care conditions.
+
+Module name:  
+    TopModule
+
+Input ports:
+    a: Single-bit logic input, most significant bit of the 4-bit address into the Karnaugh map
+    b: Single-bit logic input, second most significant bit of the 4-bit address
+    c: Single-bit logic input, second least significant bit of the 4-bit address
+    d: Single-bit logic input, least significant bit of the 4-bit address
+
+Output ports:
+    signal_out: Single-bit logic output representing the result of the Karnaugh map lookup
+
+Implementation:
+    This module implements a purely combinational logic circuit based on a Karnaugh map specification. The four input signals are concatenated to form a 4-bit address vector, which is used to index into the truth table derived from the Karnaugh map.
+
+    The circuit operates as follows:
+    - The four individual input bits are combined into a single 4-bit vector with 'a' as the most significant bit and 'd' as the least significant bit.
+    - A combinational process evaluates this 4-bit vector using a case statement that covers all sixteen possible input combinations.
+    - For each input combination, the output is assigned according to the Karnaugh map specification.
+    - The Karnaugh map contains don't-care entries at certain input combinations. For these entries, the designer has the freedom to choose either logic '0' or logic '1' to optimize the implementation. In this design, specific constant values have been chosen for the don't-care positions.
+    - The output responds immediately to any change in the input signals since the logic is purely combinational with no clock or memory elements.
+    - An additional "others" clause ensures complete coverage of the case statement, providing a default output value for any unforeseen conditions.
+
+    The module provides a straightforward mapping from the 4-bit input space to a single-bit output, implementing the specified Boolean function in a lookup-table style architecture.

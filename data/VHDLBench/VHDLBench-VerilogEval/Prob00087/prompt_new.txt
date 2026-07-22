@@ -1,0 +1,22 @@
+Please act as a professional VHDL designer.
+
+Implement a combinational circuit that computes seven different logic gate operations on two single-bit inputs.
+
+Module name:
+    TopModule
+
+Input ports:
+    a: Single-bit input operand (std_logic)
+    b: Single-bit input operand (std_logic)
+
+Output ports:
+    out_and: Result of a AND b (std_logic)
+    out_or: Result of a OR b (std_logic)
+    out_xor: Result of a XOR b (std_logic)
+    out_nand: Result of a NAND b (std_logic)
+    out_nor: Result of a NOR b (std_logic)
+    out_xnor: Result of a XNOR b (std_logic)
+    out_anotb: Result of a AND (NOT b) (std_logic)
+
+Implementation:
+    This module implements a purely combinational logic circuit that performs seven simultaneous logic operations on inputs a and b. Each output is driven by a specific Boolean gate operation. The out_and output produces the logical conjunction of both inputs. The out_or output produces the logical disjunction of both inputs. The out_xor output produces the exclusive-or of both inputs. The out_nand output produces the negated conjunction of both inputs. The out_nor output produces the negated disjunction of both inputs. The out_xnor output produces the exclusive-nor (equivalence) of both inputs. The out_anotb output produces the result of a AND (NOT b), effectively masking a with the inverse of b. All outputs update immediately in response to changes on inputs a or b, with no clock or state elements involved.

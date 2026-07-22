@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-bit logic vectors and single-bit logic signals. Additionally, the IEEE numeric standard package is necessary to enable conversion operations between logic vectors and integer types, which allows the selection index to be interpreted as an unsigned integer value for array indexing purposes.

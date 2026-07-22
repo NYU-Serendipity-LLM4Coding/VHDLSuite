@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a module that computes a boolean function combining XOR and AND operations on two single-bit inputs.
+
+Module name:  
+    TopModule
+
+Input ports:
+    x: Single-bit input operand (std_logic), active high
+    y: Single-bit input operand (std_logic), active high
+
+Output ports:
+    z: Single-bit output result (std_logic), active high
+
+Implementation:
+    This module implements a combinational logic function that performs a boolean operation on two input signals. The output z is computed by first performing an XOR operation between inputs x and y, then performing an AND operation between the XOR result and input x. This is a purely combinational design with no clock or reset signals, meaning the output responds immediately to changes in the inputs. The logic can be understood as: the output is asserted (logic high) when x is high and y is low, effectively implementing the boolean expression where x must be true and the two inputs must differ.

@@ -1,0 +1,26 @@
+Please act as a professional VHDL designer.
+
+Implement a module that functions as a four-bit shift register with integrated down-counting capability.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock signal, active on the rising edge
+    shift_ena: Shift enable control signal, active high, 1 bit
+    count_ena: Count enable control signal, active high, 1 bit
+    data: Serial data input for shift operations, 1 bit
+
+Output ports:
+    q: Four-bit register output, 4 bits wide (3 downto 0)
+
+Implementation:
+    This module implements a dual-purpose four-bit register that can operate in two mutually exclusive modes controlled by the shift_ena and count_ena signals.
+
+    When shift_ena is asserted high, the register operates as a left-shift register with most-significant-bit first loading. On each rising clock edge, the existing register contents shift left by one position, and the incoming data bit is loaded into the least-significant bit position. This allows serial data to be accumulated into the register with the first bit received ending up in the most significant position.
+
+    When count_ena is asserted high (and shift_ena is low), the register operates as a down counter. On each rising clock edge, the current four-bit value is decremented by one. The decrement operation treats the register contents as an unsigned binary number.
+
+    The priority scheme gives precedence to shift_ena over count_ena. If both control signals are asserted simultaneously, the shift operation takes priority, though the system specification indicates this condition does not occur during normal operation.
+
+    All state updates occur synchronously on the rising edge of the clock signal. The register maintains its current value when both control signals are deasserted.

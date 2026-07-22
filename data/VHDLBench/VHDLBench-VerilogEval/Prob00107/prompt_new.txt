@@ -1,0 +1,23 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a two-state Moore finite state machine with synchronous reset functionality.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit, triggers state transitions on the rising edge
+    signal_in: Input control signal, 1-bit, determines state transitions
+    signal_reset: Synchronous reset signal, 1-bit, active-high
+
+Output ports:
+    signal_out: State output signal, 1-bit, reflects the current state of the machine
+
+Implementation:
+    This module implements a Moore finite state machine with two states: A and B. The state machine operates synchronously with the clock signal and includes a synchronous active-high reset mechanism.
+
+    The reset behavior initializes the machine to state B when signal_reset is asserted high during a rising clock edge. The next-state logic is purely combinational and determines state transitions based on the current state and the signal_in input. When in state A, the machine remains in state A if signal_in is high, or transitions to state B if signal_in is low. When in state B, the machine remains in state B if signal_in is high, or transitions to state A if signal_in is low.
+
+    The state register updates on each rising edge of the clock. If the reset signal is active, the state is forced to B regardless of the next-state logic. Otherwise, the state is updated to the value computed by the next-state logic.
+
+    The output logic follows the Moore machine paradigm where the output depends solely on the current state. The signal_out output is asserted high when the machine is in state B, and is driven low when the machine is in state A. This output assignment is combinational and updates immediately when the state changes.

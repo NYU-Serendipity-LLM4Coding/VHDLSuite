@@ -1,0 +1,21 @@
+Please act as a professional VHDL designer.
+
+Implement a module containing 8 D flip-flops with active high synchronous reset. The flip-flops must be reset to 0x34 rather than zero. All DFFs should be triggered by the negative edge of the clock.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock signal, active on falling edge
+    d: 8-bit data input to be latched into the flip-flops
+    reset: Active high synchronous reset signal
+
+Output ports:
+    q: 8-bit registered output from the flip-flops
+
+Implementation:
+    The module implements an 8-bit register using D flip-flops that operate on the falling edge of the clock signal. An internal signal q_reg holds the current state of the register and drives the output port q.
+
+    On each falling edge of clk, the synchronous reset input is checked first. When reset is asserted high, the register q_reg is loaded with the hexadecimal value 0x34 (binary 00110100, decimal 52). When reset is deasserted low, the register captures the current value present on the d input and stores it in q_reg.
+
+    The output q continuously reflects the value stored in q_reg. This design ensures that all 8 flip-flops are synchronized to the same clock edge and respond identically to the reset condition, providing a predictable initialization state of 0x34 rather than the typical all-zeros reset value.

@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library, which provides the fundamental logic types and operations for VHDL hardware description. Specifically, it uses the std_logic_1164 package to support single-bit logic signals with multi-valued logic levels (such as '0', '1', 'Z', and others). The std_logic type enables modeling of digital signals with appropriate resolution and supports standard logical operations including the AND function used in this combinational circuit.

@@ -1,0 +1,32 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a 32-bit Galois Linear Feedback Shift Register (LFSR) with specific tap positions.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit, triggers state updates on rising edge
+    reset: Synchronous reset signal, 1-bit, active high
+
+Output ports:
+    q: Current state of the LFSR, 32-bit vector (31 downto 0)
+
+Implementation:
+    This module implements a 32-bit Galois LFSR, which is a specific type of linear feedback shift register that performs right-shift operations combined with XOR feedback at designated tap positions.
+
+    The LFSR operates synchronously on the rising edge of the clock signal. When the reset input is asserted high, the register initializes to a seed value where only bit position 0 is set to '1' and all other bits are '0' (equivalent to hexadecimal value 0x00000001).
+
+    During normal operation (when reset is not asserted), the LFSR executes the following Galois configuration algorithm each clock cycle:
+    
+    - The register performs a right shift where each bit position shifts to the next lower position
+    - The least significant bit (bit 0) serves as the feedback bit
+    - Four tap positions are implemented at bit positions 32, 22, 2, and 1:
+        * Position 32 (MSB): The feedback bit wraps around to become the new MSB
+        * Position 22 (bit 21 in zero-indexed notation): XORed with the feedback bit
+        * Position 2 (bit 1): XORed with the feedback bit  
+        * Position 1 (bit 0): XORed with the feedback bit
+    
+    The tap configuration creates a maximal-length sequence characteristic of Galois LFSRs, where the XOR operations with the LSB ensure proper polynomial feedback. The right-shift nature combined with these specific tap positions generates a pseudo-random sequence that cycles through states before repeating.
+
+    The output q continuously reflects the current 32-bit state of the shift register, updating synchronously with each clock cycle according to the Galois LFSR feedback rules.

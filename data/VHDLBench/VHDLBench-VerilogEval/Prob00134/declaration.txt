@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types including std_logic and std_logic_vector, which are essential for representing digital signals and buses in VHDL. Additionally, the numeric_std package is included to provide arithmetic operations and type conversions for std_logic_vector signals, enabling proper handling of vector concatenation and case statement matching used in the combinational logic implementation.

@@ -1,0 +1,2 @@
+Declaration:
+    This VHDL design requires the IEEE standard logic library to define the fundamental logic types and operations used throughout the module. Specifically, the std_logic_1164 package is necessary to support the std_logic type, which represents individual digital signal values including the basic logic levels and special states. This package provides the essential type definitions and logical operators needed for single-bit signal manipulation, comparisons, and assignments within the synchronous logic implementation.

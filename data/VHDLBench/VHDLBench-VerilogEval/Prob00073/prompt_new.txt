@@ -1,0 +1,27 @@
+Please act as a professional VHDL designer.
+
+Implement a module that creates 16 D flip-flops with byte-enable control and synchronous reset functionality.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit, active on rising edge
+    resetn: Synchronous reset signal, 1-bit, active-low
+    byteena: Byte enable control, 2-bit vector (1 downto 0), where byteena(1) controls the upper byte and byteena(0) controls the lower byte
+    d: Data input, 16-bit vector (15 downto 0)
+
+Output ports:
+    q: Data output, 16-bit vector (15 downto 0), holds the registered value
+
+Implementation:
+    The module implements a 16-bit register with byte-granular write control. On each rising edge of the clock, the module checks the reset and enable conditions to determine whether to update the stored value.
+
+    When resetn is asserted low, the entire 16-bit register is synchronously cleared to all zeros, regardless of the byte enable signals.
+
+    When resetn is high (inactive), the byte enable inputs control which portions of the register are updated:
+    - When byteena(0) is high, the lower byte q(7 downto 0) is loaded with the corresponding bits from d(7 downto 0)
+    - When byteena(1) is high, the upper byte q(15 downto 8) is loaded with the corresponding bits from d(15 downto 8)
+    - Each byte can be independently enabled, allowing selective updates to either byte, both bytes, or neither byte
+
+    The register retains its previous value for any byte whose corresponding enable bit is low. This byte-enable mechanism is useful for implementing partial word writes in memory interfaces or data path circuits where only portions of a wide data word need to be updated in a given cycle.

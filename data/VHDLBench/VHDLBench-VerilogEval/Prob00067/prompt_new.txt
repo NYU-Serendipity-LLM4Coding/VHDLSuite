@@ -1,0 +1,17 @@
+Please act as a professional VHDL designer.
+
+Implement a decade counter module that counts from 0 through 9 with a period of 10, featuring synchronous reset and conditional increment control.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit, rising edge active
+    slowena: Enable signal, 1-bit, active high - when asserted, allows the counter to increment; when deasserted, pauses the counter
+    reset: Synchronous reset signal, 1-bit, active high - resets the counter to 0
+
+Output ports:
+    q: Counter output value, 4-bit std_logic_vector, represents the current count value (0 to 9)
+
+Implementation:
+    This module implements a decade counter with synchronous control. On each rising edge of the clock, the module evaluates the control signals in priority order. If the reset signal is active high, the counter is immediately set to 0 regardless of other inputs. If reset is not active and the slowena signal is active high, the counter increments by 1. When the counter reaches its maximum value of 9 and slowena is asserted, it wraps around to 0 on the next clock cycle, creating a modulo-10 counting sequence. If slowena is deasserted, the counter holds its current value, effectively pausing the counting operation. The 4-bit output provides sufficient range to represent decimal values 0 through 9. The counter uses an internal unsigned representation for arithmetic operations and converts the result to std_logic_vector for the output port.

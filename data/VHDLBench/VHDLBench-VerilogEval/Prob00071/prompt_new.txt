@@ -1,0 +1,15 @@
+Please act as a professional VHDL designer.
+
+Implement a module that functions as a priority encoder for 8-bit inputs. The module identifies the position of the first (least significant) bit that is set to '1' in the input vector. If no bits are high in the input vector, the output reports zero. For example, when the input vector has bit 4 as the first high bit (with all lower bits at '0'), the output should indicate position 4.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    signal_in: 8-bit input vector to be encoded, std_logic_vector(7 downto 0)
+
+Output ports:
+    pos: 3-bit output indicating the bit position of the least significant '1' in the input vector, std_logic_vector(2 downto 0). Reports "000" when no bits are set.
+
+Implementation:
+    The module implements a combinational priority encoder that scans the input vector from the least significant bit (bit 0) to the most significant bit (bit 7). The encoder uses a priority chain to determine which bit position to report. The scanning process checks each bit sequentially, starting from bit 0. When a bit set to '1' is found, the corresponding position is output and no further bits are examined. The position is encoded as a 3-bit binary value ranging from "000" (decimal 0) to "111" (decimal 7), representing bit positions 0 through 7 respectively. If none of the input bits are high, the output defaults to "000". The logic is purely combinational with no clock or reset signals, meaning the output updates immediately whenever the input changes. The priority mechanism ensures that lower bit positions take precedence over higher ones, so if multiple bits are set, only the position of the lowest numbered bit is reported.

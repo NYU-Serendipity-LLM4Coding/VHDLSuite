@@ -1,0 +1,27 @@
+Please act as a professional VHDL designer.
+
+Implement a module that decodes a 4-bit input and generates two outputs representing the same Boolean function in different minimal forms.
+
+Module name:  
+    TopModule
+
+Input ports:
+    a: Single-bit input, represents the most significant bit of a 4-bit binary number
+    b: Single-bit input, represents the second bit of a 4-bit binary number
+    c: Single-bit input, represents the third bit of a 4-bit binary number
+    d: Single-bit input, represents the least significant bit of a 4-bit binary number
+
+Output ports:
+    out_sop: Single-bit output, provides the result in minimal sum-of-products form
+    out_pos: Single-bit output, provides the result in minimal product-of-sums form
+
+Implementation:
+    This module implements a combinational logic function that evaluates a 4-bit input value formed by concatenating signals a, b, c, and d (where a is the MSB and d is the LSB). The function produces logic-1 for specific input combinations corresponding to decimal values 2, 7, and 15, and produces logic-0 for decimal values 0, 1, 4, 5, 6, 9, 10, 13, and 14. Input combinations corresponding to decimal values 3, 8, 11, and 12 are treated as don't-care conditions and never occur in the system.
+
+    The module generates two outputs that represent the same Boolean function but in different minimal forms:
+
+    The out_sop output implements the minimal sum-of-products form. This is achieved through a two-term OR expression where the first term is the AND of c and d, and the second term is the AND of the complements of a and b with c.
+
+    The out_pos output implements the minimal product-of-sums form. Two intermediate signals, pos0 and pos1, are used to calculate candidate POS expressions. Both signals compute a product of three terms: c ANDed with an OR of the complement of b with d, further ANDed with different final terms. The signal pos0 uses an OR of the complement of a with b as its third term, while pos1 uses an OR of the complement of a with d. The final out_pos output is assigned the value of pos0 when both intermediate signals agree, otherwise it produces a don't-care value to handle potential discrepancies.
+
+    This design is purely combinational with no clocking or state elements. The outputs respond immediately to changes in the inputs according to the specified minimal Boolean expressions.

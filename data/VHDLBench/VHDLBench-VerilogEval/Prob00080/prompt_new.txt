@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a module that functions as a programmable down-counter timer. The timer counts down from a loaded value and signals when the countdown reaches zero.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, active on rising edge
+    load: Load control signal, active high (1-bit)
+    data: Initial counter value to be loaded (10-bit, range 0 to 1023)
+
+Output ports:
+    tc: Terminal count flag, active high when internal counter equals zero (1-bit)
+
+Implementation:
+    The module implements a 10-bit down-counter with synchronous load capability. The internal counter operates on the rising edge of the clock signal according to the following behavior:
+
+    When the load signal is asserted high, the internal counter is immediately loaded with the value presented on the data input. This load operation takes priority and can occur at any time, even while the counter is actively counting down.
+
+    When the load signal is not asserted, the counter decrements by one on each clock cycle, but only if the current count value is non-zero. Once the counter reaches zero, it remains at zero and stops decrementing automatically, effectively halting the countdown until a new value is loaded.
+
+    The tc output continuously reflects the state of the internal counter. It is asserted high when the counter value equals zero, providing immediate indication that the programmed duration has elapsed. The tc signal is deasserted (low) whenever the counter holds any non-zero value.
+
+    This design allows flexible timer operation where the countdown duration can be dynamically reconfigured by loading new values, and the terminal count condition is clearly signaled to external logic for timing control applications.

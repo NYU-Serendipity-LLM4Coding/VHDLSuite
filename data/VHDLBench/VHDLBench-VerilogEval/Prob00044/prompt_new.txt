@@ -1,0 +1,26 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs bitwise-OR, logical-OR, and bitwise-NOT operations on two 3-bit input vectors.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    a: 3-bit input vector (std_logic_vector, bits 2 downto 0)
+    b: 3-bit input vector (std_logic_vector, bits 2 downto 0)
+
+Output ports:
+    out_or_bitwise: 3-bit output vector containing the bitwise-OR result of inputs a and b (std_logic_vector, bits 2 downto 0)
+    out_or_logical: single-bit output representing the logical-OR of the two input vectors (std_logic)
+    out_not: 6-bit output vector containing the bitwise inversion of both input vectors (std_logic_vector, bits 5 downto 0)
+
+Implementation:
+    The module performs three independent combinational operations on the input vectors:
+
+    First, it computes the bitwise-OR operation between vectors a and b. Each bit position is independently OR'ed (bit 0 of a with bit 0 of b, bit 1 of a with bit 1 of b, and so on), and the result is assigned to out_or_bitwise.
+
+    Second, it computes the logical-OR of the two vectors. This operation returns a single-bit result that is true (logic '1') if at least one bit in either vector a or vector b is '1', and false (logic '0') only when both vectors contain all zeros. This is achieved by performing a reduction OR on each vector independently and then OR'ing those two results together.
+
+    Third, it performs bitwise inversion (NOT operation) on both input vectors and concatenates them into a single 6-bit output. The inverted version of vector b occupies the upper half of out_not (bits 5 downto 3), while the inverted version of vector a occupies the lower half (bits 2 downto 0). The concatenation places the NOT of b first, followed by the NOT of a.
+
+    All operations are purely combinational with no clock or reset signals involved. The outputs respond immediately to any changes in the input vectors.

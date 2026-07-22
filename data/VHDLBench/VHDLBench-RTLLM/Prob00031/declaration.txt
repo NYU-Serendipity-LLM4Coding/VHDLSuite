@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support digital logic types and operations. Specifically, it uses the standard logic type system for representing individual bits and multi-bit vectors, along with arithmetic capabilities for unsigned integer operations including comparison and increment functions. These foundational packages enable the representation of clock signals, reset control, counter registers, and the necessary arithmetic operations for frequency division logic.

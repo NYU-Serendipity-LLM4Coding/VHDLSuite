@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the std_logic type, which provides multi-valued logic levels suitable for digital circuit modeling. The std_logic_1164 package from the IEEE library is necessary to enable the use of std_logic signals for the input and output ports, as well as the conditional signal assignment logic used in the multiplexer implementation.

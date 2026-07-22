@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a module that splits an input half-word into its constituent high and low bytes.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    signal_in: 16-bit input word to be split, indexed [15:0]
+
+Output ports:
+    out_hi: 8-bit output representing the upper byte of the input word, corresponding to bits [15:8]
+    out_lo: 8-bit output representing the lower byte of the input word, corresponding to bits [7:0]
+
+Implementation:
+    This is a purely combinational circuit with no registers or clocked logic. The module performs a simple bit-slicing operation on the input signal. The upper half of the 16-bit input (bits 15 through 8) is directly assigned to the out_hi output port, while the lower half (bits 7 through 0) is directly assigned to the out_lo output port. This effectively splits the input half-word into two separate byte-wide outputs representing the most significant and least significant bytes respectively. There is no latency in this operation; the outputs respond immediately to any change in the input signal_in.

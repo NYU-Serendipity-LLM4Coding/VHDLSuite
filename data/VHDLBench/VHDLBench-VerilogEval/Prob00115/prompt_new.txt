@@ -1,0 +1,33 @@
+Please act as a professional VHDL designer.
+
+Implement a module that provides a 64-bit arithmetic shift register with synchronous load capability. The shifter supports bidirectional shifting (left and right) with variable shift amounts (1 or 8 bit positions).
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal for synchronous operation
+    load: Synchronous load enable signal, active high. When asserted, loads the shift register with the value on data input
+    ena: Shift enable signal, active high. When asserted (and load is not asserted), performs a shift operation
+    amount: 2-bit control signal selecting shift direction and amount:
+        "00": shift left by 1 bit position
+        "01": shift left by 8 bit positions
+        "10": shift right by 1 bit position (arithmetic)
+        "11": shift right by 8 bit positions (arithmetic)
+    data: 64-bit parallel load input data
+
+Output ports:
+    q: 64-bit output representing the current contents of the shift register
+
+Implementation:
+    The module implements a 64-bit shift register with synchronous control. On each rising edge of the clock, the register behavior is determined by the control inputs in priority order.
+
+    When load is asserted high, the register captures the 64-bit value present on the data input, regardless of the ena and amount signals.
+
+    When load is deasserted and ena is asserted high, the register performs a shift operation based on the amount control bits:
+    - For amount "00", a left shift by 1 bit is performed, with a zero shifted in from the right
+    - For amount "01", a left shift by 8 bits is performed, with eight zeros shifted in from the right
+    - For amount "10", an arithmetic right shift by 1 bit is performed, preserving the sign bit (most significant bit) by replicating it into the vacated position
+    - For amount "11", an arithmetic right shift by 8 bits is performed, with the sign bit replicated into all eight vacated positions
+
+    When both load and ena are deasserted, the register maintains its current value. The arithmetic right shift functionality ensures proper sign extension for signed number representations, making this module suitable for signed arithmetic operations.

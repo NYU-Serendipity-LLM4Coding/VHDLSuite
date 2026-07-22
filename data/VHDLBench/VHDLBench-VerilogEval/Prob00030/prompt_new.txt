@@ -1,0 +1,21 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs a population count operation on a 255-bit input vector. The population count circuit counts the total number of '1' bits present in the input and produces an 8-bit output representing this count.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    signal_in: 255-bit input vector (254 downto 0) containing the bits to be counted
+
+Output ports:
+    signal_out: 8-bit output (7 downto 0) representing the population count, with a maximum value of 255
+
+Implementation:
+    The module implements a combinational population count circuit that analyzes all 255 bits of the input vector and counts how many bits are set to logic '1'. 
+
+    The counting operation is performed using a combinational process that is sensitive to changes in the input signal. An internal counter variable accumulates the count by iterating through each bit position of the input vector from index 0 to 254. For each bit position, the circuit checks if the bit is '1' and increments the counter accordingly.
+
+    The final count value is converted from an integer to an 8-bit unsigned representation and assigned to the output port. Since the input is 255 bits wide, the output requires 8 bits to represent all possible count values from 0 to 255.
+
+    This is a purely combinational design with no clock or reset signals. The output updates immediately whenever the input vector changes, making it suitable for applications requiring fast bit-counting operations such as Hamming weight calculation, error detection, or digital signal processing tasks.

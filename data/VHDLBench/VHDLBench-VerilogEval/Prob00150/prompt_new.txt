@@ -1,0 +1,41 @@
+Please act as a professional VHDL designer.
+
+Implement a module that provides the combinational logic for a Moore state machine's next-state and output generation.
+
+Module name:
+    TopModule
+
+Input ports:
+    d: 1-bit input signal used for state transition decisions in the detection sequence states
+    done_counting: 1-bit input signal, active high, indicates completion of the counting phase
+    ack: 1-bit input signal, active high, acknowledgment signal to exit the wait state
+    state: 10-bit one-hot encoded vector representing the current state of the Moore state machine
+
+Output ports:
+    B3_next: 1-bit signal, active high when the next state should be B3
+    S_next: 1-bit signal, active high when the next state should be S (initial state)
+    S1_next: 1-bit signal, active high when the next state should be S1
+    Count_next: 1-bit signal, active high when the next state should be Count
+    Wait_next: 1-bit signal, active high when the next state should be Wait_State
+    done: 1-bit output signal, active high, indicates the state machine has completed its operation and is waiting for acknowledgment
+    counting: 1-bit output signal, active high, indicates the state machine is in the counting phase
+    shift_ena: 1-bit output signal, active high, enables shifting operations during states B0 through B3
+
+Implementation:
+    This module implements the combinational next-state logic and output logic for a Moore state machine with ten states encoded in one-hot fashion. The state vector uses bit positions 0 through 9 to represent states S, S1, S11, S110, B0, B1, B2, B3, Count, and Wait_State respectively.
+
+    The state machine operates as a pattern detector followed by shift, count, and acknowledgment phases. The next-state logic is derived by inspection of the state transition requirements:
+
+    The B3_next signal asserts when currently in state B2, unconditionally transitioning to B3.
+
+    The S_next signal asserts when returning to the initial state S, which occurs from: state S with d low, state S1 with d low, state S110 with d low, or state Wait_State when ack is high.
+
+    The S1_next signal asserts when transitioning from state S with d high, beginning the pattern detection sequence.
+
+    The Count_next signal asserts when entering or remaining in the Count state, which happens from state B3 unconditionally, or from state Count when done_counting is low.
+
+    The Wait_next signal asserts when entering or remaining in the Wait_State, which occurs from state Count when done_counting is high, or from state Wait_State when ack is low.
+
+    The output logic reflects the Moore machine characteristics where outputs depend only on the current state. The done output is asserted when in state Wait_State, signaling completion and waiting for acknowledgment. The counting output is asserted when in state Count, indicating the counting phase is active. The shift_ena output is asserted when in any of the four shift states (B0, B1, B2, or B3), enabling shift operations during this phase.
+
+    All logic is purely combinational, deriving next-state predictions and outputs directly from the current state input and control signals without any sequential elements.

@@ -1,0 +1,30 @@
+Please act as a professional VHDL designer.
+
+Implement a module that functions as a 12-hour clock with AM/PM indicator using BCD (Binary-Coded Decimal) representation for time display.
+
+Module name:  
+    TopModule
+
+Input ports:
+    clk: Clock input signal that drives the sequential logic
+    reset: Active-high synchronous reset signal that initializes the clock to 12:00 AM; has higher priority than ena
+    ena: Enable signal that pulses once per second to increment the clock; when low, the clock holds its current value
+
+Output ports:
+    pm: Single-bit AM/PM indicator; '0' represents AM, '1' represents PM
+    hh: 8-bit vector representing hours in BCD format (valid range: 01-12); bits 7 downto 4 hold the tens digit, bits 3 downto 0 hold the ones digit
+    mm: 8-bit vector representing minutes in BCD format (valid range: 00-59); bits 7 downto 4 hold the tens digit, bits 3 downto 0 hold the ones digit
+    ss: 8-bit vector representing seconds in BCD format (valid range: 00-59); bits 7 downto 4 hold the tens digit, bits 3 downto 0 hold the ones digit
+
+Implementation:
+    The module implements a synchronous 12-hour clock that maintains time in BCD format. On the rising edge of clk, if reset is asserted, the clock initializes to 12:00:00 AM by setting pm to '0', hh to x"12", and both mm and ss to x"00". When reset is deasserted and ena is asserted, the clock increments once per second.
+
+    The design employs a cascaded enable mechanism to handle BCD digit rollovers efficiently. Seven enable signals control when each time component should increment. The base enable is always active when ena is high. Higher-level enables activate only when lower digits reach their maximum values, creating a ripple-carry effect through the time hierarchy.
+
+    The seconds ones digit increments from 0 to 9, then wraps to 0 while triggering the seconds tens digit to increment. The seconds tens digit counts from 0 to 5, wrapping to 0 at 59 seconds while enabling the minutes ones digit. The minutes follow the same pattern as seconds, with ones and tens digits forming a 00-59 counter.
+
+    Hours use special 12-hour logic. The hours ones digit increments normally from 0 to 9, but the complete hours value implements 12-hour wrapping: when the time reaches 12:59:59 and the next second arrives, hours transition from x"12" to x"01" rather than x"13". The hours tens digit increments as needed to support this range.
+
+    The PM indicator toggles at a specific transition point. When the clock reaches 11:59:59 and increments to 12:00:00, the pm signal inverts, switching between AM and PM. This occurs twice daily: at noon (AM to PM) and at midnight (PM to AM).
+
+    All BCD digits maintain their proper ranges through conditional logic that detects maximum values and wraps appropriately. The design ensures that only valid BCD values appear on the outputs, with digits 0-9 in each nibble position as required for proper BCD representation.

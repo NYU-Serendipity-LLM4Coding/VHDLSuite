@@ -1,0 +1,23 @@
+Please act as a professional VHDL designer.
+
+Implement a Moore state machine with two states and asynchronous reset.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, single bit, active on rising edge
+    signal_in: Input signal that determines state transitions, single bit
+    areset: Asynchronous reset signal, single bit, active high
+
+Output ports:
+    signal_out: Moore machine output, single bit, depends only on current state
+
+Implementation:
+    This module implements a two-state Moore finite state machine with states A and B. The machine uses an asynchronous active-high reset that forces the state to B immediately when asserted, regardless of the clock.
+
+    The state transition logic operates combinationally based on the current state and the input signal. When in state A, the machine remains in state A if the input is high, and transitions to state B if the input is low. When in state B, the machine remains in state B if the input is high, and transitions to state A if the input is low.
+
+    The state register updates synchronously on the rising edge of the clock, loading the next state value computed by the combinational logic. However, the asynchronous reset takes priority and immediately sets the state to B when active, without waiting for a clock edge.
+
+    The output is a pure function of the current state, following Moore machine semantics. The output is high when the machine is in state B, and low when in state A. This output updates whenever the state changes, either through synchronous transitions or asynchronous reset.

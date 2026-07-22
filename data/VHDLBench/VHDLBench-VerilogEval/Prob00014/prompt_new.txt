@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs a logical AND operation on two single-bit inputs.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    a: Single-bit input signal (std_logic), first operand for the AND operation
+    b: Single-bit input signal (std_logic), second operand for the AND operation
+
+Output ports:
+    signal_out: Single-bit output signal (std_logic), result of the AND operation between inputs a and b
+
+Implementation:
+    This module implements a simple combinational logic AND gate. The output signal_out is the logical AND of the two input signals a and b. When both a and b are high (logic '1'), the output signal_out will be high (logic '1'). If either or both inputs are low (logic '0'), the output will be low (logic '0'). The operation is purely combinational with no clock or reset requirements, meaning the output responds immediately to any change in the input signals.

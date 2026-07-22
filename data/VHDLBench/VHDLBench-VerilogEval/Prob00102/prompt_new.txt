@@ -1,0 +1,27 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs a specific combinational logic function based on four input signals.
+
+Module name:  
+    TopModule
+
+Input ports:
+    a: Single-bit input signal (std_logic)
+    b: Single-bit input signal (std_logic)
+    c: Single-bit input signal (std_logic)
+    d: Single-bit input signal (std_logic)
+
+Output ports:
+    q: Single-bit output signal (std_logic)
+
+Implementation:
+    This is a purely combinational circuit with no storage elements or clock dependency. The module implements a two-level logic function that combines its four input signals to produce a single output.
+
+    The logic operates as follows:
+    - First, input signals a and b are combined using a logical OR operation
+    - Separately, input signals c and d are combined using a logical OR operation
+    - The results of these two OR operations are then combined using a logical AND operation to produce the final output q
+
+    The output q will be asserted (logic high) when at least one signal from the pair (a, b) is high AND simultaneously at least one signal from the pair (c, d) is high. In all other cases, the output q will be deasserted (logic low).
+
+    This combinational function produces an immediate response to any change in the input signals, with the output updating according to the described logic relationship without any clock or synchronization requirements.

@@ -1,0 +1,27 @@
+Please act as a professional VHDL designer.
+
+Implement a module for pulse detection that monitors a single-bit input signal and identifies specific pulse patterns. The module detects when the input signal transitions through a specific sequence (from logic low to logic high and back to logic low over three consecutive clock cycles), and generates a single-cycle output pulse to indicate the completion of this pattern.
+
+Module name:
+    pulse_detect
+
+Input ports:
+    clk: Clock signal used to sample the input and drive the state machine.
+    rst_n: Asynchronous reset signal (active low) that initializes the detection logic.
+    data_in: Single-bit input signal to be monitored for pulse patterns.
+
+Output ports:
+    data_out: Single-bit output signal that asserts high for one clock cycle when a valid pulse pattern is detected, otherwise remains low.
+
+Implementation:
+The module implements a finite state machine (FSM) with four states to track the progression of the input signal pattern. The state machine monitors transitions on the input signal and advances through states as the expected sequence is observed.
+
+The design uses two internal signals to represent the current state and the next state of the FSM. The current state is updated synchronously on the rising edge of the clock, while the next state is computed combinationally based on the current state and the input signal value.
+
+The reset signal asynchronously initializes the state machine to its starting state when asserted low. From this initial state, the FSM transitions through intermediate states as the input signal changes, tracking whether the observed sequence matches the expected pulse pattern.
+
+The state machine progresses as follows: starting from the initial state, it advances to a first intermediate state when the input is low, then to a second intermediate state when the input transitions high, and finally to a third state when the input returns low, completing the pulse detection sequence. If at any point the input deviates from the expected pattern, the state machine returns to an appropriate earlier state to continue monitoring for new pulse patterns.
+
+The output logic operates combinationally and asserts the output signal high when the state machine is in the second intermediate state and simultaneously observes the input transitioning low, indicating the completion of a valid pulse pattern. The output is also forced low during reset. In all other conditions, the output remains low, ensuring a single-cycle pulse indication for each detected pattern.
+
+This design enables continuous monitoring of the input signal, detecting multiple pulse occurrences and generating corresponding output indications while maintaining synchronization with the system clock.

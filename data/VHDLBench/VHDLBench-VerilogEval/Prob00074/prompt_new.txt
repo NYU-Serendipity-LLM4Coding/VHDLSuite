@@ -1,0 +1,28 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a finite state machine circuit with three D flip-flops and combinational logic gates.
+
+Module name:  
+    TopModule
+
+Input ports:
+    clk: Clock signal, active on the rising edge, 1-bit
+    x: Primary input signal that feeds into the combinational logic, 1-bit
+
+Output ports:
+    z: Output signal derived from the state of all flip-flops, 1-bit, active high
+
+Implementation:
+    This module implements a synchronous finite state machine with three D flip-flops that maintain internal state. The design assumes all flip-flops are initialized to zero at reset.
+
+    The circuit consists of three parallel paths, each containing combinational logic feeding a D flip-flop:
+
+    - The first flip-flop receives its D input from an OR gate. This gate combines the inverted output of the flip-flop itself with the input signal x.
+    
+    - The second flip-flop receives its D input from an AND gate. This gate combines the inverted output of the flip-flop itself with the input signal x.
+    
+    - The third flip-flop receives its D input from an XOR gate. This gate combines the non-inverted output of the flip-flop itself with the input signal x.
+
+    All three flip-flops update their state synchronously on the rising edge of the clock signal. The outputs of all three flip-flops are combined through a three-input NOR gate to produce the output z. Therefore, z is active high (logic '1') only when all three flip-flop outputs are simultaneously low (logic '0').
+
+    The state vector is represented as a 3-bit signal initialized to "000". The module operates as a Moore-style state machine where the output z depends solely on the current state, while the next state depends on both the current state and the input x through the described combinational logic.

@@ -1,0 +1,26 @@
+Please act as a professional VHDL designer.
+
+Implement a Moore state machine with one input, one output, and four states according to a specified state transition table.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal for synchronous state transitions (1-bit, positive edge triggered)
+    signal_in: Input signal that determines state transitions (1-bit)
+    areset: Asynchronous reset signal (1-bit, active high)
+
+Output ports:
+    signal_out: Output signal based on current state (1-bit)
+
+Implementation:
+    The module implements a Moore finite state machine with four distinct states: A, B, C, and D. Each state is encoded using a 2-bit representation. The state machine follows this transition behavior:
+
+    From state A: transitions to state B when signal_in is high, remains in state A when signal_in is low.
+    From state B: remains in state B when signal_in is high, transitions to state C when signal_in is low.
+    From state C: transitions to state D when signal_in is high, transitions to state A when signal_in is low.
+    From state D: transitions to state B when signal_in is high, transitions to state C when signal_in is low.
+
+    The next state logic is purely combinational, determining the next state based on the current state and the input signal. The state register updates on the positive edge of the clock signal, loading the next state value into the current state. The asynchronous reset takes priority over the clock and immediately forces the state machine to state A when asserted high.
+
+    As a Moore machine, the output depends only on the current state. The signal_out output is asserted high when the state machine is in state D, and remains low for all other states (A, B, and C). This creates a predictable output pattern that changes only with state transitions, not with input changes during a clock cycle.

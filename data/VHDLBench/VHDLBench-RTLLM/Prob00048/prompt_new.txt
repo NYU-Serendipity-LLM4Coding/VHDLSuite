@@ -1,0 +1,21 @@
+Please act as a professional VHDL designer.
+
+Implement a Read-Only Memory (ROM) module designed for storing fixed data. This entity provides a way to access predefined data based on an 8-bit address input.
+
+Entity name:
+    ROM
+
+Input ports:
+    addr [7:0]: 8-bit address input of type std_logic_vector used to select the data location in memory.
+
+Output ports:
+    dout [15:0]: 16-bit output of type std_logic_vector that delivers the data stored in the ROM at the specified address.
+
+Implementation:
+    The ROM is implemented using a constant memory array with 256 locations, each 16 bits wide. The memory array is defined as a custom type (mem_array_t) which is an array of std_logic_vector elements. The ROM contents are initialized at compile-time using aggregate assignment, where the first four locations (indices 0 through 3) are pre-loaded with specific hexadecimal values (x"A0A0", x"B1B1", x"C2C2", x"D3D3"), and all remaining locations are initialized to zero using the 'others' clause.
+
+    The read operation is performed combinationally through a concurrent signal assignment. The addr input is converted from std_logic_vector to an integer using the to_integer and unsigned functions from the numeric_std library, which then serves as the index to access the corresponding location in the constant memory array. The selected 16-bit data value is directly assigned to the dout output port.
+
+    Since this is a ROM implementation, the memory contents are fixed at synthesis time and cannot be modified during operation. The design provides single-cycle read access with no clock requirement, making it purely combinational logic. The address-to-data mapping happens immediately whenever the addr input changes.
+
+Give me the complete code.

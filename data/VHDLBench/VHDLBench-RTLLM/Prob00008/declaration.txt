@@ -1,0 +1,2 @@
+Declaration:
+    This VHDL design requires the IEEE standard logic library to support multi-valued logic types including std_logic and std_logic_vector for representing the input and output signals. Additionally, the numeric_std package is necessary to provide arithmetic operations and comparisons on unsigned binary vectors, enabling the module to perform subtraction and relational operations between the 4-bit operands. These libraries are part of the IEEE 1076 standard and are commonly available in all VHDL synthesis and simulation tools.

@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to provide the fundamental logic types used in VHDL, including std_logic and std_logic_vector for representing single-bit and multi-bit signals. Additionally, the numeric_std package is necessary to enable arithmetic operations on vector types by providing the unsigned type and supporting operations such as decrement, comparison to zero, and type conversions between std_logic_vector and unsigned representations.

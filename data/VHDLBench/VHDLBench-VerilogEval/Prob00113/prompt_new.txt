@@ -1,0 +1,23 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a combinational logic function defined by a Karnaugh map.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    x: 4-bit input vector, indexed from 4 downto 1, representing the input variables to the Boolean function
+
+Output ports:
+    f: single-bit output representing the result of the Boolean function
+
+Implementation:
+    This module implements a purely combinational logic function that maps a 4-bit input to a single-bit output according to a specific truth table derived from a Karnaugh map. The function evaluates all sixteen possible input combinations and produces the corresponding output value for each case.
+
+    The logic operates as follows:
+    - The module uses a case-based evaluation of the input vector to determine the output.
+    - For input values 0x0, 0x1, 0x4, 0x5, 0x6, 0xC, 0xE, and 0xF (in hexadecimal), the output f is driven to logic high.
+    - For all other input combinations (0x2, 0x3, 0x7, 0x8, 0x9, 0xA, 0xB, 0xD), the output f is driven to logic low.
+    - The implementation includes coverage for all possible input states, ensuring deterministic behavior.
+    
+    The design is entirely asynchronous and combinational, with no clock or reset signals. The output responds immediately to changes in the input vector according to the defined mapping.

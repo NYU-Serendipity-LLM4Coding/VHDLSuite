@@ -1,0 +1,29 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a two-bit saturating counter with asynchronous reset, commonly used in branch prediction schemes.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock signal, active on the rising edge
+    areset: Asynchronous reset signal, active high
+    train_valid: Training enable signal, active high (1-bit)
+    train_taken: Training direction signal, active high indicates increment, active low indicates decrement (1-bit)
+
+Output ports:
+    state: Two-bit counter value representing the prediction state (2 bits, range 0 to 3)
+
+Implementation:
+    This module implements a two-bit saturating counter that maintains a state value between 0 and 3, inclusive. The counter is designed to saturate at its boundaries rather than wrap around.
+
+    The asynchronous reset signal areset initializes the counter to a weakly not-taken state (binary value 01, decimal 1) whenever areset is asserted high, regardless of the clock state.
+
+    On each rising edge of clk, when not in reset, the counter behavior depends on the train_valid signal:
+    - When train_valid is high, the counter enters training mode and updates based on train_taken:
+        - If train_taken is high and the current state is less than 3, the counter increments by 1
+        - If train_taken is low and the current state is greater than 0, the counter decrements by 1
+        - If the counter is already at its maximum (3) or minimum (0) boundary, it remains unchanged (saturating behavior)
+    - When train_valid is low, the counter holds its current value unchanged
+
+    The state output continuously reflects the current counter value as a 2-bit vector. The internal counter logic uses unsigned arithmetic to facilitate increment and decrement operations with boundary checking.

@@ -1,0 +1,26 @@
+Please act as a professional VHDL designer.
+
+Implement an entity that performs 8-bit binary addition with carry-in and carry-out using a ripple-carry architecture.
+
+Entity name:
+    adder_8bit
+
+Input ports:
+    a: 8-bit input operand A, defined as std_logic_vector(7 downto 0).
+    b: 8-bit input operand B, defined as std_logic_vector(7 downto 0).
+    cin: Single-bit carry-in input, type std_logic.
+
+Output ports:
+    sum: 8-bit output representing the sum result, defined as std_logic_vector(7 downto 0).
+    cout: Single-bit carry-out output, type std_logic.
+
+Implementation:
+The entity implements an 8-bit ripple-carry adder by instantiating eight individual full adder components in a cascaded configuration. Each full adder computes the sum and carry for one bit position, with the carry output of each stage feeding into the carry input of the next higher bit position.
+
+An internal carry chain signal is used to propagate carries between the full adder stages. The carry chain has nine elements to accommodate the input carry and all intermediate carries generated between bit positions.
+
+The input carry-in signal feeds the least significant bit position. Each of the eight full adder instances processes corresponding bit positions from operands a and b, along with the carry from the previous stage. The carry output from the most significant bit position is assigned to the cout output port.
+
+The full adder component itself performs single-bit addition by computing the arithmetic sum of three inputs and producing a two-bit result, with the lower bit representing the sum output and the upper bit representing the carry output.
+
+This ripple-carry structure provides a straightforward implementation where the critical path extends through all eight adder stages, as each stage must wait for the carry from the previous stage before producing valid outputs.

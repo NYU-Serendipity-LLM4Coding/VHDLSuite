@@ -1,0 +1,2 @@
+Declaration:
+    This VHDL design requires the IEEE standard logic library to support the std_logic data type used for all port signals. The std_logic_1164 package provides the necessary type definitions and logical operations, including the standard logic type itself and the NOT operator for signal negation. No additional libraries or packages beyond the IEEE standard logic support are necessary for this combinational logic design.

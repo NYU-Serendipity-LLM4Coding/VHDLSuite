@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support digital logic types and operations. Specifically, it uses the std_logic_1164 package, which provides the fundamental std_logic type for representing signal states in digital hardware. This package enables the use of logical operators such as AND, OR, and NOT, which are essential for implementing combinational logic expressions that evaluate boolean functions based on multiple input signals.

@@ -1,0 +1,27 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a 2-to-1 multiplexer using two different VHDL coding styles to demonstrate equivalent functionality.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    a: First data input, 1-bit
+    b: Second data input, 1-bit
+    sel_b1: First selection control signal, 1-bit, active high
+    sel_b2: Second selection control signal, 1-bit, active high
+
+Output ports:
+    out_assign: Multiplexer output using concurrent signal assignment, 1-bit
+    out_always: Multiplexer output using sequential process with if statement, 1-bit
+
+Implementation:
+    This module implements a 2-to-1 multiplexer with dual selection control. The multiplexer selects between two data inputs based on the logical AND of two selection signals. When both sel_b1 and sel_b2 are active high (logic '1'), the output presents the value of input b. Otherwise, the output presents the value of input a.
+
+    The design demonstrates two equivalent VHDL coding methodologies:
+
+    First method: A concurrent signal assignment statement drives out_assign. This uses a conditional signal assignment with a when-else construct that evaluates the selection condition combinationally.
+
+    Second method: A combinational process drives out_always. The process is sensitive to all four input signals and contains an if-then-else statement that evaluates the same selection logic. This sequential coding style produces identical hardware to the concurrent assignment.
+
+    Both outputs implement the same logical function: they output b when the conjunction of sel_b1 and sel_b2 is true, and output a in all other cases. The design is purely combinational with no registered elements, no clock, and no reset. The dual implementation serves as a pedagogical example showing that concurrent and sequential VHDL statements can describe identical hardware behavior.

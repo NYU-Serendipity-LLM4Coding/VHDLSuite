@@ -1,0 +1,22 @@
+Please act as a professional VHDL designer.
+
+Implement a module to find the minimum of four unsigned numbers.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    a: 8-bit unsigned input number
+    b: 8-bit unsigned input number
+    c: 8-bit unsigned input number
+    d: 8-bit unsigned input number
+
+Output ports:
+    min: 8-bit unsigned output representing the minimum value among the four inputs
+
+Implementation:
+    The module implements a combinational logic circuit that determines the minimum value among four 8-bit unsigned input numbers. The design uses a sequential comparison approach where a temporary minimum value is progressively updated by comparing it against each of the four inputs.
+
+    Initially, the first input is assigned as the temporary minimum. Then, this temporary value is compared against each remaining input in sequence. Whenever the current temporary minimum is found to be greater than an input being compared, the temporary minimum is updated to that smaller input value. After all comparisons are completed, the final temporary minimum represents the smallest of all four inputs and is assigned to the output.
+
+    The comparison logic treats all inputs as unsigned 8-bit values, allowing standard magnitude comparisons. The module operates purely combinationally with no clock or reset signals, meaning the output updates immediately whenever any input changes. The sensitivity to all four inputs ensures the output remains correct for any combination of input values.

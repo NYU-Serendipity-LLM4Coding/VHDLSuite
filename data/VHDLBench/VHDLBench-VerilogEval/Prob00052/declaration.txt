@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to provide the fundamental logic types and operations used throughout the implementation. Specifically, the std_logic_1164 package is necessary to support the std_logic type for individual signals and the std_logic_vector type for the 100-bit input bus. This package provides the basic logic values and operators needed for comparison operations and logical XOR computations on standard logic signals.

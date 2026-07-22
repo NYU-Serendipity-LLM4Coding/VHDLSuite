@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs an 8-bit right shift operation on a single-bit input stream. The module captures the input bit on each clock cycle and shifts it through an 8-bit register, with the newest bit entering at the most significant position and older bits propagating toward the least significant position.
+
+Module name:  
+    right_shifter    
+
+Input ports:
+    clk: Clock signal used for synchronous operation. Active on the rising edge.
+    d: Single-bit input signal to be shifted into the register.
+
+Output ports:
+    q: 8-bit output signal (std_logic_vector, 7 downto 0) representing the current state of the shift register.
+
+Implementation:
+The module maintains an internal 8-bit register initialized to all zeros. On each rising edge of the clock signal, the register performs a right shift operation where the input bit d is inserted into the most significant position (bit 7), and all existing bits shift one position to the right. The least significant bit (bit 0) is shifted out and discarded. The current contents of the internal register are continuously driven to the output port q. This creates a serial-to-parallel converter that accumulates the last 8 input bits, with the most recent bit appearing at the MSB and the oldest retained bit at the LSB.

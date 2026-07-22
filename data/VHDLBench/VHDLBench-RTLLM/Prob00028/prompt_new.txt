@@ -1,0 +1,26 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs barrel shifting operations on an 8-bit input vector. This barrel shifter efficiently shifts bits to the right based on a 3-bit control signal, using a multi-stage combinational approach.
+
+Module name:
+    barrel_shifter
+
+Input ports:
+    input_data [7 downto 0]: 8-bit input vector to be shifted.
+    ctrl [2 downto 0]: 3-bit control signal that determines the total shift amount. Each bit controls a different shift magnitude: ctrl(2) controls a 4-position shift, ctrl(1) controls a 2-position shift, and ctrl(0) controls a 1-position shift.
+
+Output ports:
+    output_data [7 downto 0]: 8-bit shifted result.
+
+Implementation:
+    The barrel shifter implements a right-shift operation through three cascaded combinational stages. Each stage conditionally shifts the data by a power-of-two number of positions (4, 2, or 1), controlled by the corresponding bit in the ctrl signal.
+
+    The design uses two intermediate 8-bit signals, x and y, to carry results between stages. A subordinate mux2X1 component provides 2-to-1 multiplexing functionality, selecting between two single-bit inputs based on a selection signal.
+
+    Stage 1 processes the input_data signal. When ctrl(2) is high, a 4-position right shift occurs: the upper four bits of x receive logic zero, while the lower four bits receive the upper four bits of input_data. When ctrl(2) is low, x passes input_data unchanged.
+
+    Stage 2 processes the x signal. When ctrl(1) is high, a 2-position right shift occurs: the upper two bits of y receive logic zero, while the remaining bits shift accordingly from x. When ctrl(1) is low, y passes x unchanged.
+
+    Stage 3 processes the y signal to produce output_data. When ctrl(0) is high, a 1-position right shift occurs: the most significant bit of output_data receives logic zero, while each other bit receives the value from the next higher bit position in y. When ctrl(0) is low, output_data passes y unchanged.
+
+    The total shift amount ranges from 0 to 7 positions, determined by the binary value of the ctrl signal. Bits shifted out to the right are lost, and positions shifted in from the left receive logic zero. All operations are purely combinational with no clock or reset signals.

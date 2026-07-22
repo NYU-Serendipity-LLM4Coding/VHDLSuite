@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a module that provides a 16-bit bidirectional counter with wrap-around capability.
+
+Module name:                 
+    up_down_counter
+
+Input ports:
+    clk: Clock signal (1-bit, std_logic), synchronizes all counter operations on its rising edge.
+    reset: Asynchronous reset signal (1-bit, std_logic, active high), immediately resets the counter to zero.
+    up_down: Direction control signal (1-bit, std_logic), determines counting direction. When high ('1'), the counter increments; when low ('0'), the counter decrements.
+
+Output ports:
+    count: 16-bit output (std_logic_vector, range 15 downto 0) representing the current counter value.
+
+Implementation:
+    The module implements a 16-bit counter that can count both upward and downward with automatic wrap-around at boundary conditions. The design uses an internal unsigned register to perform arithmetic operations, which is then converted to a std_logic_vector for output.
+
+    The counter operates synchronously with respect to the clock signal, updating its value on each rising edge. An asynchronous reset takes priority, immediately clearing the counter to zero regardless of the clock state when the reset signal is asserted high.
+
+    When the direction control signal is high, the counter increments by one on each clock cycle. If the counter reaches its maximum value of 65535 (all bits set to '1'), it automatically wraps around to zero on the next increment operation.
+
+    When the direction control signal is low, the counter decrements by one on each clock cycle. If the counter reaches its minimum value of zero (all bits cleared to '0'), it automatically wraps around to 65535 on the next decrement operation.
+
+    This wrap-around behavior ensures continuous operation without overflow or underflow conditions, making the counter suitable for applications requiring cyclic counting patterns or modulo arithmetic operations. The 16-bit width allows the counter to represent values from 0 to 65535 inclusive.

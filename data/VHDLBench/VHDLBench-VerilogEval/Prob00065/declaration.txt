@@ -1,0 +1,2 @@
+Declaration:
+    This VHDL design requires the IEEE standard logic library to support digital logic types and operations. Specifically, the std_logic_1164 package is necessary to provide the std_logic type for representing individual logic signals, along with the logical operators (and, not) used to implement combinational logic functions. These standard declarations enable the design to perform multi-input Boolean operations and produce logic-level outputs compatible with typical digital hardware synthesis and simulation environments.

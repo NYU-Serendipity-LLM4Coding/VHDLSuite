@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs combinational logic operations on a 4-bit input vector.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    signal_in: 4-bit input vector (3 downto 0), active high
+
+Output ports:
+    out_and: single-bit output representing the reduction AND of all input bits, active high
+    out_or: single-bit output representing the reduction OR of all input bits, active high
+    out_xor: single-bit output representing the reduction XOR of all input bits, active high
+
+Implementation:
+    This module implements a purely combinational circuit that computes three different reduction operations on the 4-bit input vector signal_in. 
+    
+    The out_and output performs a reduction AND operation, producing a logic '1' only when all four bits of signal_in are '1', and '0' otherwise.
+    
+    The out_or output performs a reduction OR operation, producing a logic '1' when at least one bit of signal_in is '1', and '0' only when all bits are '0'.
+    
+    The out_xor output performs a reduction XOR operation, producing a logic '1' when an odd number of bits in signal_in are '1', and '0' when an even number of bits are '1'.
+    
+    All three outputs are computed concurrently and independently through combinational logic. There is no clock or reset signal, and the outputs respond immediately to changes in the input vector.

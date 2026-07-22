@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support digital logic types and operations. Specifically, the std_logic_1164 package is needed to provide the std_logic type for representing single-bit signals with multiple logic states, as well as logical operators including AND, OR, and XOR operations on std_logic values. No additional libraries or packages beyond the standard IEEE definitions are necessary for this sequential circuit implementation.

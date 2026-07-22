@@ -1,0 +1,18 @@
+Please act as a professional VHDL designer.
+
+Implement an entity for edge detection on a single-bit input signal.
+
+Entity name:
+    edge_detect
+
+Input ports:
+    clk: Clock signal used to sample the input and synchronize outputs.
+    rst_n: Asynchronous reset signal (active low).
+    a: 1-bit input signal to be monitored for edge transitions.
+
+Output ports:
+    rise: 1-bit output signal that pulses high for one clock cycle when a rising edge (transition from low to high) is detected on input a.
+    down: 1-bit output signal that pulses high for one clock cycle when a falling edge (transition from high to low) is detected on input a.
+
+Implementation:
+The entity operates on the rising edge of the clock signal. It maintains an internal register to store the previous state of the input signal. On each clock cycle, the current value of the input is compared against its previous value to identify edge transitions. When a rising edge is detected (current value is high while previous value was low), the rise output is asserted high for exactly one clock cycle while down remains low. Conversely, when a falling edge is detected (current value is low while previous value was high), the down output is asserted high for one clock cycle while rise remains low. If no edge transition occurs, both outputs remain low. The asynchronous reset clears both output signals and the internal state register when asserted. This design ensures that edge detection is fully synchronous and that output pulses are precisely one clock cycle in duration, making them suitable for triggering downstream logic or counters.

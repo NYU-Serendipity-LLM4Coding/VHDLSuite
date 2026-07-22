@@ -1,0 +1,30 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs unsigned 16-bit multiplication using a shift-and-accumulate algorithm. The module accepts two 16-bit operands and produces a 32-bit product output. It includes control signals for clock, active-low reset, and operation initiation, along with a completion flag to indicate when the multiplication is finished.
+
+Module name:  
+    multi_16bit  
+
+Input ports:
+    clk: Clock signal that synchronizes all sequential operations.
+    rst_n: Active-low asynchronous reset signal. When low (logic 0), the module resets to its initial state; when high (logic 1), normal operation proceeds.
+    start: Enable signal that initiates the multiplication operation. Must be asserted high to begin computation.
+    ain: 16-bit input operand representing the multiplicand, with bit indices 15 downto 0.
+    bin: 16-bit input operand representing the multiplier, with bit indices 15 downto 0.
+
+Output ports:
+    yout: 32-bit product output signal containing the multiplication result, with bit indices 31 downto 0.
+    done: Status flag output signal. Asserts high (logic 1) to indicate completion of the multiplication operation.
+
+Implementation:
+The module implements an iterative shift-and-accumulate multiplication algorithm that processes one bit of the multiplicand per clock cycle. The design uses three primary sequential processes operating on the rising edge of the clock or the falling edge of the reset signal.
+
+The iteration control mechanism maintains a 5-bit counter that tracks the multiplication progress through 17 distinct states. When the reset signal is inactive and the start signal is asserted, the counter increments on each clock cycle while remaining below 17. When the start signal is deasserted, the counter resets to zero, preparing for a new operation.
+
+The completion flag generation process monitors the iteration counter to determine when multiplication is complete. The flag asserts high when the counter reaches 16, indicating that all 16 bits of the multiplicand have been processed. The flag then deasserts when the counter advances to 17, allowing for proper handshaking with external logic.
+
+The core multiplication logic captures the input operands into internal registers when the iteration counter equals zero and the start signal is active. For iteration counts from 1 through 16, the process examines each bit of the stored multiplicand sequentially. When a multiplicand bit is high, the process adds a left-shifted version of the multiplier to the accumulating product register. The shift amount corresponds to the bit position being examined, implementing the standard shift-and-add multiplication algorithm. This approach constructs the final product incrementally by adding partial products aligned to their appropriate bit positions.
+
+The product accumulator register is 32 bits wide to accommodate the full range of products from two 16-bit operands without overflow. The multiplier value is zero-extended to 32 bits before shifting to ensure correct arithmetic alignment. All internal registers reset to zero when the asynchronous reset is asserted, establishing a known initial state.
+
+The output assignment continuously presents the contents of the internal product register on the output port, making the result available as soon as the done flag indicates completion.

@@ -1,0 +1,27 @@
+Please act as a professional VHDL designer.
+
+Implement a frequency divider module that divides the input clock frequency by odd numbers. The module generates a divided clock output using a fixed odd divisor value.
+
+Module name:
+    freq_divbyodd
+
+Input ports:
+    clk: Input clock signal.
+    rst_n: Active low asynchronous reset signal that initializes the divider.
+    
+Output ports:
+    clk_div: Divided clock output signal.  
+
+Implementation:
+
+The module divides the input clock frequency by an odd number defined by a constant NUM_DIV, which is set to 5. The division is achieved using a dual-edge approach to maintain approximately 50% duty cycle on the output.
+
+Two 3-bit counters, cnt1 and cnt2, operate independently to track clock cycles. Counter cnt1 increments on the rising edge of the input clock, while cnt2 increments on the falling edge. Each counter counts from 0 to NUM_DIV - 1 before wrapping back to 0.
+
+Two intermediate clock divider signals, clk_div1 and clk_div2, are generated based on their respective counters. Each divider signal remains high when its associated counter is less than NUM_DIV / 2, and transitions to low otherwise. The clk_div1 signal is updated synchronously with the rising edge of the input clock, while clk_div2 is updated synchronously with the falling edge.
+
+The final divided clock output clk_div is produced by performing a logical OR operation on clk_div1 and clk_div2. This combination ensures that transitions occur on both edges of the input clock, creating a more balanced output waveform for odd division ratios.
+
+The active low reset signal rst_n asynchronously initializes both counters to zero and both intermediate divider signals to logic high.
+
+Give me the complete VHDL code.

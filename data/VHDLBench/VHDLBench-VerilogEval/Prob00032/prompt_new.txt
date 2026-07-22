@@ -1,0 +1,24 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs vector passthrough and bit-level splitting on a 3-bit input.
+
+Module name:
+    TopModule
+
+Input ports:
+    vec: 3-bit input vector (std_logic_vector, range 2 downto 0)
+
+Output ports:
+    outv: 3-bit output vector (std_logic_vector, range 2 downto 0), passes through the input vector unchanged
+    o2: single-bit output, corresponds to bit 2 of the input vector
+    o1: single-bit output, corresponds to bit 1 of the input vector
+    o0: single-bit output, corresponds to bit 0 of the input vector
+
+Implementation:
+    This is a purely combinational module with no clock or reset signals. The module performs two concurrent operations:
+
+    First, it directly assigns the input vector to the output vector, creating a passthrough connection where all three bits of vec are routed to outv without modification.
+
+    Second, it splits the 3-bit input vector into three separate single-bit outputs. Each individual bit of the input vector is mapped to its corresponding output: bit 2 maps to o2, bit 1 maps to o1, and bit 0 maps to o0. This allows access to each bit position independently while maintaining the complete vector output.
+
+    The implementation uses concurrent signal assignments with no internal logic or state, resulting in zero propagation delay beyond the inherent routing delays. All outputs update immediately in response to changes on the input vector.

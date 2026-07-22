@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the fundamental digital logic types used throughout the module, including single-bit signals and multi-bit vectors. Additionally, the numeric standard package is utilized to enable arithmetic operations and conversions on vector types, supporting both signed and unsigned interpretations where needed. These libraries provide the essential type definitions and operations for implementing synchronous digital logic, state machine control, and data manipulation in hardware description.

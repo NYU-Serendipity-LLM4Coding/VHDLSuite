@@ -1,0 +1,21 @@
+Please act as a professional VHDL designer.
+
+Implement a module that functions as a 4-bit priority encoder.
+
+Module name:  
+    TopModule
+
+Input ports:
+    signal_in: 4-bit input vector to be encoded, where each bit position represents a potential priority level (3 downto 0)
+
+Output ports:
+    pos: 2-bit output vector indicating the bit position of the first (lowest index) logic high bit in the input vector
+
+Implementation:
+    This module implements a combinational priority encoder that scans a 4-bit input vector and identifies the position of the first occurrence of a logic high bit, starting from the least significant bit (bit 0). The encoder operates purely combinationally with no clock or reset signals.
+
+    The priority encoding logic examines the input vector and produces a 2-bit position value. The encoder prioritizes lower bit positions over higher ones - if multiple bits are high simultaneously, the output reflects the position of the lowest-indexed high bit. For example, if bit 0 is high (regardless of the state of bits 1, 2, or 3), the output will be "00". If bit 0 is low but bit 1 is high, the output will be "01". If only bit 2 is high, the output will be "10", and if only bit 3 is high, the output will be "11".
+
+    When the input vector is all zeros (no bits are high), the module outputs "00" as a default value. This design choice provides deterministic behavior for the zero-input case.
+
+    The implementation uses a case statement that evaluates all sixteen possible combinations of the 4-bit input vector, explicitly mapping each combination to its corresponding priority-encoded output. This exhaustive approach ensures complete coverage of the input space and provides predictable timing characteristics for synthesis.

@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a combinational logic circuit that performs a two-input logical AND operation.
+
+Module name:
+    TopModule
+
+Input ports:
+    a: Single-bit input signal, one of the operands for the AND operation
+    b: Single-bit input signal, the second operand for the AND operation
+
+Output ports:
+    q: Single-bit output signal, the result of the AND operation
+
+Implementation:
+    This is a purely combinational circuit with no sequential elements or clocking. The module implements a basic two-input AND gate. The output q is asserted high (logic '1') if and only if both input signals a and b are simultaneously high. In all other cases (when either or both inputs are low), the output q remains low (logic '0'). The logic function can be expressed as: q is true when a is true AND b is true. This represents one of the fundamental Boolean logic operations commonly used in digital design for conditional signal generation, masking operations, and control logic.

@@ -1,0 +1,24 @@
+Please act as a professional VHDL designer.
+
+Implement a sequential circuit that performs single-bit full adder logic with carry propagation across clock cycles.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, active on the rising edge
+    a: Single-bit input operand for addition
+    b: Single-bit input operand for addition
+
+Output ports:
+    q: Single-bit sum output of the full adder
+    state: Single-bit carry output, representing the internal carry state
+
+Implementation:
+    This module implements a clocked full adder circuit where the carry bit is stored in a flip-flop and propagates across clock cycles. On each rising edge of the clock, the circuit computes the carry-out using majority logic: the new carry is asserted when at least two of the three signals (a, b, and the current carry) are high. This carry value is registered and becomes available in the next clock cycle.
+
+    The sum output q is computed combinationally as the XOR of the three inputs: a, b, and the registered carry. This produces the standard full adder sum behavior where q toggles based on the odd or even number of high inputs among the three operands.
+
+    The state output directly exposes the internal carry flip-flop value, allowing external observation of the sequential state. This carry bit persists across clock cycles, enabling the circuit to accumulate carries over multiple additions.
+
+    The circuit operates synchronously with respect to the clock signal. The carry logic uses majority voting (two-out-of-three) to determine when a carry should propagate forward. The XOR-based sum computation ensures proper single-bit addition results at each clock edge, taking into account both current inputs and the stored carry from the previous cycle.

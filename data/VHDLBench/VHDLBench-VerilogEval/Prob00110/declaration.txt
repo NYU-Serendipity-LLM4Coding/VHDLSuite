@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support digital logic types and operations. Specifically, it uses the std_logic_1164 package which provides the std_logic type for representing signal values in hardware description. This package enables the representation of individual bits and multi-bit vectors with standard logic levels, supporting the synchronous and asynchronous control signals needed for state machine implementation.

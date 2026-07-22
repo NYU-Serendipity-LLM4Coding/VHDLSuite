@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types for digital circuit modeling. It also requires the numeric standard package to enable arithmetic operations and type conversions for vector signals. These packages provide the necessary definitions for logic values, signal types, and basic arithmetic functions used throughout the finite state machine implementation.

@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types for digital signals. The std_logic_1164 package provides the fundamental std_logic and std_logic_vector types used for the input and output ports. The numeric_std package enables arithmetic operations and conversions on std_logic_vector types, supporting the numerical interpretation of bit positions in the priority encoding logic.

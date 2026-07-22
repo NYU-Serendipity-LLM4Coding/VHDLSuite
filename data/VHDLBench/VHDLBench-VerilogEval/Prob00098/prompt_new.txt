@@ -1,0 +1,22 @@
+Please act as a professional VHDL designer.
+
+Implement a module that creates a D flip-flop with an inverted input signal.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit, triggers on rising edge
+    a: Data input signal, 1-bit
+
+Output ports:
+    q: Data output signal, 1-bit
+
+Implementation:
+    This module implements a single-bit register that captures and inverts the input data on each rising edge of the clock signal. The circuit operates as a D flip-flop with built-in inversion functionality.
+
+    On every rising edge of the clock signal, the module samples the current value of input 'a', inverts it (logical NOT operation), and stores the result in output 'q'. The output 'q' maintains this inverted value until the next rising clock edge occurs.
+
+    There is no asynchronous reset, so the initial state of the output is undefined until the first clock edge. After the first rising edge, the output will always reflect the inverted state of the input as it was sampled at the previous clock edge.
+
+    This creates a one-cycle delay between changes on input 'a' and the corresponding inverted response on output 'q'. When 'a' is low, 'q' will be driven high on the next clock edge. When 'a' is high, 'q' will be driven low on the next clock edge.

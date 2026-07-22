@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support digital logic types and operations. Specifically, the IEEE std_logic_1164 package is necessary to provide the std_logic type for representing signal states, along with logical operators such as AND, OR, and NOT. These fundamental capabilities enable the implementation of combinational logic expressions and sequential storage elements that form the core functionality of the flip-flop circuit.

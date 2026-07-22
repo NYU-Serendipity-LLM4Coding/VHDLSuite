@@ -1,0 +1,28 @@
+Please act as a professional VHDL designer.
+
+Implement a combinational circuit that realizes a specific three-input logic function defined by a truth table.
+
+Module name:  
+    TopModule
+
+Input ports:
+    x3: First input signal, 1-bit
+    x2: Second input signal, 1-bit
+    x1: Third input signal, 1-bit
+
+Output ports:
+    f: Output signal, 1-bit
+
+Implementation:
+    This module implements a purely combinational logic function that maps three input signals to a single output according to the following truth table:
+
+    When x3, x2, and x1 are all low, the output f is low.
+    When x3 is low, x2 is low, and x1 is high, the output f is low.
+    When x3 is low, x2 is high, and x1 is low, the output f is high.
+    When x3 is low, x2 is high, and x1 is high, the output f is high.
+    When x3 is high, x2 is low, and x1 is low, the output f is low.
+    When x3 is high, x2 is low, and x1 is high, the output f is high.
+    When x3 is high, x2 is high, and x1 is low, the output f is low.
+    When x3 is high, x2 is high, and x1 is high, the output f is high.
+
+    The logic function is realized using a sum-of-products form. The output f asserts high when any of the following input combinations occurs: x2 is high while both x3 and x1 are low; x2 and x1 are both high while x3 is low; x3 and x1 are both high while x2 is low; or all three inputs x3, x2, and x1 are high simultaneously. The design uses basic Boolean operations including AND, OR, and NOT gates to construct the combinational logic. There are no storage elements, clock signals, or sequential behavior—the output responds immediately to changes in the input signals.

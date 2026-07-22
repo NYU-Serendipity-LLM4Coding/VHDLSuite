@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the std_logic data type used for all port signals. The ieee.std_logic_1164 package provides the necessary definitions for standard logic values and operations, enabling basic signal assignments and connections between single-bit ports.

@@ -1,0 +1,33 @@
+Please act as a professional VHDL designer.
+
+Implement a Moore finite state machine that models the behavior of a Lemming in a 2D world, where the Lemming can walk left or right, fall, and dig, with specific rules governing state transitions based on environmental inputs.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal for synchronous state transitions (1-bit, active rising edge)
+    areset: Asynchronous reset signal (1-bit, active high) that initializes the state machine to walk left
+    bump_left: Collision signal indicating the Lemming has bumped into an obstacle on its left side (1-bit, active high)
+    bump_right: Collision signal indicating the Lemming has bumped into an obstacle on its right side (1-bit, active high)
+    ground: Ground presence indicator (1-bit, active high when ground is present, low when absent)
+    dig: Command signal to start digging (1-bit, active high)
+
+Output ports:
+    walk_left: Status flag indicating the Lemming is walking left (1-bit, active high)
+    walk_right: Status flag indicating the Lemming is walking right (1-bit, active high)
+    aaah: Status flag indicating the Lemming is falling (1-bit, active high)
+    digging: Status flag indicating the Lemming is digging (1-bit, active high)
+
+Implementation:
+    The module implements a Moore finite state machine with six distinct states representing the Lemming's possible behaviors. The state machine tracks both the current action (walking, falling, or digging) and the direction (left or right).
+
+    The state machine operates on a synchronous clock with asynchronous reset. When areset is asserted, the machine immediately transitions to the walk-left state regardless of the clock. On each rising edge of the clock when not in reset, the machine updates to the next state based on the current state and input conditions.
+
+    The next-state logic implements a priority-based decision structure. When the Lemming is in a walking state, the machine first checks for loss of ground, which causes an immediate transition to the corresponding falling state. If ground is present, the machine next checks whether a dig command has been issued, transitioning to the appropriate digging state. Only if neither falling nor digging conditions are met does the machine check for collision inputs that would cause a direction change. A collision on the left while walking left causes a transition to walk right, and vice versa.
+
+    While in a falling state, the Lemming continues to fall until ground reappears, at which point it resumes walking in the same direction it was traveling before the fall. Collision inputs are ignored during falling.
+
+    When digging, the Lemming continues in the digging state as long as ground remains present. Once the Lemming digs through to the other side and ground disappears, it transitions to the falling state corresponding to its digging direction. Collision and dig inputs have no effect while already digging.
+
+    The output logic is purely combinational and directly decodes the current state. The walk_left output is asserted only in the walk-left state, walk_right only in the walk-right state, aaah is asserted in either falling state, and digging is asserted in either digging state. This Moore machine design ensures outputs depend solely on the current state and change synchronously with state transitions.

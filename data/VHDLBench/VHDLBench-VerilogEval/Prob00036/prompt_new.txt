@@ -1,0 +1,17 @@
+Please act as a professional VHDL designer.
+
+Implement a module to control a cellphone's ringer and vibration motor based on incoming call status and user preferences.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    ring: 1-bit signal indicating an incoming call is present (active high)
+    vibrate_mode: 1-bit signal indicating the phone is in vibrate mode (active high)
+
+Output ports:
+    ringer: 1-bit signal controlling the audible ringer (active high)
+    motor: 1-bit signal controlling the vibration motor (active high)
+
+Implementation:
+    The module implements a simple control logic that ensures only one output device is activated at a time when an incoming call occurs. When the ring signal is asserted, the module selects between two mutually exclusive outputs based on the vibrate_mode setting. If vibrate_mode is high, the motor output is activated while the ringer remains off. Conversely, if vibrate_mode is low, the ringer output is activated while the motor remains off. When no incoming call is present (ring is low), both outputs remain inactive regardless of the vibrate_mode state. This design guarantees that the ringer and motor are never simultaneously active, preventing conflicting alert mechanisms.

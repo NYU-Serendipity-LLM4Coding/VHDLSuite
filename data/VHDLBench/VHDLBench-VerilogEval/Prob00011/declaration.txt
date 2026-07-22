@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library, which provides the fundamental logic types and operators for VHDL designs. Specifically, the std_logic_1164 package is necessary to support std_logic signal types and logical operations including NOT and OR functions used in combinational logic implementations.

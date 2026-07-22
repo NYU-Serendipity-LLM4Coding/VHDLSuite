@@ -1,0 +1,31 @@
+Please act as a professional VHDL designer.
+
+Implement a finite state machine that follows a specific state transition diagram with six states and produces an output based on the current state.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, single bit, used to synchronize state transitions on the rising edge
+    reset: Synchronous active-high reset signal, single bit, forces the FSM into the initial state
+    w: Control input signal, single bit, determines the next state transition path
+
+Output ports:
+    z: Status output signal, single bit, indicates whether the FSM is currently in specific states
+
+Implementation:
+    This module implements a Mealy-style finite state machine with six distinct states labeled A through F. The FSM uses synchronous logic with a clock-driven state register and combinational next-state logic.
+
+    The state register updates on each rising clock edge. When the reset input is asserted high, the FSM synchronously transitions to state A regardless of other inputs. When reset is de-asserted, the state register loads the value computed by the next-state logic.
+
+    The next-state logic is purely combinational and determines the subsequent state based on the current state and the value of input w. The transition rules are as follows:
+    - From state A: transitions to B when w is high, remains in A when w is low
+    - From state B: transitions to C when w is high, transitions to D when w is low
+    - From state C: transitions to E when w is high, transitions to D when w is low
+    - From state D: transitions to F when w is high, transitions to A when w is low
+    - From state E: remains in E when w is high, transitions to D when w is low
+    - From state F: transitions to C when w is high, transitions to D when w is low
+
+    The output z is generated through combinational logic based solely on the current state. The output is asserted high when the FSM resides in either state E or state F, and is driven low for all other states (A, B, C, and D).
+
+    The design uses an enumerated type to represent the six states, providing clear and maintainable state encoding. The architecture separates concerns into three distinct processes: one for the state register with synchronous reset, one for the combinational next-state logic, and one concurrent assignment for the output logic.

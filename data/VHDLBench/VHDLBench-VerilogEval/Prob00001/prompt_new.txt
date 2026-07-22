@@ -1,0 +1,15 @@
+Please act as a professional VHDL designer.
+
+Implement a module that always outputs a constant LOW logic level.
+
+Module name:
+    TopModule
+
+Input ports:
+    None
+
+Output ports:
+    zero: A single-bit output that is continuously driven to logic LOW ('0')
+
+Implementation:
+    This is a simple combinational circuit with no inputs and one output. The module continuously assigns the logic LOW level to the output signal. There is no clocking, no reset, and no state—the output remains constant at '0' for the entire duration of operation. This type of module is typically used for tying unused inputs to a known logic level or for testing purposes.

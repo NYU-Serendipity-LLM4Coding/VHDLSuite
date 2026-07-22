@@ -1,0 +1,15 @@
+Please act as a professional VHDL designer.
+
+Implement a module that reverses the bit ordering of a 100-bit input vector.
+
+Module name:
+    TopModule
+
+Input ports:
+    signal_in: 100-bit input vector (std_logic_vector, range 99 downto 0) containing the data to be reversed
+
+Output ports:
+    signal_out: 100-bit output vector (std_logic_vector, range 99 downto 0) containing the bit-reversed result
+
+Implementation:
+    This module performs a combinational bit-reversal operation on a 100-bit input vector. The design uses a purely combinational process that continuously monitors the input signal. For each bit position in the output vector, the module assigns the corresponding bit from the reversed position of the input vector. Specifically, output bit 0 receives input bit 99, output bit 1 receives input bit 98, and so on, until output bit 99 receives input bit 0. This creates a complete mirror image of the input bit pattern. The operation is asynchronous and has no clock or reset dependencies, meaning the output updates immediately whenever the input changes.

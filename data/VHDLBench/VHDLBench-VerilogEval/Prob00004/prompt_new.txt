@@ -1,0 +1,23 @@
+Please act as a professional VHDL designer.
+
+Implement a module that reverses the byte order of a 32-bit vector.
+
+Module name:
+    TopModule
+
+Input ports:
+    signal_in: 32-bit input vector to be byte-reversed (bits 31 downto 0)
+
+Output ports:
+    signal_out: 32-bit output vector with reversed byte order (bits 31 downto 0)
+
+Implementation:
+    This module performs a byte-order reversal (endianness conversion) on a 32-bit input vector. The operation is purely combinational with no clock or reset signals required.
+
+    The 32-bit input signal_in is treated as four consecutive 8-bit bytes. The module rearranges these bytes such that:
+    - The least significant byte of signal_in (bits 7 downto 0) becomes the most significant byte of signal_out (bits 31 downto 24)
+    - The second byte of signal_in (bits 15 downto 8) becomes the second byte of signal_out (bits 23 downto 16)
+    - The third byte of signal_in (bits 23 downto 16) becomes the third byte of signal_out (bits 15 downto 8)
+    - The most significant byte of signal_in (bits 31 downto 24) becomes the least significant byte of signal_out (bits 7 downto 0)
+
+    The transformation occurs instantaneously through concurrent signal assignment, making this module suitable for data format conversion between big-endian and little-endian representations in communication protocols or memory interfaces.

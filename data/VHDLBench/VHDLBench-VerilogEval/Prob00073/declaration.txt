@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types including std_logic and std_logic_vector, which are essential for representing digital signals and buses in VHDL. The std_logic_1164 package provides the necessary type definitions and logic operations for working with these fundamental signal types used throughout the module's ports and internal registers.

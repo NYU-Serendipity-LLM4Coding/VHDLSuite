@@ -1,0 +1,2 @@
+Declaration:
+    This VHDL design requires the IEEE standard logic library to support multi-valued logic types and vector operations. Specifically, the design uses the `ieee.std_logic_1164` package, which provides the `std_logic` and `std_logic_vector` types necessary for representing digital signals and buses. These types enable bitwise logical operations (such as OR and NOT), vector concatenation, and the ability to define custom reduction functions that operate across all elements of a vector. No additional libraries beyond the IEEE standard are needed for this design.

@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a module that analyzes bit relationships within a four-bit input vector.
+
+Module name:  
+    TopModule
+
+Input ports:
+    signal_in: 4-bit input vector (3 downto 0)
+
+Output ports:
+    out_both: 3-bit output vector (2 downto 0) where each bit indicates whether both the corresponding input bit and its left neighbor are '1'
+    out_any: 3-bit output vector (3 downto 1) where each bit indicates whether either the corresponding input bit or its right neighbor are '1'
+    out_different: 4-bit output vector (3 downto 0) where each bit indicates whether the corresponding input bit differs from its left neighbor
+
+Implementation:
+    This module performs three parallel combinational operations on the input vector to detect various bit relationships:
+
+    The out_both output analyzes pairs of adjacent bits to detect when both bits in a pair are high. Specifically, each bit position checks if the corresponding input bit and the next higher-indexed bit are both '1'. Since the highest input bit has no left neighbor, only three comparison results are produced. This is implemented using a bitwise AND operation between two shifted slices of the input vector.
+
+    The out_any output determines whether at least one bit in each adjacent pair is high. Each bit position indicates if either the corresponding input bit or the next lower-indexed bit are '1'. The lowest input bit has no right neighbor, so only three comparison results are generated. This uses a bitwise OR operation between overlapping slices of the input.
+
+    The out_different output detects transitions between adjacent bits by comparing each bit with its left neighbor. This operation treats the input vector as circular, meaning the highest bit's left neighbor wraps around to the lowest bit. All four bit positions produce outputs. The implementation uses a bitwise XOR between the input vector and a rotated version of itself, created by concatenating the lowest bit with the upper three bits.
+
+    All three outputs are generated purely combinationally with no registers or state elements, providing immediate results based on the current input values.

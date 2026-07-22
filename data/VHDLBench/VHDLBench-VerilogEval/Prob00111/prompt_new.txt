@@ -1,0 +1,26 @@
+Please act as a professional VHDL designer.
+
+Implement a Moore state machine with two states, two inputs, and one output that transitions between states based on control signals.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, single bit, rising edge triggers state transitions
+    j: Control input, single bit, active-high, controls transition from OFF state to ON state
+    k: Control input, single bit, active-high, controls transition from ON state to OFF state
+    reset: Synchronous reset signal, single bit, active-high, resets the state machine to OFF state
+
+Output ports:
+    signal_out: Single bit output, reflects the current state of the machine (logic '0' when in OFF state, logic '1' when in ON state)
+
+Implementation:
+    This module implements a two-state Moore finite state machine with states labeled A (corresponding to OFF) and B (corresponding to ON). The machine operates on the rising edge of the clock signal with synchronous reset capability.
+
+    The state machine exhibits the following behavior:
+    - When in state A (OFF), the output signal_out is driven to logic '0'. If input j is asserted high, the machine transitions to state B on the next clock edge. If j is low, the machine remains in state A.
+    - When in state B (ON), the output signal_out is driven to logic '1'. If input k is asserted high, the machine transitions to state A on the next clock edge. If k is low, the machine remains in state B.
+
+    The reset input provides synchronous reset functionality. When reset is asserted high at a rising clock edge, the state machine immediately transitions to state A regardless of current state or input conditions. The reset takes priority over normal state transitions.
+
+    The design uses a standard two-process Moore machine architecture. One combinational process determines the next state based on the current state and inputs j and k. A separate clocked process handles the state register update, incorporating the synchronous reset logic. The output is generated purely as a function of the current state through concurrent signal assignment, characteristic of Moore machines where outputs depend only on state and not on inputs.

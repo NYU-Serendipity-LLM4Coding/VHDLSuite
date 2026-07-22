@@ -1,0 +1,19 @@
+Please act as a professional VHDL designer.
+
+Implement a module that functions as a 4-input multiplexer with a default output value.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    a: 4-bit data input, one of the selectable inputs for the multiplexer
+    b: 4-bit data input, one of the selectable inputs for the multiplexer
+    c: 4-bit select signal, determines which input is routed to the output
+    d: 4-bit data input, one of the selectable inputs for the multiplexer
+    e: 4-bit data input, one of the selectable inputs for the multiplexer
+
+Output ports:
+    q: 4-bit output, carries the selected input value or default value
+
+Implementation:
+    This module implements a combinational multiplexer that routes one of four data inputs to the output based on the value of the select signal. The select input c determines which data input appears on output q according to the following mapping: when c equals 0, output b is selected; when c equals 1, output e is selected; when c equals 2, output a is selected; when c equals 3, output d is selected. For all other values of c (4 through 15), the output q is set to a default value of hexadecimal F (binary 1111). The design is purely combinational with no memory elements or clock dependency. The selection logic responds immediately to any change in the select signal c or any of the data inputs, implementing a standard multiplexer behavior with a defined default state for out-of-range select values.

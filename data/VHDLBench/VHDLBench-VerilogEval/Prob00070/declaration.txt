@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support fundamental digital logic operations. Specifically, the std_logic_1164 package is needed to provide the std_logic type for representing binary signal values including logic levels and don't-care conditions. This package enables the use of basic Boolean operations such as logical AND, OR, and NOT, as well as support for metalogical values like don't-care states that may be assigned to outputs under certain conditions.

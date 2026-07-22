@@ -1,0 +1,22 @@
+Please act as a professional VHDL designer.
+
+Implement a module that serves as a building block for hierarchical LFSR (Linear Feedback Shift Register) designs, containing a single flip-flop with an integrated 2:1 multiplexer for input selection.
+
+Module name:  
+    TopModule
+
+Input ports:
+    clk: Clock signal, single bit, active on rising edge
+    L: Load control signal, single bit, active high - selects between loading external data or feedback data
+    q_in: Feedback input, single bit - carries the computed feedback value when not loading
+    r_in: Load input, single bit - carries the external load value when loading is enabled
+
+Output ports:
+    Q: Registered output, single bit - the current state of the flip-flop
+
+Implementation:
+    This module implements a fundamental building block designed to be instantiated multiple times in a hierarchical LFSR architecture. The core functionality combines a D flip-flop with a 2:1 multiplexer on its input path.
+
+    On each rising edge of the clock, the module captures one of two possible input values based on the load control signal. When the load signal is asserted high, the flip-flop captures the value from the external load input. When the load signal is deasserted, the flip-flop captures the value from the feedback input, which typically carries a computed value derived from XOR operations on other flip-flop outputs in the complete LFSR structure.
+
+    The output reflects the registered state and updates synchronously with the clock. The flip-flop initializes to a low state upon design startup. This module provides the storage and input multiplexing necessary for each bit position in an LFSR, allowing the parent module to implement the complete feedback polynomial and parallel load capability by appropriately connecting the feedback and load inputs across multiple instances.

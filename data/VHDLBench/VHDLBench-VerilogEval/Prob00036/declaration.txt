@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support digital logic types and operations. Specifically, it uses the standard logic package which provides the `std_logic` type for representing single-bit signals with multiple logic states, as well as logical operators such as AND and NOT for combining these signals. These standard components are essential for implementing the combinational logic that controls the ringer and motor outputs based on the input conditions.

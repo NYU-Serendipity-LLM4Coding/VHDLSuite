@@ -1,0 +1,23 @@
+Please act as a professional VHDL designer.
+
+Implement a module of a 64-bit subtractor with overflow checking for high-precision arithmetic operations.
+
+Module name:  
+    sub_64bit
+
+Input ports:
+    A: 64-bit input operand representing the minuend (std_logic_vector, bits 63 downto 0). Treated as a signed integer for arithmetic and overflow detection purposes.
+    B: 64-bit input operand representing the subtrahend (std_logic_vector, bits 63 downto 0). Treated as a signed integer for arithmetic and overflow detection purposes.
+
+Output ports:
+    result: 64-bit output representing the difference of the two operands (std_logic_vector, bits 63 downto 0). Computed as A minus B.
+    overflow: Single-bit output indicating whether a signed overflow occurred during the subtraction operation (std_logic). Active high ('1') when overflow is detected, otherwise '0'.
+
+Implementation:
+    The module performs signed 64-bit subtraction and detects arithmetic overflow conditions. The subtraction is computed by treating both input operands as signed integers and performing the arithmetic difference operation. The result is then converted back to a standard logic vector for output.
+
+    Overflow detection logic monitors the sign bits of the operands and the computed result. An overflow condition occurs when the signs of the two input operands differ and the sign of the result does not match the sign of the minuend. Specifically:
+    - When subtracting a negative number from a positive number, if the result appears negative, positive overflow has occurred.
+    - When subtracting a positive number from a negative number, if the result appears positive, negative overflow has occurred.
+
+    The overflow flag is asserted high when such a condition is detected, indicating that the true mathematical result cannot be accurately represented within the 64-bit signed range. Otherwise, the overflow flag remains low, signaling a valid result.

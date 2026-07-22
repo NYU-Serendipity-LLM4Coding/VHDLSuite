@@ -1,0 +1,28 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a one-dimensional cellular automaton following Rule 90, a system where each cell's next state is determined by the XOR of its two neighboring cells.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock signal, active on the rising edge, 1-bit
+    load: Synchronous load control signal, active high, 1-bit. When asserted, the system loads new initial state data
+    data: Input data vector for initializing the cellular automaton state, 512-bit wide (511 downto 0)
+
+Output ports:
+    q: Current state of the 512-cell system, 512-bit wide (511 downto 0)
+
+Implementation:
+    This module implements a 512-cell Rule 90 cellular automaton that evolves synchronously with the clock. Rule 90 defines that each cell's next state is computed as the XOR of its left and right neighbors.
+
+    On each rising edge of the clock, the module operates as follows:
+    - When the load signal is asserted high, the entire 512-bit state vector is synchronously loaded from the data input, initializing or resetting the automaton to a new configuration.
+    - When load is not asserted, the automaton advances by one generation. Each cell computes its next state by XORing its immediate left and right neighbors from the current state.
+    
+    Boundary conditions are handled specially:
+    - The leftmost cell (bit 0) treats its left neighbor as logic zero and XORs this with its right neighbor (bit 1).
+    - The rightmost cell (bit 511) treats its right neighbor as logic zero and XORs this with its left neighbor (bit 510).
+    - All interior cells (bits 1 through 510) XOR their actual left and right neighbors.
+
+    The state is maintained in an internal register that updates synchronously on each clock edge. The output q continuously reflects this internal state. The design ensures that all 512 cells update simultaneously based on the previous generation's configuration, maintaining the proper cellular automaton evolution according to Rule 90.

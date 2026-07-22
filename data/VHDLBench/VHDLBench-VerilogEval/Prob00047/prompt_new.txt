@@ -1,0 +1,23 @@
+Please act as a professional VHDL designer.
+
+Implement a module that contains eight D flip-flops with active-high asynchronous reset functionality.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit, triggers the flip-flops on the rising edge
+    d: Data input, 8-bit vector (7 downto 0), representing the input values for all eight flip-flops
+    areset: Asynchronous reset signal, 1-bit, active-high
+
+Output ports:
+    q: Data output, 8-bit vector (7 downto 0), representing the current state of all eight flip-flops
+
+Implementation:
+    This module implements eight parallel D flip-flops that operate synchronously with respect to the clock while providing asynchronous reset capability. The design uses a single clocked process sensitive to both the clock and reset signals.
+
+    When the asynchronous reset signal areset is asserted high, all eight flip-flops immediately reset to logic zero, regardless of the clock state. This asynchronous behavior ensures that the outputs can be cleared at any time without waiting for a clock edge.
+
+    During normal operation, when areset is low, the flip-flops capture the input data on the rising edge of the clock signal. Each rising edge of clk causes the 8-bit input vector d to be transferred to the output vector q. The transfer is parallel, meaning all eight bits are captured simultaneously on the same clock edge.
+
+    The module maintains the captured data stable at the output q until the next rising clock edge or until an asynchronous reset occurs. This design is commonly used for register implementations, data synchronization, and state storage in digital systems.

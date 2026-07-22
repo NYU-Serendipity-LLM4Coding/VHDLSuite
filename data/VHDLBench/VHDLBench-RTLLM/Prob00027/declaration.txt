@@ -1,0 +1,2 @@
+Declaration:
+    The design requires the IEEE standard logic library to support multi-valued logic types including vectors and individual logic signals. Additionally, numeric operations on unsigned vectors are necessary to perform arithmetic manipulation of the stack pointer, requiring support for conversions between unsigned types and integers for array indexing purposes.

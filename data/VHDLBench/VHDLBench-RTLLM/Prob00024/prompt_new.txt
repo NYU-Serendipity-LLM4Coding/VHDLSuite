@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a Mealy finite state machine that detects a specific five-bit pattern on a single-bit input stream. The module continuously monitors the input and asserts an output signal when the target sequence is recognized. The design supports overlapping pattern detection, allowing consecutive matches when the input stream contains the pattern multiple times.
+
+Module name:  
+    fsm
+
+Input ports:
+    IN_p: Single-bit input signal carrying the serial data stream to be analyzed by the FSM (1-bit, std_logic).
+    CLK: Clock signal for synchronous operation (1-bit, std_logic, active rising edge).
+    RST: Asynchronous reset signal to initialize the FSM (1-bit, std_logic, active high).
+
+Output ports:
+    MATCH: Output signal that asserts high when the target pattern is detected (1-bit, std_logic).
+
+Implementation:
+The module implements a Mealy-type finite state machine with six distinct states to recognize the bit sequence 10011. The FSM transitions between states based on the current state and the value of the input signal.
+
+The state register updates synchronously on the rising edge of the clock. When the reset signal is asserted high, the state machine returns to its initial state asynchronously, regardless of the clock.
+
+The next-state logic is purely combinational and determines state transitions based on the current state and input value. The state machine progresses through intermediate states as it tracks the incoming bit pattern. If the input deviates from the expected sequence at any point, the FSM either returns to an earlier state or transitions to a state that allows for overlapping pattern detection.
+
+The output logic is combinational and follows Mealy machine behavior, where the output depends on both the current state and the current input value. The MATCH signal asserts high for one clock cycle when the FSM is in the appropriate state and the input completes the target sequence. During reset, the MATCH output is forced low. In all other conditions, MATCH remains low.
+
+The design enables continuous monitoring, so after detecting one occurrence of the pattern, the FSM can immediately begin recognizing subsequent occurrences, including those that overlap with the previous match.

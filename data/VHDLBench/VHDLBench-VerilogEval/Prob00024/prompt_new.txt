@@ -1,0 +1,17 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs half addition. A half adder adds two single-bit binary inputs and produces a sum output and a carry-out output.
+
+Module name:  
+    TopModule
+
+Input ports:
+    a: First single-bit operand (std_logic, 1-bit)
+    b: Second single-bit operand (std_logic, 1-bit)
+
+Output ports:
+    sum: Sum result of the addition (std_logic, 1-bit)
+    cout: Carry-out from the addition (std_logic, 1-bit)
+
+Implementation:
+    The module implements a combinational half adder circuit. It performs binary addition of the two input bits a and b without any carry-in. The addition operation produces a 2-bit result where the least significant bit represents the sum and the most significant bit represents the carry-out. The sum output reflects the XOR of the two inputs, while the cout output reflects the AND of the two inputs. This is a fundamental building block in digital arithmetic circuits.

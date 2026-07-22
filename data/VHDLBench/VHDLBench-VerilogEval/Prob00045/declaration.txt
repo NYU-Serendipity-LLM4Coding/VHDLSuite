@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types and vector operations. Specifically, it uses the std_logic_1164 package to define std_logic and std_logic_vector types, which provide the necessary logic values and bitwise operations including XOR for edge detection across vector elements.

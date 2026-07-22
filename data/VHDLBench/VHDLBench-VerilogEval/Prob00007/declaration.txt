@@ -1,0 +1,2 @@
+Declaration:
+This design requires the IEEE standard logic library, which provides the fundamental logic type std_logic used for representing single-bit digital signals. The std_logic_1164 package is necessary to support the declaration and manipulation of standard logic values, enabling basic signal assignments and connectivity within the module.

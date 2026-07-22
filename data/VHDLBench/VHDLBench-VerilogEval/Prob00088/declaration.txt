@@ -1,0 +1,2 @@
+Declaration:
+    The design requires the IEEE standard logic library to support fundamental digital logic types and operations. Specifically, the std_logic_1164 package is necessary to provide the std_logic type for representing signal values including logic levels, high-impedance states, and uninitialized conditions. This package enables the declaration of single-bit signals and supports logical operations, comparisons, and conditional expressions essential for implementing sequential state machine logic and combinational output assignments.

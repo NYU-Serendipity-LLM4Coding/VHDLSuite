@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs equality comparison between two 2-bit inputs and produces a single-bit output indicating whether the inputs are equal.
+
+Module name:  
+    TopModule
+
+Input ports:
+    A: 2-bit input vector for comparison operand A (bit width: 2 bits, indexed 1 downto 0)
+    B: 2-bit input vector for comparison operand B (bit width: 2 bits, indexed 1 downto 0)
+
+Output ports:
+    z: Single-bit output indicating equality result (active high when A equals B)
+
+Implementation:
+    This module implements a combinational equality comparator that continuously evaluates whether the two input vectors A and B are identical. The output z is driven high (logic '1') when both bits of A match the corresponding bits of B, and driven low (logic '0') otherwise. The comparison is performed bitwise across all positions of the 2-bit vectors. No clock or reset signals are required, as this is a purely combinational design. The output responds immediately to any change in either input A or input B, making it suitable for use in datapaths, control logic, or conditional decision circuits where real-time equality checking is needed.

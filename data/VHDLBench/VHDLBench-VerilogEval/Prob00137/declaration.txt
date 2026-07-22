@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support digital logic types and operations. Specifically, the std_logic_1164 package is needed to define the fundamental logic types used for port signals and internal state representation. The numeric_std package is included to provide support for arithmetic and type conversion operations that may be useful in related design contexts, though the core finite state machine logic primarily relies on enumerated types and standard logic values.

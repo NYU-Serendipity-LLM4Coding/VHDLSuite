@@ -1,0 +1,2 @@
+Declaration:
+    The design requires the IEEE standard logic library to support multi-valued logic types representing digital signals and buses. Additionally, the numeric standard package is needed to enable arithmetic operations and type conversions on standard logic vectors, though the core rotator functionality relies primarily on concatenation and bit manipulation rather than arithmetic computation.

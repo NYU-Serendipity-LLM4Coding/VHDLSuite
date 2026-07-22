@@ -1,0 +1,2 @@
+Declaration:
+This design requires the IEEE standard logic library, which provides the fundamental logic types and operations for VHDL hardware description. Specifically, the std_logic_1164 package is necessary to support single-bit logic signals with multiple states (such as logic high, logic low, high-impedance, and undefined states) used throughout the interface and internal state representation. This package enables the declaration and manipulation of std_logic signal types for the clock, reset, input, and output ports of the finite state machine.

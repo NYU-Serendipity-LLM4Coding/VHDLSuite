@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types and vector operations. Specifically, it uses the std_logic_1164 package to define std_logic_vector types for representing the 32-bit input and output ports. The design performs bit-field concatenation and slicing operations on these vectors to reorder byte segments, which are natively supported by the standard logic type system without requiring additional arithmetic or conversion packages.

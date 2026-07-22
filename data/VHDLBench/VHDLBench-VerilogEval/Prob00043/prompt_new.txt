@@ -1,0 +1,23 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs pairwise equality comparisons of five 1-bit input signals.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    a: 1-bit input signal to be compared against all five inputs
+    b: 1-bit input signal to be compared against all five inputs
+    c: 1-bit input signal to be compared against all five inputs
+    d: 1-bit input signal to be compared against all five inputs
+    e: 1-bit input signal to be compared against all five inputs
+
+Output ports:
+    signal_out: 25-bit output vector containing results of all pairwise comparisons, active high
+
+Implementation:
+    The module computes all 25 pairwise equality comparisons between the five input bits and produces a 25-bit result vector. Each bit in the output indicates whether two specific input bits are equal (output is 1 when equal, 0 when different).
+
+    The comparisons are organized systematically in the output vector from most significant bit to least significant bit. The first five bits compare the first input against all five inputs in order, the next five bits compare the second input against all five inputs, and so on. For example, the most significant bit position compares the first input with itself, while subsequent positions compare the first input with each of the other inputs in sequence.
+
+    The implementation uses two internal 25-bit vectors. The first vector replicates each input bit five times in sequence, creating five consecutive groups of five identical bits. The second vector creates five identical copies of the five-input sequence. One of these vectors is inverted, and the two vectors are combined using an XOR operation to produce the equality comparison results. This approach efficiently generates all 25 pairwise comparisons in parallel using combinational logic.

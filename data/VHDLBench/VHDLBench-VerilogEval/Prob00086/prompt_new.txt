@@ -1,0 +1,24 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a 5-bit maximal-length Galois Linear Feedback Shift Register (LFSR) with taps at bit positions 5 and 3.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal for synchronous operation (active rising edge)
+    reset: Active-high synchronous reset signal
+
+Output ports:
+    q: 5-bit output vector (4 downto 0) representing the current state of the LFSR
+
+Implementation:
+    The module implements a Galois LFSR architecture that cycles through a maximum-length sequence of 31 states (2^5 - 1) before repeating. The all-zero state is never reached due to the careful selection of tap positions.
+
+    The design consists of two main parts:
+    
+    Combinational logic computes the next state of the LFSR. The shift register shifts right, where bits without taps move unchanged to the next lower position. The least significant bit (bit position 0) serves as the feedback bit. Bit position 4 receives this feedback bit directly. Bit position 2, which corresponds to tap position 3, is computed by XORing the shifted value with the feedback bit. The remaining positions shift right without modification.
+
+    Sequential logic operates on the rising edge of the clock. When the reset signal is asserted high, the register is synchronously loaded with the value "00001" (decimal 1). This non-zero initialization ensures the LFSR enters a valid state in the maximum-length sequence. When reset is not asserted, the register updates to the next state as computed by the combinational logic.
+
+    The tap configuration at positions 5 and 3 ensures the polynomial feedback creates a maximal-length sequence, allowing the LFSR to generate pseudo-random patterns suitable for applications such as pattern generation, scrambling, or built-in self-test circuits.

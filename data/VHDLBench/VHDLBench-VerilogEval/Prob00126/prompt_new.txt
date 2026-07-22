@@ -1,0 +1,27 @@
+Please act as a professional VHDL designer.
+
+Implement a combinational lookup table module that maps a 3-bit input address to a 16-bit output value.
+
+Module name:
+    TopModule
+
+Input ports:
+    a: 3-bit address input (std_logic_vector, range 2 downto 0) used to select one of eight predefined output values
+
+Output ports:
+    q: 16-bit data output (std_logic_vector, range 15 downto 0) providing the lookup result corresponding to the input address
+
+Implementation:
+    This module implements a purely combinational lookup table (LUT) with eight entries. The input address selects one of eight distinct 16-bit values that appear on the output. The mapping is implemented using a combinational process sensitive to the input address signal.
+
+    The lookup table contains the following address-to-value mappings:
+    - Address 0 maps to decimal value 4658
+    - Address 1 maps to decimal value 44768
+    - Address 2 maps to decimal value 10196
+    - Address 3 maps to decimal value 23054
+    - Address 4 maps to decimal value 8294
+    - Address 5 maps to decimal value 25806
+    - Address 6 maps to decimal value 50470
+    - Address 7 maps to decimal value 12057
+
+    The output changes immediately whenever the input address changes, as this is a combinational circuit with no clock or memory elements. There is no registered state, and the output is purely a function of the current input value. A default case handles any unexpected input patterns by driving the output to zero, though in normal operation with a 3-bit input, all eight cases are explicitly covered.

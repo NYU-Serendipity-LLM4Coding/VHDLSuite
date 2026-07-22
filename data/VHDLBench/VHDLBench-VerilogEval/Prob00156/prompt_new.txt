@@ -1,0 +1,30 @@
+Please act as a professional VHDL designer.
+
+Implement a timer module with pattern detection, delay configuration, countdown functionality, and user acknowledgment.
+
+Module name:  
+    TopModule
+
+Input ports:
+    clk: Clock signal, positive edge triggered
+    reset: Synchronous reset signal, active high
+    data: Serial data input for pattern detection and delay configuration, 1-bit
+    ack: Acknowledgment signal from user to restart the timer, 1-bit, active high
+
+Output ports:
+    count: Current remaining count value during countdown, 4-bit vector (count(3 downto 0))
+    counting: Status flag indicating the timer is actively counting, 1-bit, active high
+    done: Status flag indicating the countdown has completed and awaiting acknowledgment, 1-bit, active high
+
+Implementation:
+    The module implements a finite state machine that performs sequential pattern detection, delay configuration, countdown timing, and user notification. Upon reset, the module enters an idle state and begins monitoring the serial data input for a specific activation pattern.
+
+    The pattern detection logic searches for the sequence 1101 on the data input. The state machine progresses through multiple states to recognize this pattern bit-by-bit. If the pattern is successfully detected, the module transitions to a delay capture phase. During this phase, it shifts in exactly four bits from the data input, most-significant-bit first, storing them in an internal shift register. These four bits form the delay configuration value.
+
+    Once the delay value is captured, the module enters the counting phase and asserts the counting output to indicate active countdown operation. The timer counts for exactly (delay + 1) × 1000 clock cycles. For example, if delay equals 0, the timer counts for 1000 cycles; if delay equals 5, it counts for 6000 cycles.
+
+    The countdown mechanism uses two internal counters: a 10-bit fast counter that cycles from 0 to 999, and a 4-bit slow counter initialized to the delay value. The count output reflects the slow counter value during the counting phase, displaying the remaining time. This value equals the delay for the first 1000 cycles, then decrements by one every 1000 cycles until it reaches zero for the final 1000 cycles. When not in the counting phase, the count output is undefined.
+
+    When the countdown completes (slow counter reaches zero and fast counter reaches 999), the module asserts the done output and enters a wait state. It remains in this state until the ack input is asserted high, indicating user acknowledgment. Upon receiving acknowledgment, the module returns to the initial idle state and resumes searching for the next occurrence of the 1101 pattern.
+
+    The reset signal immediately returns the module to the idle state, clearing all internal state and restarting the pattern detection process. All state transitions and counter updates occur synchronously on the rising edge of the clock.

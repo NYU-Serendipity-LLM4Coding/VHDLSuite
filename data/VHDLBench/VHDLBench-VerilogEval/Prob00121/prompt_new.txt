@@ -1,0 +1,30 @@
+Please act as a professional VHDL designer.
+
+Implement a finite-state machine module that follows a specific state-assigned table with five states.
+
+Module name:  
+    TopModule
+
+Input ports:
+    clk: Clock signal, single bit, transitions occur on the rising edge
+    reset: Synchronous active-high reset signal, single bit
+    x: Input signal controlling state transitions, single bit
+
+Output ports:
+    z: Output signal indicating specific states, single bit
+
+Implementation:
+    This module implements a five-state finite-state machine using explicit 3-bit state encoding. The five states are encoded as follows: state A is encoded as "000", state B as "001", state C as "010", state D as "011", and state E as "100".
+
+    The design uses a synchronous reset mechanism. On the rising edge of the clock, when reset is asserted high, the FSM transitions to state A regardless of other inputs. When reset is not asserted, the FSM updates to the next state determined by the current state and input x.
+
+    The state transition logic operates as a combinational process that evaluates the current state and input x to determine the next state:
+    - From state A: transitions to state B when x is high, otherwise remains in state A
+    - From state B: transitions to state E when x is high, otherwise remains in state B
+    - From state C: transitions to state B when x is high, otherwise remains in state C
+    - From state D: transitions to state C when x is high, otherwise transitions to state B
+    - From state E: transitions to state E when x is high, otherwise transitions to state D
+
+    The output z is generated combinationally based solely on the current state. The output z is asserted high when the FSM is in either state D or state E, and is low for all other states (A, B, and C).
+
+    The architecture separates the state register (clocked process with synchronous reset), the next-state logic (combinational process), and the output logic (concurrent assignment) into distinct processes for clarity and maintainability.

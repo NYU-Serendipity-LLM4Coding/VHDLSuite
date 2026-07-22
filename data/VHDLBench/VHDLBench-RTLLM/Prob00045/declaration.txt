@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types used for digital circuit modeling. Additionally, it requires numeric standard packages to enable arithmetic operations and conversions on vector types. These libraries provide the fundamental data types for representing signals, ports, and internal registers, as well as support for vector slicing and bit-width manipulation necessary for the instruction processing functionality.

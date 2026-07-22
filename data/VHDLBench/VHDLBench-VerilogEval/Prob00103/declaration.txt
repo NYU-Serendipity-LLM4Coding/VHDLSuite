@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the std_logic type system used for all port signals. The ieee.std_logic_1164 package provides the fundamental logic value definitions and the logical operators necessary for combinational logic operations, including XOR and NOT gates that form the core functionality of this module.

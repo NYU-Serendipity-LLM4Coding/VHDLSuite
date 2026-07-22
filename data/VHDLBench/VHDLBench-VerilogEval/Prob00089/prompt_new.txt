@@ -1,0 +1,28 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs serial 2's complement conversion using a Moore finite state machine.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal for synchronous state transitions (1-bit, rising edge active)
+    areset: Asynchronous reset signal (1-bit, active high)
+    x: Serial input bit stream, least-significant bit first (1-bit)
+
+Output ports:
+    z: Serial output bit stream representing the 2's complement of the input (1-bit)
+
+Implementation:
+    The module implements a Moore state machine with three states (A, B, C) to compute the 2's complement of a serial bit stream. The conversion algorithm processes bits from least-significant to most-significant, one bit per clock cycle.
+
+    The state machine operates as follows:
+    - State A is the initial state after reset. The machine remains in state A while receiving input bits of value '0', and transitions to state C upon receiving the first '1' bit.
+    - State B handles subsequent bits after the initial transition, moving to state B when the input is '1' and to state C when the input is '0'.
+    - State C processes bits by transitioning to state B when the input is '1' and remaining in state C when the input is '0'.
+
+    The asynchronous reset signal initializes the state machine to state A when asserted high, allowing immediate reset regardless of the clock signal. When reset is released, the conversion begins and processes incoming serial data on each rising clock edge.
+
+    The output z is directly determined by the current state, producing '1' when the machine is in state C and '0' otherwise. This Moore machine output depends solely on the state, not on the current input value.
+
+    The design accepts input numbers of arbitrary length, processing each bit serially and producing the corresponding 2's complement output bit in the same clock cycle. The conversion continues until the reset signal is asserted again.

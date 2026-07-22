@@ -1,0 +1,23 @@
+Please act as a professional VHDL designer.
+
+Implement a module that provides the combinational logic for a Moore state machine with one input, one output, and four states. This module computes the next state and output based on the current state and input, following a predefined state transition table.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    signal_in: Single-bit control input that determines state transitions (active high, std_logic)
+    state: 2-bit vector representing the current state of the Moore machine (std_logic_vector, 1 downto 0)
+
+Output ports:
+    next_state: 2-bit vector representing the next state to transition to (std_logic_vector, 1 downto 0)
+    signal_out: Single-bit Moore machine output that depends solely on the current state (std_logic)
+
+Implementation:
+    The module implements the combinational logic portion of a Moore state machine with a specific state encoding: A="00", B="01", C="10", D="11". The design consists of two main functional blocks: state transition logic and output logic.
+
+    The state transition logic uses combinational process sensitivity to both the current state and the input signal. For each of the four states, the next state is determined by evaluating the input condition. When in state A, the machine remains in A if the input is low, or transitions to B if the input is high. From state B, a low input causes transition to C, while a high input keeps the machine in B. State C transitions to A on low input or to D on high input. Finally, state D transitions to C when input is low or to B when input is high. An additional case handles any undefined state encodings by defaulting to state A for safety.
+
+    The output logic is implemented as pure combinational logic that asserts the output high only when the current state equals D, and drives it low for all other states. This implements the Moore machine characteristic where outputs depend exclusively on the current state rather than on inputs.
+
+    The design is fully combinational with no clock or reset signals, as it implements only the next-state and output decode logic that would typically be used alongside sequential state registers in a complete state machine implementation.

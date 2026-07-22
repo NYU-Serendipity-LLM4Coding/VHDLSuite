@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support fundamental digital logic types and operations. Specifically, it uses the std_logic_1164 package, which provides the std_logic type for representing signal values and the logical AND operator for combining boolean signals. These standard VHDL libraries enable the representation of single-bit logic values and basic combinational logic operations necessary for implementing simple gate-level functionality.

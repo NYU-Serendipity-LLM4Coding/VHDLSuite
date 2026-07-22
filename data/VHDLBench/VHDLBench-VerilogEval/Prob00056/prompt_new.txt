@@ -1,0 +1,24 @@
+Please act as a professional VHDL designer.
+
+Implement a JK flip-flop module with standard JK flip-flop behavior.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit, active on rising edge
+    j: J input of the JK flip-flop, 1-bit, active high
+    k: K input of the JK flip-flop, 1-bit, active high
+
+Output ports:
+    Q: Output of the JK flip-flop, 1-bit
+
+Implementation:
+    This module implements a standard JK flip-flop that updates its output on the rising edge of the clock signal. The behavior follows the classic JK flip-flop truth table:
+    
+    - When both j and k are low, the output Q retains its previous value.
+    - When j is low and k is high, the output Q is forced to low.
+    - When j is high and k is low, the output Q is forced to high.
+    - When both j and k are high, the output Q toggles to its complement.
+    
+    The flip-flop uses synchronous logic triggered by the rising edge of the clock. The next state logic combines the j and k inputs with the current state to determine the new output value. Specifically, the output is set high when j is asserted and the current output is low, or when k is not asserted and the current output is already high. This combinational expression captures all four operational modes of the JK flip-flop in a single update equation.

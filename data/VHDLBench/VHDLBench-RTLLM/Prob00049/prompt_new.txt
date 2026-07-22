@@ -1,0 +1,27 @@
+Please act as a professional VHDL designer.
+
+Implement a Triangle Wave signal generator module that generates a waveform by incrementing and decrementing a 5-bit signal named "wave". The waveform cycles between 0 and 31, incrementing or decrementing by 1.
+
+Module name:  
+    signal_generator
+                 
+Input ports:
+    clk: Clock signal used for synchronous operation.
+    rst_n: Active-low asynchronous reset signal. When '0', the module is held in reset; when '1', normal operation proceeds.
+
+Output ports:
+    wave: 5-bit output waveform signal representing the generated triangular waveform, with values ranging from 0 to 31.
+
+Implementation:
+State and Waveform Generation:
+The module uses an internal single-bit state signal to control the direction of waveform generation (increment or decrement).
+The waveform is maintained in an internal 5-bit unsigned register that is converted to std_logic_vector for the output port.
+A clocked process sensitive to the rising edge of clk and the asynchronous reset signal rst_n controls the waveform generation.
+Upon assertion of the asynchronous reset (rst_n = '0'), the state signal is initialized to '0' and the waveform register is cleared to all zeros.
+The waveform generation uses a state-based control mechanism:
+When state is '0' (increment mode), the waveform value increases by 1 on each clock cycle. Upon reaching the maximum value of 31, the state transitions to '1' while the waveform holds at 31 for that cycle.
+When state is '1' (decrement mode), the waveform value decreases by 1 on each clock cycle. Upon reaching the minimum value of 0, the state transitions back to '0' while the waveform holds at 0 for that cycle.
+The design includes a default case handler to ensure robust state machine behavior, resetting both state and waveform to their initial values if an unexpected state is encountered.
+The waveform continuously cycles between 0 and 31, creating a triangular wave pattern that rises from 0 to 31 and falls back to 0.
+
+Give me the complete code.

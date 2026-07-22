@@ -1,0 +1,26 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes an 8x1 memory with shift-in write capability and random-access read functionality, used to implement a 3-input logic function.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, active on rising edge
+    enable: Synchronous active-high enable signal that controls the shift operation
+    S: Serial input for shifting data into the memory (MSB is shifted in first)
+    A: Most significant bit of the 3-bit read address
+    B: Middle bit of the 3-bit read address
+    C: Least significant bit of the 3-bit read address
+
+Output ports:
+    Z: Single-bit output representing the data read from the selected memory location
+
+Implementation:
+    This module implements an 8x1 memory using an 8-bit shift register combined with an 8-to-1 multiplexer. The design consists of two main functional blocks:
+
+    The shift register is an 8-bit register (q) that stores the memory contents. On each rising edge of the clock, when the enable signal is asserted high, the register shifts left by one position: the current contents shift towards higher bit indices, and the serial input S is loaded into the lowest bit position (bit 0). This allows sequential writing of 8 bits into the memory by shifting them in one at a time, with the MSB entered first.
+
+    The multiplexer provides random-access read capability. The three address inputs A, B, and C are concatenated to form a 3-bit address vector, where A is the most significant bit and C is the least significant bit. This address selects one of the eight memory locations (q bits 0 through 7) to be output on Z. When the address is 000, Z outputs the contents of q bit 0; when the address is 001, Z outputs q bit 1, and so forth up to address 111 outputting q bit 7.
+
+    The read operation is asynchronous and occurs combinationally based on the current address inputs, while the write operation is synchronous and controlled by the clock and enable signals. This design realizes a lookup table that can implement any 3-input Boolean function by pre-loading the appropriate truth table values via the shift register.

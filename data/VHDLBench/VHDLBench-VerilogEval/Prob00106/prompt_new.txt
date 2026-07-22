@@ -1,0 +1,26 @@
+Please act as a professional VHDL designer.
+
+Implement a module to decode PS/2 keyboard scancodes and detect arrow key presses.
+
+Module name:
+    TopModule
+
+Input ports:
+    scancode: 16-bit std_logic_vector representing the last two bytes of scancodes received from a PS/2 keyboard
+
+Output ports:
+    left: std_logic signal that asserts high ('1') when the left arrow key scancode is detected
+    down: std_logic signal that asserts high ('1') when the down arrow key scancode is detected
+    right: std_logic signal that asserts high ('1') when the right arrow key scancode is detected
+    up: std_logic signal that asserts high ('1') when the up arrow key scancode is detected
+
+Implementation:
+    This is a purely combinational decoder circuit that maps specific 16-bit scancode values to corresponding arrow key outputs. The module continuously monitors the scancode input and activates the appropriate output based on the following mapping:
+    
+    - When scancode equals hexadecimal E06B, the left output is asserted
+    - When scancode equals hexadecimal E072, the down output is asserted
+    - When scancode equals hexadecimal E074, the right output is asserted
+    - When scancode equals hexadecimal E075, the up output is asserted
+    - For any other scancode value, all outputs remain low
+    
+    The decoding logic ensures that exactly one output is active at any given time when a valid arrow key scancode is present. All outputs default to logic low, and only the matched arrow key output transitions to logic high. This behavior is achieved through a case-based selection structure that evaluates the scancode input and drives the outputs accordingly. The design is asynchronous with respect to any clock, responding immediately to changes in the scancode input.

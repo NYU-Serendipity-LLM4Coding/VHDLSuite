@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a decade counter that counts from 1 through 10, inclusive, with synchronous reset functionality.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock input signal, active on the rising edge
+    reset: Synchronous reset signal, active high. When asserted, resets the counter to 1
+
+Output ports:
+    q: 4-bit output representing the current count value (range 1 to 10)
+
+Implementation:
+    This module implements a decade counter that cycles through values from 1 to 10. The counter operates synchronously with the clock signal, incrementing on each rising edge of clk. When the counter reaches its maximum value of 10, it automatically wraps around to 1 on the next clock cycle. The reset input provides a synchronous reset mechanism - when reset is asserted high during a clock edge, the counter immediately returns to its initial value of 1. The counter uses a 4-bit internal register to maintain the count state, which is sufficient to represent values from 1 to 10. The output q directly reflects the current counter value and updates synchronously with the clock.

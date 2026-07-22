@@ -1,0 +1,31 @@
+Please act as a professional VHDL designer.
+
+Implement a module that maintains a 32-bit global branch history shift register with support for rolling back state in response to pipeline flushes caused by branch mispredictions.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal for synchronous operation
+    areset: Asynchronous reset signal, active high, resets the history register to zero
+    predict_valid: Branch prediction enable signal, active high (1-bit)
+    predict_taken: Predicted branch direction to shift into history, active high (1-bit)
+    train_mispredicted: Branch misprediction indicator, active high (1-bit)
+    train_taken: Actual result of the mispredicted branch, active high (1-bit)
+    train_history: Branch history before the mispredicted branch occurred (32-bit)
+
+Output ports:
+    predict_history: Current value of the branch history shift register (32-bit)
+
+Implementation:
+    The module implements a 32-bit shift register that tracks branch prediction history for use in branch prediction mechanisms. The history register can be updated in two distinct ways depending on pipeline events.
+
+    During normal operation when a branch prediction is made, indicated by the predict_valid signal being asserted, the history register performs a left shift operation. The predict_taken value is shifted in from the least significant bit position, while the most significant bit is discarded. This maintains a running history where bit 0 represents the direction of the most recently predicted branch.
+
+    When a branch misprediction is detected, indicated by the train_mispredicted signal being asserted, the module must recover the correct architectural state. In this case, the history register is loaded with a reconstructed history value consisting of the pre-misprediction history concatenated with the actual branch outcome. Specifically, the lower 31 bits come from train_history, and the actual branch result train_taken is placed in the least significant bit position.
+
+    Priority logic ensures that misprediction recovery takes precedence over normal prediction updates. If both train_mispredicted and predict_valid are asserted simultaneously, the misprediction handling dominates because the pipeline flush will invalidate the concurrent prediction operation.
+
+    The asynchronous reset signal areset clears the entire history register to zero when asserted, providing initialization capability independent of the clock signal. All synchronous updates to the history register occur on the rising edge of the clock signal.
+
+    The current state of the history register is continuously presented on the predict_history output port, allowing downstream prediction logic to access the branch history for making informed predictions.

@@ -1,0 +1,2 @@
+Declaration:
+This design requires the IEEE standard logic library, which provides the fundamental `std_logic` type for representing digital signal values. The `std_logic_1164` package is necessary to support single-bit logic signals and the logical NOR operation used in this combinational circuit.

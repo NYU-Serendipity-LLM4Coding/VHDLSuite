@@ -1,0 +1,27 @@
+Please act as a professional VHDL designer.
+
+Implement a module of a 3-bit comparator for comparing binary numbers.
+
+Module name:  
+    comparator_3bit               
+
+Input ports:
+    A: First 3-bit unsigned binary input operand (std_logic_vector, 2 downto 0).
+    B: Second 3-bit unsigned binary input operand (std_logic_vector, 2 downto 0).
+
+Output ports:
+    A_greater: Single-bit output (std_logic) that asserts to logic '1' when A is greater than B.
+    A_equal: Single-bit output (std_logic) that asserts to logic '1' when A is equal to B.
+    A_less: Single-bit output (std_logic) that asserts to logic '1' when A is less than B.
+
+Implementation:
+The module performs unsigned arithmetic comparison between the two 3-bit input vectors using concurrent signal assignments. Both input operands are interpreted as unsigned binary values for the comparison operations.
+
+Comparison Logic: Three independent conditional signal assignments generate the comparison outputs:
+- The A_greater output is driven high when the unsigned value of A exceeds the unsigned value of B, otherwise it remains low.
+- The A_equal output is driven high when the unsigned value of A equals the unsigned value of B, otherwise it remains low.
+- The A_less output is driven high when the unsigned value of A is less than the unsigned value of B, otherwise it remains low.
+
+Output Characteristics: The three outputs are mutually exclusive by design. Exactly one output will be asserted to logic '1' at any given time, while the other two remain at logic '0', based on the arithmetic relationship between the two input operands. The comparison results are available combinationally with no registered stages.
+
+Give me the complete code.

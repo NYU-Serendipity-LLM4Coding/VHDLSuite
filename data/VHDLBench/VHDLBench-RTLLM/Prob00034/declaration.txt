@@ -1,0 +1,2 @@
+Declaration:
+    The design requires the IEEE standard logic library to support fundamental digital logic types and operations. Specifically, it uses the standard logic type definitions for representing signal states and logical operations. Additionally, the design requires numeric support for performing arithmetic operations on unsigned vector types, including increment operations and integer comparisons. These libraries provide the necessary type definitions and operators for handling multi-bit counters and arithmetic comparisons used in the frequency division logic.

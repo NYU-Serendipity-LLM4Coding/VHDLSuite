@@ -1,0 +1,22 @@
+Please act as a professional VHDL designer.
+
+Implement a frequency divider entity that divides the input clock frequency by even numbers. This entity generates a divided clock signal by toggling its output every specified number of input clock cycles.
+
+Entity name:
+    freq_divbyeven
+
+Input ports:
+    clk: Input clock signal that will be divided, std_logic type.
+    rst_n: Active-low asynchronous reset signal to initialize the entity, std_logic type.
+
+Output ports:
+    clk_div: Divided clock output signal, std_logic type.
+
+Implementation:
+    The frequency divider uses an internal counter to count the number of clock cycles. A constant NUM_DIV specifies the division factor, which must be an even number (set to 6 in this design).
+    - The counter is implemented as a 4-bit unsigned signal that tracks clock cycle counts from 0 to (NUM_DIV/2 - 1).
+    - An internal register holds the divided clock state and drives the output port.
+    - When the reset signal rst_n is low (active-low), the counter is cleared to zero and the divided clock register is reset to logic '0' asynchronously.
+    - On each rising edge of the input clock, if the counter value is less than (NUM_DIV/2 - 1), the counter increments by one without changing the divided clock output.
+    - When the counter reaches (NUM_DIV/2 - 1), it resets to zero on the next clock edge and the divided clock register toggles its state, effectively dividing the input clock frequency by the factor specified by NUM_DIV.
+    - The design uses a clocked process sensitive to both the clock and reset signals to implement the counter and toggle logic, ensuring proper synchronous operation with asynchronous reset capability.

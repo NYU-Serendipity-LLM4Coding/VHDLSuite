@@ -1,0 +1,28 @@
+Please act as a professional VHDL designer.
+
+Implement a module that searches for message boundaries in an input byte stream and outputs complete 3-byte messages.
+
+Module name:  
+    TopModule
+
+Input ports:
+    clk: Clock signal, active on rising edge
+    signal_in: 8-bit input data stream
+    reset: Synchronous reset signal, active high
+    
+Output ports:
+    out_bytes: 24-bit output containing the complete 3-byte message (out_bytes(23 downto 16) is the first byte, out_bytes(15 downto 8) is the second byte, out_bytes(7 downto 0) is the third byte)
+    done: Single-bit signal asserted high for one clock cycle when a complete message has been received
+
+Implementation:
+    The module implements a finite state machine (FSM) that detects and extracts 3-byte messages from a continuous input stream. The FSM operates by discarding incoming bytes until it finds a byte with bit 3 set to '1', which marks the beginning of a new message.
+
+    The state machine transitions through four states: BYTE1 (waiting for message start), BYTE2 (first byte received), BYTE3 (second byte received), and DONE_STATE (third byte received). When in BYTE1 or DONE_STATE, the FSM examines bit 3 of the incoming data. If this bit is high, the current byte is treated as the first byte of a new message and the FSM advances to BYTE2. If bit 3 is low, the FSM remains in or returns to BYTE1, discarding the byte. From BYTE2, the FSM unconditionally advances to BYTE3 on the next cycle, then to DONE_STATE on the following cycle.
+
+    A 24-bit shift register captures the incoming bytes. On each clock cycle, the register shifts left by 8 bits and loads the new input byte into the lowest 8 bits. This continuously maintains a sliding window of the three most recent bytes.
+
+    The done signal is asserted high when the FSM reaches DONE_STATE, indicating that a complete 3-byte message has been successfully received. The done signal remains high for exactly one clock cycle.
+
+    The out_bytes output presents the captured 24-bit message only when done is asserted. At all other times, out_bytes is driven to a don't-care value. When valid, out_bytes(23 downto 16) contains the first byte of the message, out_bytes(15 downto 8) contains the second byte, and out_bytes(7 downto 0) contains the third byte.
+
+    Upon assertion of the synchronous reset signal, the FSM returns to BYTE1 state, ready to search for the next message boundary.

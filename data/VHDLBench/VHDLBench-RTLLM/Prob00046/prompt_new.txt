@@ -1,0 +1,36 @@
+Please act as a professional VHDL designer.
+
+Implement a Multiplying Accumulator for 32-bit unsigned integer operations. The design contains a register that stores the partial sum (the intermediate accumulation result). In each cycle, the result of multiplying input operand a by input operand b is added to this register, and output c reflects the current value of the accumulator register.
+
+Module name:                 
+    pe
+
+Input ports:
+    clk: Clock signal used for synchronous operations.
+    rst: Asynchronous reset signal. Active high (logic '1' triggers reset, logic '0' indicates normal operation).
+    a: 32-bit unsigned input operand A (std_logic_vector, 31 downto 0).
+    b: 32-bit unsigned input operand B (std_logic_vector, 31 downto 0).
+
+Output ports:
+    c: 32-bit unsigned output representing the accumulated result (std_logic_vector, 31 downto 0).
+
+Implementation:
+The module implements a multiply-accumulate (MAC) operation using a registered accumulator and a clocked process with asynchronous reset.
+
+Accumulator Register:
+An internal 32-bit unsigned register stores the accumulated sum. This register is updated synchronously on the rising edge of the clock signal or asynchronously reset when the reset signal is asserted high.
+
+Reset Behavior:
+When the reset signal is active (logic '1'), the accumulator register is immediately cleared to zero regardless of the clock state, providing asynchronous reset functionality.
+
+Multiplication and Accumulation:
+During normal operation (reset inactive), on each rising clock edge, the module performs the following operations:
+- Converts the input operands from std_logic_vector to unsigned representation for arithmetic operations.
+- Multiplies the two 32-bit unsigned operands, producing a 64-bit intermediate product.
+- Truncates the 64-bit multiplication result to 32 bits using a resize operation to match the accumulator width.
+- Adds the truncated 32-bit product to the current accumulator value.
+- Stores the new sum back into the accumulator register.
+
+The output port continuously reflects the current state of the internal accumulator register through a concurrent assignment, converted back to std_logic_vector format.
+
+This design effectively implements a single-cycle MAC unit where overflow beyond 32 bits is handled by truncation, suitable for applications requiring continuous accumulation of multiplication results with periodic reset capability.

@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a 64-bit Johnson counter (torsional ring counter). A Johnson counter is a modified shift register where the complement of the output is fed back to the input. For reference, a 4-bit Johnson counter would produce the sequence: 0000, 1000, 1100, 1110, 1111, 0111, 0011, 0001, 0000.
+
+Module name:                 
+    JC_counter
+
+Input ports:
+    clk: Clock signal used for synchronous operation, active on the rising edge.
+    rst_n: Asynchronous active-low reset signal to initialize the counter.
+
+Output ports:
+    Q: 64-bit output vector representing the current state of the Johnson counter.
+
+Implementation:
+    The counter operates on the rising edge of the clock signal and responds asynchronously to the reset signal. When the reset signal is asserted low, the counter is initialized to all zeros. During normal operation, the counter implements the Johnson counter pattern by examining the least significant bit of the current state. If bit 0 is low, the counter shifts right by one position and inserts a one at the most significant bit position. If bit 0 is high, the counter shifts right by one position and inserts a zero at the most significant bit position. This creates the characteristic Johnson counter sequence where ones propagate from the MSB to the LSB, followed by zeros propagating in the same manner, producing a cycle length of 128 states for a 64-bit implementation.

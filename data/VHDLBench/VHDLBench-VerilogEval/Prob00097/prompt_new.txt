@@ -1,0 +1,30 @@
+Please act as a professional VHDL designer.
+
+Implement a module that functions as a 16-bit wide, 9-to-1 multiplexer with default high output for unused select values.
+
+Module name:
+    TopModule
+
+Input ports:
+    a: 16-bit data input, selected when sel equals 0
+    b: 16-bit data input, selected when sel equals 1
+    c: 16-bit data input, selected when sel equals 2
+    d: 16-bit data input, selected when sel equals 3
+    e: 16-bit data input, selected when sel equals 4
+    f: 16-bit data input, selected when sel equals 5
+    g: 16-bit data input, selected when sel equals 6
+    h: 16-bit data input, selected when sel equals 7
+    i: 16-bit data input, selected when sel equals 8
+    sel: 4-bit selection signal that determines which input is routed to the output
+
+Output ports:
+    signal_out: 16-bit output that carries the selected input data or all ones
+
+Implementation:
+    This module implements a combinational multiplexer that routes one of nine 16-bit input signals to the output based on a 4-bit select signal. The multiplexer operates purely combinationally with no clock or reset requirements.
+
+    The selection mechanism works as follows: when sel has a value from 0 to 8, the corresponding input port is routed to signal_out. Specifically, sel value 0 selects input a, value 1 selects input b, and so on through value 8 which selects input i.
+
+    For all other select values (9 through 15), the output signal_out is driven to all ones, meaning all 16 bits are set to logic high. This default behavior ensures deterministic output even when the select signal falls outside the valid range of defined inputs.
+
+    The design uses a combinational process that is sensitive to all input signals including the nine data inputs and the select signal. The output immediately reflects any changes on the inputs without requiring clock edges, making this a purely asynchronous multiplexer suitable for datapath routing and signal selection applications.

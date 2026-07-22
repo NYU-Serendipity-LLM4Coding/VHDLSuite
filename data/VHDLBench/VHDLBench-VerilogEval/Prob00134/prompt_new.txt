@@ -1,0 +1,24 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes combinational logic functions for a state machine's next-state bit and output, based on a given state-assigned table.
+
+Module name:  
+    TopModule
+
+Input ports:
+    clk: clock signal (1-bit, not used in the combinational logic but present in the interface)
+    x: external input that influences the next state transition (1-bit)
+    y: current state vector (3-bit, y(2 downto 0))
+
+Output ports:
+    Y0: least significant bit of the next state vector (1-bit)
+    z: Moore-type output signal dependent only on the current state (1-bit)
+
+Implementation:
+    This module implements two combinational logic functions derived from a state machine specification table. The design uses purely combinational logic without registers or sequential elements, despite the presence of a clock input in the interface.
+
+    The first function computes Y0, which represents the least significant bit (bit 0) of the next state. This output depends on both the current state y and the input x. The logic evaluates a 4-bit concatenation of the current state and input (y & x) to determine the appropriate value for Y0. The mapping covers ten distinct input combinations, with specific binary values assigned to each case. Any unspecified combination results in an undefined ('X') value.
+
+    The second function computes z, which is a Moore-type output that depends solely on the current state y. The logic examines the 3-bit current state vector and produces a binary output accordingly. Five state encodings are explicitly handled, producing either logic '0' or logic '1'. States "011" and "100" produce a high output (z = '1'), while states "000", "001", and "010" produce a low output (z = '0'). Any other state value results in an undefined output.
+
+    Both functions are implemented using combinational processes with sensitivity to their respective inputs. Internal signals Y0_comb and z_comb hold the computed values before being assigned to the output ports. The design uses case statements to map input conditions to output values in a clear, tabular fashion that directly reflects the state transition and output specification table.

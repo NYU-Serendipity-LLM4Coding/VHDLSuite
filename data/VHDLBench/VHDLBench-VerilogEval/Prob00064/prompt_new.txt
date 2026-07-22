@@ -1,0 +1,29 @@
+Please act as a professional VHDL designer.
+
+Implement a module that concatenates multiple input vectors and redistributes them into output vectors with padding.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    a: 5-bit input vector
+    b: 5-bit input vector
+    c: 5-bit input vector
+    d: 5-bit input vector
+    e: 5-bit input vector
+    f: 5-bit input vector
+
+Output ports:
+    w: 8-bit output vector
+    x: 8-bit output vector
+    y: 8-bit output vector
+    z: 8-bit output vector
+
+Implementation:
+    This module performs a concatenation and redistribution operation on multiple input vectors. The design takes six 5-bit input vectors (a, b, c, d, e, f), providing a total of 30 bits of input data. These inputs are concatenated together in order from a to f, with two additional constant bits appended at the least significant bit positions. The two appended bits are both logic high ('1').
+
+    The concatenated 32-bit result is then partitioned into four 8-bit output vectors (w, x, y, z). The most significant 8 bits of the concatenation are assigned to output w, the next 8 bits to output x, followed by y, and finally the least significant 8 bits are assigned to output z.
+
+    The mapping follows this pattern: input vector a occupies the most significant positions in the concatenated result, while the two constant '1' bits occupy the least significant positions. The output z contains the two padding bits in its lower bit positions, along with portions of input f. Output y contains the remaining bits of f and portions of e, and so forth through the chain.
+
+    This is a purely combinational design with no clock or reset signals. The outputs respond immediately to any changes in the input vectors.

@@ -1,0 +1,33 @@
+Please act as a professional VHDL designer.
+
+Implement a finite-state machine that controls a timer with pattern detection and delay functionality.
+
+Module name:  
+    TopModule
+
+Input ports:
+    clk: Clock signal (1-bit, rising edge active)
+    reset: Synchronous reset signal (1-bit, active high)
+    data: Serial data input for pattern detection (1-bit)
+    done_counting: Signal indicating counter completion (1-bit, active high)
+    ack: User acknowledgment signal (1-bit, active high)
+
+Output ports:
+    shift_ena: Enable signal for shifting delay duration bits (1-bit, active high)
+    counting: Status signal indicating counting phase (1-bit, active high)
+    done: Timer completion notification signal (1-bit, active high)
+
+Implementation:
+    The module implements a finite-state machine that orchestrates a timer through four distinct phases: pattern detection, delay configuration, counting, and user notification.
+
+    The FSM operates on a rising-edge triggered clock with synchronous active-high reset. Upon reset, the machine returns to its initial search state.
+
+    In the pattern detection phase, the FSM monitors the serial data input to detect the specific sequence 1101. The machine progresses through detection states as each bit of the pattern arrives. If the sequence is interrupted by an incorrect bit, the FSM returns to the appropriate state to resume pattern matching (allowing for overlapping patterns).
+
+    Once the complete 1101 pattern is detected, the FSM enters a shift phase consisting of four sequential states. During these four clock cycles, the shift_ena output is asserted high, allowing external circuitry to capture four additional data bits that determine the timer duration.
+
+    After the shift phase completes, the FSM transitions to a counting state where the counting output is asserted high. The machine remains in this state, monitoring the done_counting input. When done_counting goes high, indicating that external counters have completed their countdown, the FSM proceeds to the notification phase.
+
+    In the notification phase, the done output is asserted high to alert the user that the timer has expired. The FSM waits in this state until the ack input is received high, indicating user acknowledgment. Upon acknowledgment, the machine returns to the initial pattern detection state to begin monitoring for the next timer sequence.
+
+    All outputs are generated combinationally based on the current state, with default inactive values assigned before conditional assertion based on state conditions.

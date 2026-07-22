@@ -1,0 +1,29 @@
+Please act as a professional VHDL designer.
+
+Implement a module that replicates the functionality of the 7420 integrated circuit chip, which contains two independent 4-input NAND gates.
+
+Module name:  
+    TopModule
+
+Input ports:
+    p1a: First input to the first 4-input NAND gate (1-bit, std_logic)
+    p1b: Second input to the first 4-input NAND gate (1-bit, std_logic)
+    p1c: Third input to the first 4-input NAND gate (1-bit, std_logic)
+    p1d: Fourth input to the first 4-input NAND gate (1-bit, std_logic)
+    p2a: First input to the second 4-input NAND gate (1-bit, std_logic)
+    p2b: Second input to the second 4-input NAND gate (1-bit, std_logic)
+    p2c: Third input to the second 4-input NAND gate (1-bit, std_logic)
+    p2d: Fourth input to the second 4-input NAND gate (1-bit, std_logic)
+
+Output ports:
+    p1y: Output of the first 4-input NAND gate (1-bit, std_logic, active-low)
+    p2y: Output of the second 4-input NAND gate (1-bit, std_logic, active-low)
+
+Implementation:
+    This module implements two completely independent 4-input NAND gates, mimicking the behavior of the 7420 chip from the 7400-series family of digital logic integrated circuits.
+
+    The first NAND gate takes inputs p1a, p1b, p1c, and p1d, and produces output p1y. The output p1y is logic low only when all four inputs are simultaneously logic high. In all other input combinations, p1y will be logic high.
+
+    The second NAND gate operates identically but independently, taking inputs p2a, p2b, p2c, and p2d, and producing output p2y. Similarly, p2y is logic low only when all four of its inputs are simultaneously logic high, and logic high otherwise.
+
+    Both gates operate purely combinationally with no clocking or state retention. The outputs respond immediately to changes in their respective inputs, subject only to propagation delays inherent in the physical implementation. There is no interaction or dependency between the two NAND gates; they function as separate logical units within the same module.

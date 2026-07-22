@@ -1,0 +1,15 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a NOT gate (inverter).
+
+Module name:
+    TopModule
+
+Input ports:
+    signal_in: Single-bit input signal to be inverted (std_logic)
+
+Output ports:
+    signal_out: Single-bit inverted output signal (std_logic)
+
+Implementation:
+    This module performs a simple combinational logic inversion operation. The output signal_out is the logical complement of the input signal_in. When signal_in is logic '1', signal_out becomes logic '0', and vice versa. This is a purely combinational design with no clocking or reset requirements. The inversion is performed continuously using concurrent signal assignment.

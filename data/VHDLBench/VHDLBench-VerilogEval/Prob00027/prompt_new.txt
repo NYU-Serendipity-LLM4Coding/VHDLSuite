@@ -1,0 +1,24 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs full addition of three single-bit inputs.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    a: First single-bit addend input
+    b: Second single-bit addend input
+    cin: Carry-in input, single bit
+
+Output ports:
+    cout: Carry-out output, single bit
+    sum: Sum output, single bit
+
+Implementation:
+    This module implements a full adder, which adds three single-bit inputs (a, b, and cin) and produces a two-bit result consisting of a sum bit and a carry-out bit.
+
+    The addition operation treats each input as a single-bit unsigned value and computes their sum. Since adding three bits can produce a maximum value of 3 (binary "11"), the result requires two bits to represent all possible outcomes.
+
+    The lower bit of the addition result drives the sum output, representing the least significant bit of the arithmetic sum. The upper bit drives the cout output, representing the carry-out or most significant bit of the result.
+
+    This combinational logic module operates continuously without clock or reset signals. Any change on the inputs a, b, or cin immediately propagates through the addition logic to update the sum and cout outputs accordingly.

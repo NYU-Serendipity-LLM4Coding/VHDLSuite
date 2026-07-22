@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types such as std_logic and std_logic_vector, which represent individual bits and bit vectors respectively. Additionally, the numeric_std package is necessary to provide arithmetic operations on std_logic_vector types, including addition and resizing functions that facilitate the computation of sums with extended bit widths. These standard libraries enable the implementation of signed arithmetic operations and overflow detection logic in a portable and synthesizable manner.

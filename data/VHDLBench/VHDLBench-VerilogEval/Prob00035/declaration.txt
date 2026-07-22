@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the std_logic and std_logic_vector types used for clock, reset, and output signals. Additionally, the numeric_std package is required to provide unsigned arithmetic types and conversion functions, enabling increment operations and numeric literal assignments for the counter register.

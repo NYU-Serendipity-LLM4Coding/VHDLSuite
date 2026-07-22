@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library, which provides the fundamental logic types and operations for VHDL synthesis. Specifically, the std_logic_1164 package is necessary to support single-bit logic signals with multiple states (such as logic high, logic low, high impedance, and unknown), as well as the rising_edge function used to detect clock transitions in sequential logic implementations.

@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library, which provides the fundamental logic types and operations for VHDL hardware description. Specifically, it uses the std_logic_1164 package to support multi-valued logic signals including the std_logic type for representing digital signals with states such as logic high, logic low, and undriven conditions. This package also provides the rising_edge function used to detect clock transitions in synchronous logic designs.

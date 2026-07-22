@@ -1,0 +1,37 @@
+Please act as a professional VHDL designer.
+
+Implement a module of a fixed-point subtractor for precise arithmetic operations with fixed precision.
+
+Module name:
+    fixed_point_subtractor
+
+Generic parameters:
+    Q: Represents the number of fractional bits in the fixed-point representation (default value is 15).
+    N: Represents the total number of bits (both integer and fractional) used for inputs and outputs (default value is 32).
+
+Input ports:
+    a (N-1 downto 0): First N-bit fixed-point input operand in std_logic_vector format.
+    b (N-1 downto 0): Second N-bit fixed-point input operand in std_logic_vector format.
+
+Output ports:
+    c (N-1 downto 0): N-bit output in std_logic_vector format representing the result of the fixed-point subtraction.
+
+Internal signals:
+    res (N-1 downto 0): N-bit signal used to store the result of the subtraction operation before driving the output port.
+
+Implementation:
+    The module performs fixed-point subtraction using a sign-magnitude representation, where bit N-1 serves as the sign bit (0 for positive, 1 for negative) and bits N-2 downto 0 represent the magnitude.
+
+    The subtraction logic operates combinationally through a sensitivity process that responds to changes in inputs a and b. Internal variables a_mag, b_mag, and sum_mag of type unsigned are used to perform arithmetic operations on the magnitude portions.
+
+    Same Sign Subtraction: When both operands have identical sign bits, the module subtracts the magnitude of b from the magnitude of a. The result retains the same sign as both input operands.
+
+    Different Sign Subtraction: When the operands have opposite signs, the module adds their magnitudes, implementing the mathematical principle that subtracting a number of opposite sign is equivalent to addition.
+        - When a is positive (sign bit is 0) and b is negative (sign bit is 1): If the magnitude of a exceeds the magnitude of b, the sum of magnitudes is computed with a positive sign. Otherwise, the magnitudes are summed, and the result takes a negative sign unless the sum equals zero.
+        - When a is negative (sign bit is 1) and b is positive (sign bit is 0): If the magnitude of a exceeds the magnitude of b, the magnitudes are summed with a negative sign unless the sum equals zero. Otherwise, the sum of magnitudes is computed with a positive sign.
+
+    Zero Handling: The design explicitly checks for zero results when computing sums of magnitudes in the different-sign cases. When the computed magnitude equals zero, the sign bit is forced to 0, ensuring consistent representation of zero regardless of the input combination.
+
+    Precision: The fixed-point precision is controlled by generic parameters Q (fractional bits) and N (total bits), ensuring accurate subtraction while maintaining the required precision for both integer and fractional components of the operands.
+
+Give me the complete code.

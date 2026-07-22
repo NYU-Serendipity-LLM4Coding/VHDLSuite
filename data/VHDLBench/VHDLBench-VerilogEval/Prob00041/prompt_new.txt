@@ -1,0 +1,17 @@
+Please act as a professional VHDL designer.
+
+Implement a module consisting of 8 D flip-flops with active high synchronous reset functionality that sets the output to zero.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit, triggers on the rising edge
+    d: Data input, 8-bit wide (7 downto 0), represents the data to be stored in the flip-flops
+    reset: Synchronous reset signal, 1-bit, active high
+
+Output ports:
+    q: Data output, 8-bit wide (7 downto 0), represents the current state of the flip-flops
+
+Implementation:
+    The module implements an 8-bit register using D flip-flops that are all triggered by the rising edge of the clock signal. On each rising clock edge, the module evaluates the reset input first. When reset is asserted high, all flip-flops are synchronously cleared to zero regardless of the data input. When reset is not asserted, the flip-flops capture and store the current value present on the data input, transferring it to the output. This synchronous reset behavior ensures that the reset operation occurs in alignment with the clock edge, providing predictable timing characteristics. The output reflects the registered value of the input data, delayed by one clock cycle when reset is inactive.

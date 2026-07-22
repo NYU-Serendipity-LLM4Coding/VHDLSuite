@@ -1,0 +1,23 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs 16-bit by 8-bit division using combinational logic. The module calculates both the quotient and remainder through an iterative shift-and-subtract algorithm.
+
+Module name:
+    div_16bit
+
+Input ports:
+    A: 16-bit dividend (std_logic_vector, 15 downto 0).
+    B: 8-bit divisor (std_logic_vector, 7 downto 0).
+
+Output ports:
+    result: 16-bit quotient (std_logic_vector, 15 downto 0).
+    odd: 16-bit remainder (std_logic_vector, 15 downto 0).
+
+Implementation:
+    The module employs two combinational processes to perform the division operation using a restoring division algorithm.
+
+    The first process is sensitive to both inputs A and B. It converts the input dividend A to an unsigned 16-bit signal a_reg, and resizes the 8-bit divisor B to a 16-bit unsigned signal b_reg by zero-extension.
+
+    The second process is sensitive to A, B, a_reg, and b_reg. It implements the core division algorithm using local variables. The dividend is extended to 32 bits by prepending 16 zero bits, and the divisor is positioned in the upper 16 bits of a 32-bit value by appending 16 zero bits to its lower portion. The algorithm executes exactly 16 iterations. In each iteration, the extended dividend is left-shifted by one bit position. Then a comparison is performed: if the shifted value is greater than or equal to the positioned divisor, the divisor is subtracted from it and 1 is added to indicate a quotient bit of 1; otherwise, the value remains unchanged, indicating a quotient bit of 0. After all iterations complete, the accumulated result contains the quotient in the lower 16 bits and the remainder in the upper 16 bits.
+
+    The output assignments extract the upper 16 bits of the final accumulated value as the remainder (odd) and the lower 16 bits as the quotient (result), converting them back to std_logic_vector type.

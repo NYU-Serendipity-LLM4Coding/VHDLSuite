@@ -1,0 +1,29 @@
+Please act as a professional VHDL designer.
+
+Implement a finite state machine that controls a motor based on input sequences and produces control outputs accordingly.
+
+Module name:  
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit, rising edge active
+    resetn: Synchronous reset signal, 1-bit, active low
+    x: Motor feedback input signal, 1-bit
+    y: Motor feedback input signal, 1-bit
+
+Output ports:
+    f: Motor control output signal, 1-bit
+    g: Motor control output signal, 1-bit
+
+Implementation:
+    This module implements a finite state machine designed to control a motor by monitoring input signals and generating appropriate control outputs. The FSM operates synchronously on the rising edge of the clock signal and responds to a synchronous active-low reset.
+
+    When the reset signal is asserted (low), the FSM immediately transitions to its initial state on the next clock edge and remains there until reset is de-asserted. Once reset is released, the FSM begins its operational sequence.
+
+    Upon leaving the reset state, the FSM asserts output f high for exactly one clock cycle as an initialization pulse. After this initialization, f remains low for the remainder of operation until the next reset.
+
+    Following initialization, the FSM enters a pattern detection phase where it monitors input x for a specific sequence. The FSM watches for x to produce the pattern one-zero-one across three consecutive clock cycles. The state machine tracks partial matches and resets its pattern matching if the sequence is broken. Once the complete one-zero-one pattern is successfully detected, the FSM asserts output g high on the subsequent clock cycle.
+
+    After asserting g, the FSM enters a monitoring phase where it observes input y while maintaining g high. The FSM allows up to two clock cycles for y to become high. If y goes high within this two-cycle window, the FSM locks g permanently high, entering a stable state that persists until reset. However, if y fails to go high within the two-cycle observation period, the FSM permanently drives g low, entering a different stable state that also persists until reset.
+
+    The design uses nine distinct states to implement this behavior: an initial reset state, an initialization state that produces the f pulse, three states for tracking the one-zero-one pattern on input x, two states for the y monitoring window while g is asserted, and two final stable states representing the permanent high and permanent low conditions for g. State transitions occur synchronously on each rising clock edge based on the current state and the values of inputs x and y.

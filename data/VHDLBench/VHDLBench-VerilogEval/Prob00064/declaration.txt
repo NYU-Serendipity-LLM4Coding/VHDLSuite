@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types and vector operations. Specifically, the std_logic_1164 package is necessary to provide the std_logic and std_logic_vector types used for all port declarations and internal signals. This package enables the fundamental logic operations including vector concatenation and bit-slice extraction that form the core functionality of the module.

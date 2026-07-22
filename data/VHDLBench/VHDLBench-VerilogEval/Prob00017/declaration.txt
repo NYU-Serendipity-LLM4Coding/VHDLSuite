@@ -1,0 +1,2 @@
+Declaration:
+This VHDL design requires the IEEE standard logic library to support multi-valued logic types and vector operations. Specifically, the design uses the std_logic_1164 package which provides the std_logic type for representing individual logic signals and std_logic_vector type for representing buses or multi-bit signals. These types are essential for defining the 100-bit wide data ports and the single-bit select control signal used in the multiplexer implementation.

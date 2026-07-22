@@ -1,0 +1,31 @@
+Please act as a professional VHDL designer.
+
+Implement a module that models the behavior of a Lemming creature using a Moore finite state machine. The Lemming has simple logic: it walks either left or right, changes direction when bumped by obstacles, and falls when there is no ground beneath it.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, single bit, positive edge triggered
+    areset: Asynchronous reset signal, single bit, active high
+    bump_left: Obstacle bump indicator from the left side, single bit, active high
+    bump_right: Obstacle bump indicator from the right side, single bit, active high
+    ground: Ground presence indicator, single bit, active high when ground is present
+
+Output ports:
+    walk_left: Walking left state indicator, single bit, active high when Lemming is walking left
+    walk_right: Walking right state indicator, single bit, active high when Lemming is walking right
+    aaah: Falling state indicator, single bit, active high when Lemming is falling
+
+Implementation:
+    The module implements a Moore state machine with four distinct states representing the Lemming's possible conditions: walking left, walking right, falling while facing left, and falling while facing right.
+
+    The state machine operates synchronously on the rising edge of the clock signal. The asynchronous reset signal initializes the machine to the walking left state when asserted, regardless of the clock.
+
+    When the Lemming is walking and ground is present, it continues in its current direction unless bumped. A bump from the left causes the Lemming to switch from walking left to walking right. Similarly, a bump from the right causes it to switch from walking right to walking left. If bumped on both sides simultaneously, the direction change still occurs.
+
+    When ground becomes absent during walking, the Lemming transitions to the corresponding falling state (falling left or falling right) based on its current walking direction. The falling state is maintained as long as ground remains absent.
+
+    While falling, bump inputs do not affect the state or future walking direction. When ground reappears, the Lemming resumes walking in the same direction it was facing before or during the fall.
+
+    The output signals directly reflect the current state: walk_left is asserted only in the walking left state, walk_right is asserted only in the walking right state, and aaah is asserted in either of the two falling states to indicate the Lemming is falling.

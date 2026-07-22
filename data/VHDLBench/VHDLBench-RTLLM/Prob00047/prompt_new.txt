@@ -1,0 +1,30 @@
+Please act as a professional VHDL designer.
+
+Implement a dual-port RAM module with a depth of 8 locations and a data width of 6 bits. All memory locations are initialized to zero upon reset. The module provides independent read and write ports, allowing simultaneous read and write operations. When the read enable signal is asserted, data from the location specified by the read address is output on the read data port. When the write enable signal is asserted, data is written to the location specified by the write address.
+
+Module name:  
+    RAM
+
+Input ports:
+    clk: Clock signal used for synchronous operation of both read and write processes.
+    rst_n: Active-low asynchronous reset signal. When '0', the module is in reset state; when '1', normal operation is enabled.
+    write_en: Write enable signal. When '1', a write operation is performed on the rising edge of the clock.
+    write_addr: 8-bit write address signal. Only the lower 3 bits (bits 2 downto 0) are used to address the 8 memory locations.
+    write_data: 6-bit data input to be written into the RAM.
+    read_en: Read enable signal. When '1', a read operation is performed on the rising edge of the clock.
+    read_addr: 8-bit read address signal. Only the lower 3 bits (bits 2 downto 0) are used to address the 8 memory locations.
+
+Output ports:
+    read_data: 6-bit output signal representing the data read from the RAM. Outputs zero when read_en is inactive.
+
+Implementation:
+
+The module implements a synchronous dual-port RAM using an internal memory array. The memory array consists of 8 storage locations, each holding 6 bits of data. All locations are initialized to zero.
+
+Write Operation:
+The write process is sensitive to both the clock signal and the asynchronous reset. During reset (when rst_n is '0'), all eight memory locations are cleared to zero through an initialization loop. On each rising edge of the clock, if the write enable signal is asserted, the data present on write_data is stored into the memory location indexed by the lower 3 bits of write_addr. This addressing scheme effectively wraps the 8-bit address into the valid range of 0 to 7.
+
+Read Operation:
+The read process operates synchronously with the clock and responds to the asynchronous reset. When reset is active, the read_data output is cleared to zero. On each rising clock edge, if the read enable signal is asserted, the module retrieves data from the memory location addressed by the lower 3 bits of read_addr and drives it onto the read_data output. If read_en is not asserted, the read_data output is explicitly cleared to zero, ensuring no stale data appears on the output port.
+
+The dual-port architecture allows independent and concurrent access to the memory array for reading and writing, with the lower 3 bits of the address inputs determining which of the 8 memory locations is accessed.

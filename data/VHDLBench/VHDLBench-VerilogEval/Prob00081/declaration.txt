@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library, which provides the fundamental digital logic types and operations for VHDL. Specifically, the std_logic_1164 package is necessary to support the std_logic type used for all port signals, as well as the logical AND and OR operators that combine these signals. No additional libraries or packages beyond the IEEE standard logic support are required for this combinational logic implementation.

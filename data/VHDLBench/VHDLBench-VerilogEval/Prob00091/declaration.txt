@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types and vector operations. Specifically, it uses the std_logic_1164 package which provides the std_logic type for individual signals and std_logic_vector for grouped signals representing buses or state encodings. These types enable the representation of digital logic values and support common logical operations such as AND, OR, and NOT that are essential for implementing combinational next-state logic in finite state machine designs.

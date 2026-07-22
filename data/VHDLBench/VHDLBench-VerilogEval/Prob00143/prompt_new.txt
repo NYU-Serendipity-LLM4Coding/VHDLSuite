@@ -1,0 +1,31 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes the combinational logic for the next-state and output generation of a one-hot encoded finite state machine with 10 states, 1 input, and 2 outputs.
+
+Module name:
+    TopModule
+
+Input ports:
+    signal_in: Single-bit input signal that determines state transitions
+    state: 10-bit vector representing the current state in one-hot encoding, where bit positions 0 through 9 correspond to states S0 through S9 respectively
+
+Output ports:
+    next_state: 10-bit vector representing the next state in one-hot encoding, where bit positions 0 through 9 correspond to states S0 through S9 respectively
+    out1: Single-bit output signal, active high
+    out2: Single-bit output signal, active high
+
+Implementation:
+    This module implements the combinational logic portion of a one-hot state machine, excluding the state registers themselves. The design accepts the current state vector and input signal, then computes both the next state vector and two output signals.
+
+    The output logic is derived directly from the current state encoding. Output out1 is asserted when the machine is in state S8 or S9. Output out2 is asserted when the machine is in state S7 or S9. Both outputs are combinational functions of the state bits.
+
+    The next-state logic implements the state transition table using combinational equations derived by inspection of the one-hot encoding. Each bit of the next_state vector corresponds to conditions under which that particular state should become active in the next cycle. The transitions depend on both the current state and the value of signal_in:
+
+    - State S0 becomes active when signal_in is low and the machine is currently in any of states S0 through S4, or in states S7, S8, or S9
+    - State S1 becomes active when signal_in is high and the machine is in S0, S8, or S9
+    - States S2 through S6 follow a sequential pattern, each becoming active when signal_in is high and the machine is in the immediately preceding state
+    - State S7 becomes active when signal_in is high and the machine is in S6, or remains in S7 when signal_in is high
+    - State S8 becomes active when signal_in is low and the machine is in S5
+    - State S9 becomes active when signal_in is low and the machine is in S6
+
+    The design uses purely combinational logic with no internal sequential elements, making it suitable for integration with external state registers driven by a clock signal.

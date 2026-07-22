@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library, which provides the fundamental logic types and operations for VHDL hardware description. Specifically, it uses the std_logic_1164 package to support the std_logic type, enabling representation of digital signal states including logic low and logic high values. This package is essential for defining single-bit output signals and assigning constant logic levels in the design.

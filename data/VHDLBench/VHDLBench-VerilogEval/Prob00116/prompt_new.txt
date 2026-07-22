@@ -1,0 +1,23 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a combinational logic function defined by a Karnaugh map with don't-care conditions.
+
+Module name:
+    TopModule
+
+Input ports:
+    x: 4-bit input vector, indexed from 4 downto 1, representing the four Boolean variables that define the function
+
+Output ports:
+    f: single-bit output representing the combinational logic function result
+
+Implementation:
+    This module implements a purely combinational logic function based on a Karnaugh map specification. The function maps a 4-bit input to a single-bit output according to specific truth table entries.
+
+    The Karnaugh map divides the input space into sixteen possible combinations. For certain input combinations, the output is strictly defined (must be logic 0 or logic 1). For other combinations marked as don't-care, the designer has freedom to choose either value for optimization purposes.
+
+    The implementation uses a combinatorial process that evaluates all sixteen possible input patterns. The process is sensitive to changes in the input vector x. Based on the current value of x, the appropriate output value is assigned to f.
+
+    The don't-care positions in the original specification have been resolved to concrete values (either 0 or 1) in this implementation. These choices were made to simplify the logic expression while maintaining correctness for all mandatory output values.
+
+    The module operates entirely combinationally with no clock or reset signals. Output f responds immediately to any change in input x, with the response determined solely by the current input value according to the implemented truth table mapping.

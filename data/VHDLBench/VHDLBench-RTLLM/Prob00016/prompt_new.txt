@@ -1,0 +1,50 @@
+Please act as a professional VHDL designer.
+
+Implement a module of a parameterized fixed-point adder for arithmetic operations with fixed precision.
+
+Module name:  
+    fixed_point_adder
+
+Generic parameters:
+    Q: Number of fractional bits (precision). Default value is 15.
+    N: Total number of bits, including integer and fractional parts. Default value is 32.
+
+Input ports:
+    a: N-bit fixed-point input operand (std_logic_vector ranging from N-1 downto 0). Represents the first signed fixed-point number.
+    b: N-bit fixed-point input operand (std_logic_vector ranging from N-1 downto 0). Represents the second signed fixed-point number.
+
+Output ports:
+    c: N-bit output (std_logic_vector ranging from N-1 downto 0) representing the result of the fixed-point addition.
+
+Implementation:
+
+The module performs signed fixed-point addition using a sign-magnitude representation approach. The most significant bit (bit N-1) serves as the sign bit, while the remaining bits (N-2 downto 0) represent the magnitude.
+
+The computation process is combinational and sensitive to changes in inputs a and b. Internal variables are used to handle the magnitude portions as unsigned values for arithmetic operations.
+
+The addition logic operates as follows:
+
+1. Same Sign Addition:
+    - When both input operands have the same sign bit (both positive or both negative), their magnitudes are added together.
+    - The result magnitude is computed by adding the lower N-1 bits of both operands.
+    - The sign bit of the result matches the common sign bit of the inputs.
+
+2. Different Sign Subtraction:
+    - When the input operands have different signs, the operation becomes a subtraction of magnitudes.
+    - The module compares the magnitudes to determine which is larger.
+    - The larger magnitude is subtracted from by the smaller magnitude to obtain the result magnitude.
+    
+3. Sign Determination for Subtraction:
+    - When a is positive and b is negative: if the magnitude of a is greater, the result is positive; otherwise, the result is negative unless the result magnitude is zero.
+    - When a is negative and b is positive: if the magnitude of a is greater, the result is negative unless the result magnitude is zero; otherwise, the result is positive.
+    - Special handling ensures that a zero result always has a positive sign bit.
+
+4. Precision:
+    - The generic parameter Q defines how many of the N bits represent fractional precision.
+    - Both inputs and output maintain consistent fixed-point format with Q fractional bits.
+    - The integer portion consists of N-Q-1 bits (excluding the sign bit).
+
+5. Output Assignment:
+    - The computed result is assigned to an internal signal res, which directly drives the output port c.
+
+Give me the complete code.

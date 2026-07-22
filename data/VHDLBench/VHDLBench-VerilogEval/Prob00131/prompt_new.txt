@@ -1,0 +1,29 @@
+Please act as a professional VHDL designer.
+
+Implement a hierarchical digital circuit that combines the outputs of four submodules using combinational logic gates.
+
+Module name:  
+    TopModule
+
+Input ports:
+    x: Single-bit input signal, connected to the first input of all four submodules
+    y: Single-bit input signal, connected to the second input of all four submodules
+
+Output ports:
+    z: Single-bit output signal, representing the final result of the hierarchical logic combination
+
+Implementation:
+    This module implements a hierarchical combinational logic circuit that instantiates four submodules and combines their outputs through a series of logic gates.
+
+    The design consists of two types of submodules:
+    - ModuleA: Implements the Boolean function that computes the AND of an XOR operation with one of its operands. This produces a logic high only when the first input is high and differs from the second input.
+    - ModuleB: Implements the XNOR (equivalence) function, producing a logic high when both inputs have the same logic level.
+
+    The top-level architecture instantiates two instances of ModuleA and two instances of ModuleB. All four submodules receive the same input signals x and y.
+
+    The outputs are combined as follows:
+    - The first ModuleA instance and the first ModuleB instance outputs are fed into a two-input OR gate
+    - The second ModuleA instance and the second ModuleB instance outputs are fed into a two-input AND gate
+    - The outputs of the OR gate and AND gate are then combined through a two-input XOR gate to produce the final output z
+
+    This hierarchical structure creates a specific combinational logic function where the final output depends on the logical combination of the intermediate results. The circuit is purely combinational with no memory elements, meaning the output responds immediately to changes in the input signals.

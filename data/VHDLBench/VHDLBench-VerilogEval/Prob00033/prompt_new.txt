@@ -1,0 +1,21 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs 8-bit signed two's complement addition with overflow detection.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    a: 8-bit signed two's complement input operand (a[7:0], where bit 7 is the sign bit)
+    b: 8-bit signed two's complement input operand (b[7:0], where bit 7 is the sign bit)
+
+Output ports:
+    s: 8-bit result of the signed addition (s[7:0], lower 8 bits of the sum)
+    overflow: Single-bit flag indicating signed overflow (active high when overflow occurs)
+
+Implementation:
+    The module adds two 8-bit signed two's complement numbers and detects overflow conditions. Internally, the addition is performed using a 9-bit intermediate result to capture the full sum. The lower 8 bits of this intermediate sum are extracted and assigned to the output port s.
+
+    Overflow detection is implemented by examining the sign bits of the operands and the result. Signed overflow occurs when adding two numbers with the same sign produces a result with a different sign. Specifically, overflow is detected when both input operands have identical sign bits (indicating they are both positive or both negative) and the sign bit of the result differs from the sign bits of the inputs. The overflow output is asserted high when this condition is met, indicating that the 8-bit result cannot accurately represent the true signed sum of the inputs.
+
+    The module operates purely combinationally with no clock or reset signals. The outputs update immediately in response to changes in the input operands.

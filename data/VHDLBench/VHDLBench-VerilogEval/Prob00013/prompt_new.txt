@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a 2-input NOR gate.
+
+Module name:  
+    TopModule
+
+Input ports:
+    in1: First input signal, 1-bit, active high
+    in2: Second input signal, 1-bit, active high
+
+Output ports:
+    signal_out: NOR gate output, 1-bit, active high
+
+Implementation:
+    This module implements a combinational 2-input NOR logic gate. The output signal_out is driven by the logical NOR operation of the two input signals. The NOR operation produces a high output only when both inputs are low. If either or both inputs are high, the output will be low. The implementation uses a single concurrent signal assignment statement that performs the logical OR of the two inputs and then inverts the result to produce the NOR function. This is a purely combinational circuit with no sequential elements, registers, or clocking requirements.

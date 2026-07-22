@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library, which provides the fundamental logic types and operations for VHDL hardware description. Specifically, the std_logic_1164 package is necessary to support the std_logic data type used for all port signals, as well as the logical XOR and NOT operations applied to these signals.

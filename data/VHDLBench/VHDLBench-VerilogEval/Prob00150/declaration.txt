@@ -1,0 +1,2 @@
+Declaration:
+    This VHDL design requires the IEEE standard logic library to support multi-valued logic types including `std_logic` and `std_logic_vector`, which are used for all port signals and internal state representations. The design also uses the IEEE numeric standard package to enable arithmetic and logical operations on standard logic vectors, particularly for indexing and bit-level manipulations of the one-hot encoded state vector. No additional libraries beyond these IEEE standard packages are necessary for this combinational logic implementation.

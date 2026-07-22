@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the fundamental digital logic types used in VHDL. Specifically, the std_logic_1164 package is necessary to define the std_logic type, which represents individual signal values with multiple logic states including high, low, high-impedance, and undefined conditions. This package provides the essential type system for modeling digital signals and their interconnections in hardware description.

@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the fundamental logic types used in digital hardware description. Specifically, it uses the std_logic_1164 package, which provides the std_logic type and std_logic_vector type necessary for representing individual bits and multi-bit buses. These types enable the modeling of signal states and vector operations essential for bit manipulation tasks in the design.

@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types and vector operations. The std_logic_1164 package provides the fundamental std_logic and std_logic_vector types necessary for representing the 8-bit input and output ports. No additional arithmetic, numeric conversion, or signed/unsigned packages are needed, as the design performs only direct bit-level assignments without mathematical operations.

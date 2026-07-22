@@ -1,0 +1,21 @@
+Please act as a professional VHDL designer.
+
+Implement a module that functions as a 100-bit left/right rotator with synchronous load and directional enable control. A rotator shifts bits in a circular manner, where the shifted-out bit from one end is shifted back into the other end of the register, preserving all bits rather than discarding them.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal for synchronous operation
+    load: Synchronous load enable signal, active high; when asserted, loads the shift register with the value on data
+    ena: 2-bit synchronous enable control that selects the rotation direction:
+        "01" rotates right by one bit position
+        "10" rotates left by one bit position
+        "00" and "11" hold the current state without rotation
+    data: 100-bit parallel input data vector (bits 99 downto 0) to be loaded into the rotator
+
+Output ports:
+    q: 100-bit output vector (bits 99 downto 0) representing the current contents of the rotator
+
+Implementation:
+    The module implements a synchronous 100-bit barrel rotator with load capability. On each rising clock edge, the behavior is determined by a priority structure. When the load signal is active high, the internal register is loaded with the value present on the data input, overriding any rotation operation. If load is not asserted, the ena control determines the operation: when ena equals "01", a right rotation occurs where bit 0 moves to bit 99 and all other bits shift down by one position; when ena equals "10", a left rotation occurs where bit 99 moves to bit 0 and all other bits shift up by one position. For any other ena value, the register contents remain unchanged. The output q continuously reflects the current state of the internal register. All operations are synchronized to the rising edge of the clock signal, ensuring predictable timing behavior.

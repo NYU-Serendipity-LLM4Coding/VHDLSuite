@@ -1,0 +1,26 @@
+Please act as a professional VHDL designer.
+
+Implement a module of a 4-bit comparator with multiple bit-level comparators in combinational logic.
+
+Module name:  
+    comparator_4bit
+
+Input ports:
+    A [3:0]: First 4-bit input operand (std_logic_vector representing an unsigned binary number to compare).
+    B [3:0]: Second 4-bit input operand (std_logic_vector representing an unsigned binary number to compare).
+
+Output ports:
+    A_greater: 1-bit output (std_logic) indicating if A is greater than B.
+    A_equal: 1-bit output (std_logic) indicating if A is equal to B.
+    A_less: 1-bit output (std_logic) indicating if A is less than B.
+
+Implementation:
+Comparison Logic: The module compares the two 4-bit unsigned binary numbers A and B using purely combinational logic.
+- The inputs are converted to unsigned types to enable arithmetic operations and relational comparisons.
+- A subtraction operation is performed internally: A minus B. The 4-bit difference result is computed to help determine the relationship between A and B.
+- Carry-out (borrow) detection: A carry-out signal is generated to indicate whether a borrow occurred during subtraction. When the carry-out is high, it means no borrow occurred (A is greater than or equal to B). When the carry-out is low, a borrow occurred (A is less than B).
+- The A_greater output is asserted when there is no borrow (carry-out is high) and the difference is non-zero, indicating A is strictly greater than B.
+- The A_equal output is asserted when A and B are identical (direct comparison).
+- The A_less output is asserted when a borrow occurred (carry-out is low), indicating A is less than B.
+
+Output Encoding: The outputs (A_greater, A_equal, A_less) are mutually exclusive, ensuring only one of the three outputs is high at any given time, providing a clear one-hot encoding of the comparison result.

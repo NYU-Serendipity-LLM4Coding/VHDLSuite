@@ -1,0 +1,2 @@
+Declaration:
+    This VHDL design requires the IEEE standard logic library to support the std_logic and std_logic_vector types used for the clock, control input, and output vector. Additionally, the numeric_std package is necessary to enable arithmetic operations on unsigned vectors, including increment operations and conversions between unsigned and std_logic_vector types. These libraries provide the foundational data types and arithmetic capabilities required for implementing the synchronous counter with conditional load and wrap-around behavior.

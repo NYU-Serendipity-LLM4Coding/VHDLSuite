@@ -1,0 +1,2 @@
+Declaration:
+This design requires the IEEE standard logic library to provide the fundamental digital logic types including the standard logic vector type used for multi-bit signals and ports. Additionally, the numeric standard package is necessary to enable arithmetic operations on unsigned binary representations, specifically to support incrementing operations on the binary-coded decimal digit values within the counter implementation.

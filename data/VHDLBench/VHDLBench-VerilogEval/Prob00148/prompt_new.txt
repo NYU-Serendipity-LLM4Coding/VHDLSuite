@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a finite state machine that acts as an arbiter circuit, controlling access to a shared resource by three requesting devices with a priority-based grant mechanism.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal for synchronous operation
+    resetn: Active-low synchronous reset signal
+    r: 3-bit request vector (indexed 3 downto 1), where each bit represents a request from a corresponding device
+
+Output ports:
+    g: 3-bit grant vector (indexed 3 downto 1), where each bit represents a grant to a corresponding device
+
+Implementation:
+    The module implements a finite state machine with four states that arbitrates access to a shared resource among three requesting devices. The FSM operates on the rising edge of the clock and uses a synchronous active-low reset to initialize to an idle state.
+
+    The state machine begins in an idle state where no grants are active. When the FSM is in the idle state and no requests are pending, it remains idle. When one or more requests arrive, the FSM evaluates them according to a strict priority hierarchy: device 1 has the highest priority, device 2 has medium priority, and device 3 has the lowest priority. Based on this priority, the FSM transitions to a corresponding grant state.
+
+    Once the FSM enters a grant state for a particular device, it asserts the corresponding grant signal and remains in that state as long as the associated request remains active. When the request is deasserted, the FSM returns to the idle state, ready to arbitrate among any new requests.
+
+    The priority mechanism ensures that if multiple devices request access simultaneously while in the idle state, only the highest-priority requesting device receives a grant. Lower-priority devices must wait until the FSM returns to the idle state and their request is the highest-priority active request.
+
+    The design uses separate processes for the state register and next-state logic, following a standard FSM design pattern. The output signals are generated using concurrent assignments based on the current state, ensuring that exactly one grant signal is active at any time when a grant is issued, or all grant signals are inactive when in the idle state.

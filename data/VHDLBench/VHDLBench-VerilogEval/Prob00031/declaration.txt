@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to provide the fundamental digital logic types and operations. Specifically, the std_logic_1164 package is necessary to support std_logic signal types, which represent single-bit digital values with multiple states including logic high, logic low, and uninitialized conditions. This package also provides the rising_edge function used to detect positive clock edge transitions in synchronous logic elements.

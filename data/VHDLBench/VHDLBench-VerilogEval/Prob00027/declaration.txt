@@ -1,0 +1,2 @@
+Declaration:
+    This VHDL design requires the IEEE standard logic library to support multi-valued logic types representing individual bits and bit vectors. Additionally, it requires the numeric standard package to enable arithmetic operations on unsigned vector types, including addition and resizing of bit-width representations. These libraries provide the foundational support for single-bit logic signals and the arithmetic computation necessary to implement the adder functionality.

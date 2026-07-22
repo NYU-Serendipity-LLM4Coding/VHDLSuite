@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a data width conversion circuit that converts 8-bit data input to 16-bit data output. The module provides two output ports: valid_out, which indicates the validity of the output data, and data_out, which represents the converted 16-bit output data. The first arriving 8-bit data should be placed in the higher 8 bits of the 16-bit data output. The valid_out and data_out signals are generated in the next clock cycle after the two data inputs. When there is only one data input, valid_out and data_out are not generated immediately. Instead, they wait for the arrival of the next data input to complete the concatenation of the two data inputs before generating valid_out and data_out.
+
+Module name:  
+    width_8to16   
+
+Input ports:
+    clk: Clock signal used for synchronous operation.
+    rst_n: Active-low reset signal. Defined as logic low for reset and logic high for reset signal inactive.
+    valid_in: Input signal indicating the validity of the input data.
+    data_in: 8-bit input data vector (7 downto 0) to be converted.
+
+Output ports:
+    valid_out: Output signal indicating the validity of the output data.
+    data_out: 16-bit output data vector (15 downto 0) resulting from the width conversion.
+
+Implementation:
+The module operates synchronously on the rising edge of the clock signal. An asynchronous active-low reset clears all internal state.
+
+The design uses an internal toggle flag to track whether the next valid input is the first or second byte of a pair. When valid_in is asserted and the flag is low, the incoming data_in is captured into an internal buffer named data_lock. Simultaneously, the flag toggles to indicate that one byte has been received. When valid_in is asserted again and the flag is high, the module concatenates data_lock (the previously stored byte) with the current data_in to form the 16-bit output. The first received byte occupies the upper 8 bits (15 downto 8) and the second byte occupies the lower 8 bits (7 downto 0) of data_out.
+
+The valid_out signal is asserted for one clock cycle whenever a complete 16-bit conversion occurs, specifically when valid_in is high and the flag indicates the second byte of a pair. After this event, the flag toggles back, resetting the cycle to wait for the next pair of bytes.
+
+During reset, all internal registers including data_lock, flag, valid_out, and data_out are cleared to zero. The module then waits for pairs of valid input bytes to produce corresponding valid 16-bit outputs.

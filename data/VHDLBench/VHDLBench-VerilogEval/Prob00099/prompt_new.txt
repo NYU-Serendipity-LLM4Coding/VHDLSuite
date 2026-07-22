@@ -1,0 +1,23 @@
+Please act as a professional VHDL designer.
+
+Implement a module that computes the next-state signals for a one-hot encoded finite state machine.
+
+Module name:  
+    TopModule
+
+Input ports:
+    y: 6-bit current state vector (6 downto 1), one-hot encoded representing states A through F
+    w: 1-bit input signal that determines state transitions
+
+Output ports:
+    Y2: 1-bit next-state signal corresponding to state B (bit position 2 of the state vector)
+    Y4: 1-bit next-state signal corresponding to state D (bit position 4 of the state vector)
+
+Implementation:
+    This module implements combinational next-state logic for a finite state machine using one-hot encoding. The state assignment maps each state to a unique bit position: state A corresponds to y(1), state B to y(2), state C to y(3), state D to y(4), state E to y(5), and state F to y(6).
+
+    The Y2 output determines when the machine should transition into state B. This occurs when the current state is A (indicated by y(1) being active) and the input w is low. The logic combines these conditions using an AND operation between y(1) and the complement of w.
+
+    The Y4 output determines when the machine should transition into state D. This occurs from multiple source states when the input w is high. Specifically, state D can be reached from states B, C, E, or F when w is asserted. The logic first combines the indicators for these four states using OR operations (y(2), y(3), y(5), y(6)), then gates the result with w using an AND operation.
+
+    Both outputs are purely combinational, deriving their values directly from the current state vector y and input w without any sequential elements or clock dependency.

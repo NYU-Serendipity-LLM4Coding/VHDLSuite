@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a D flip-flop with asynchronous reset functionality.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit, positive edge triggered
+    d: Data input, 1-bit, sampled on the rising edge of clk
+    ar: Asynchronous reset, 1-bit, active high
+
+Output ports:
+    q: Data output, 1-bit, reflects the registered value of d
+
+Implementation:
+    This module implements a single-bit D flip-flop with asynchronous reset capability. The design operates as follows:
+
+    - The asynchronous reset input ar has the highest priority. When ar is asserted high, the output q is immediately forced to logic low, regardless of the clock signal state.
+    
+    - When ar is not asserted, the flip-flop operates in normal mode: on each rising edge of the clk signal, the value present at input d is captured and propagated to output q.
+    
+    - The asynchronous nature of the reset means that the reset action occurs independently of the clock, providing immediate clearing of the flip-flop state.
+    
+    - The flip-flop uses a sensitivity list that includes both the clock and the asynchronous reset, ensuring proper response to both synchronous clocking events and asynchronous reset events.

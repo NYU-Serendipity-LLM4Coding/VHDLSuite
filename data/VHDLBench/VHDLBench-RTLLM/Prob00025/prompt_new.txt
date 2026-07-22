@@ -1,0 +1,34 @@
+Please act as a professional VHDL designer.
+
+Implement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.
+
+Module name:
+    sequence_detector
+
+Input ports:
+    clk: Clock signal (std_logic) to synchronize the detector on its rising edge.
+    rst_n: Active-low asynchronous reset signal (std_logic) to initialize the state machine.
+    data_in: 1-bit input signal (std_logic) to feed the bitstream for sequence detection.
+
+Output ports:
+    sequence_detected: 1-bit output signal (std_logic) that is asserted high when the specific sequence is detected.
+
+Implementation:
+    The sequence detector implements a finite state machine (FSM) with five states: IDLE, S1, S2, S3, and S4. The FSM is designed to recognize the binary pattern 1001 from the incoming bitstream.
+
+    State Machine Behavior:
+    - IDLE state: The initial state where the detector waits for the first bit of the sequence. The FSM remains in IDLE when a zero is received and transitions to S1 when a one is detected.
+    - S1 state: Indicates that the first bit (1) of the target sequence has been observed. The FSM stays in S1 if another one arrives (restarting the potential sequence) or moves to S2 when a zero is received.
+    - S2 state: Represents detection of the first two bits (10) of the sequence. If a one arrives, the FSM transitions back to S1 (starting a new potential match). If a zero arrives, it advances to S3.
+    - S3 state: Indicates that three bits (100) have been matched. A one at this point completes the sequence, transitioning to S4. A zero causes the FSM to return to IDLE.
+    - S4 state: The final state where the complete sequence 1001 has been detected. The output sequence_detected is asserted high in this state. From S4, the FSM transitions to S1 if a one is received or to S2 if a zero is received, allowing for detection of overlapping sequences.
+
+    Clocking and Reset:
+    - The state register updates on the rising edge of clk.
+    - When rst_n is low (active-low reset), the state machine asynchronously resets to the IDLE state, clearing any partial sequence detection.
+    - The reset condition is checked in both the state register process and the next-state logic to ensure proper initialization.
+
+    Output Generation:
+    - The sequence_detected output is combinationally derived from the current state. It is asserted high when the FSM is in state S4, and low otherwise.
+
+    The design uses a two-process FSM architecture: one synchronous process manages the state register with asynchronous reset, and one combinational process determines the next state based on the current state and input data. This structure provides clear separation between sequential and combinational logic, facilitating verification and maintenance.

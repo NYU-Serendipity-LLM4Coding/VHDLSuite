@@ -1,0 +1,27 @@
+Please act as a professional VHDL designer.
+
+Implement a combinational logic circuit that realizes the function specified by the following Karnaugh map:
+
+```
+             ab
+  cd   00  01  11  10
+  00 | 0 | 1 | 0 | 1 |
+  01 | 1 | 0 | 1 | 0 |
+  11 | 0 | 1 | 0 | 1 |
+  10 | 1 | 0 | 1 | 0 |
+```
+
+Module name:  
+    TopModule
+
+Input ports:
+    a: Single-bit input, represents the most significant bit of the AB input pair in the Karnaugh map
+    b: Single-bit input, represents the least significant bit of the AB input pair in the Karnaugh map
+    c: Single-bit input, represents the most significant bit of the CD input pair in the Karnaugh map
+    d: Single-bit input, represents the least significant bit of the CD input pair in the Karnaugh map
+
+Output ports:
+    signal_out: Single-bit output that produces the logic value corresponding to the Karnaugh map entry indexed by the four-bit combination {a, b, c, d}
+
+Implementation:
+    The module implements a purely combinational logic function based on a Karnaugh map truth table. The four input signals are treated as a four-bit address that selects one of sixteen possible output values. The inputs are concatenated in the order a, b, c, d to form a four-bit vector, which is then decoded to produce the appropriate output value. The output is determined using a case-based lookup structure that maps each of the sixteen possible input combinations to its corresponding output value as defined by the Karnaugh map. For instance, when the input combination is binary 0000, the output is logic 0; when the combination is binary 0001, the output is logic 1, and so forth for all sixteen entries. The circuit operates asynchronously and responds immediately to any change in the input signals, producing the correct output value according to the specified truth table.

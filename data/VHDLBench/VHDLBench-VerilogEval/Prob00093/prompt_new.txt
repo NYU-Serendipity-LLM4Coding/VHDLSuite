@@ -1,0 +1,24 @@
+Please act as a professional VHDL designer.
+
+Implement a module that generates the input signals for a 4-to-1 multiplexer to realize a specific Boolean function defined by a Karnaugh map.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    c: 1-bit input signal, represents one of the variables in the K-map
+    d: 1-bit input signal, represents another variable in the K-map
+
+Output ports:
+    mux_in: 4-bit output signal vector (3 downto 0), provides the data inputs to a 4-to-1 multiplexer
+
+Implementation:
+    This module computes four separate logic functions based on inputs c and d, with each result driving one bit of the mux_in output vector. These outputs are intended to connect to the data inputs of a 4-to-1 multiplexer that uses two other variables as its selector inputs.
+
+    The module implements the following logic for each bit of mux_in:
+    - mux_in(0) produces a logic high when either c or d (or both) is high, implementing an OR function
+    - mux_in(1) is permanently tied to logic low
+    - mux_in(2) produces a logic high when d is low, implementing a NOT function on d
+    - mux_in(3) produces a logic high only when both c and d are high simultaneously, implementing an AND function
+
+    All four outputs are computed using pure combinational logic with no registers or state elements. The outputs update immediately whenever the inputs change. This design assumes the external 4-to-1 multiplexer will select among these four values based on its selector inputs to produce the final Boolean function output as specified by the target Karnaugh map.

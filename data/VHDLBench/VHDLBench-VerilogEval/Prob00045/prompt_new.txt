@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a module that detects any edge transition (rising or falling) for each bit in an 8-bit input vector.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, active on the rising edge
+    signal_in: 8-bit input vector to be monitored for edge transitions
+
+Output ports:
+    anyedge: 8-bit output vector indicating detected edges, where each bit is set high for one clock cycle after the corresponding input bit transitions from 0 to 1 or from 1 to 0
+
+Implementation:
+    This module implements an edge detector that monitors all eight bits of the input vector independently and simultaneously. On each rising edge of the clock, the module captures the current state of the input vector and compares it with the state from the previous clock cycle. The comparison is performed using an XOR operation between the current input value and the delayed version. When a bit changes state (either rising or falling edge), the XOR operation produces a logic high for that bit position, which is presented on the corresponding output bit for exactly one clock cycle. The module maintains an internal 8-bit register to store the previous state of the input vector, enabling the bit-by-bit comparison. Each output bit operates independently, allowing multiple edges across different bit positions to be detected concurrently within the same clock cycle.

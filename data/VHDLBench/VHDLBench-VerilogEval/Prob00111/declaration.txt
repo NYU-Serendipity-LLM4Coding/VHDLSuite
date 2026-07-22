@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the fundamental logic types and operations used in VHDL digital designs. Specifically, the std_logic_1164 package is necessary to provide the std_logic type for representing signal values with multiple logic levels, including high, low, and undefined states. This package enables the definition of port signals, internal state representations, and logical comparisons essential for implementing synchronous sequential logic with clock-edge detection and combinational next-state decoding.

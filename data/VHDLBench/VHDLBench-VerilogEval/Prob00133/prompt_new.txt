@@ -1,0 +1,28 @@
+Please act as a professional VHDL designer.
+
+Implement a finite state machine that detects a specific pattern of input occurrences over sliding three-cycle windows.
+
+Module name:  
+    TopModule
+
+Input ports:
+    clk: Clock signal, active on the rising edge, 1-bit
+    reset: Synchronous reset signal, active high, 1-bit
+    s: Start signal to transition from idle state, active high, 1-bit
+    w: Data input signal monitored for pattern detection, 1-bit
+
+Output ports:
+    z: Detection flag indicating the pattern was found, active high, 1-bit
+
+Implementation:
+    This module implements a finite state machine that monitors the input signal w over consecutive three-clock-cycle windows and detects when exactly two occurrences of logic high appear within any window.
+
+    The FSM begins in an idle state upon reset. While in this idle state, the machine waits for the start signal s to become high. Once s is asserted, the FSM transitions to an active monitoring state and begins evaluating the w input.
+
+    The monitoring operates in overlapping three-cycle windows. Starting from the active state, the FSM examines w during three consecutive clock cycles, tracking how many times w is high during this period. The state machine encodes the count of high values seen so far within the current window using intermediate states.
+
+    After observing three samples of w, the FSM determines whether exactly two of those samples were high. If this condition is met, the output z is asserted high for one clock cycle. Otherwise, z remains low. The FSM then continues monitoring, starting a new three-cycle window immediately, creating overlapping observation periods.
+
+    The design uses eight distinct states encoded with 3-bit values to track both the position within each three-cycle window and the accumulated count of high w values. State transitions depend on the current state and the value of w, implementing a compact representation that minimizes the total number of states required.
+
+    The synchronous reset forces the FSM back to the idle state when asserted high. The output z is derived directly from the current state, becoming high only when the state indicates that exactly two ones were detected in the preceding three-cycle observation window.

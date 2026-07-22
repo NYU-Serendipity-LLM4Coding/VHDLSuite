@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a module that functions as a 3-bit synchronous counter with conditional load and wrap-around behavior.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, active on rising edge
+    a: Synchronous load control signal, active high
+
+Output ports:
+    q: 3-bit counter output value (range 0 to 7)
+
+Implementation:
+    This module implements a 3-bit synchronous counter with conditional behavior based on the input control signal and the current counter value. The counter operates on the rising edge of the clock signal.
+
+    The counter behavior follows a priority scheme:
+    - When input a is asserted (logic high), the counter is synchronously loaded with the value 4, regardless of its current state.
+    - When input a is deasserted (logic low) and the counter value equals 6, the counter wraps around to 0 on the next clock cycle.
+    - When input a is deasserted and the counter value is any value other than 6, the counter increments by 1 on the next clock cycle.
+
+    This creates a counting sequence that increments from 0 through 6, then wraps to 0, continuing this pattern as long as input a remains low. When input a goes high, the counter immediately loads value 4 on the next rising clock edge and holds that value until input a is deasserted again, at which point counting resumes from 4.
+
+    The counter has no asynchronous reset. The output q directly reflects the internal counter register state as a 3-bit value.

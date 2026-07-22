@@ -1,0 +1,15 @@
+Please act as a professional VHDL designer.
+
+Implement a module that behaves like a wire, directly connecting one input to one output.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    signal_in: 1-bit input signal that will be passed through to the output
+
+Output ports:
+    signal_out: 1-bit output signal that continuously reflects the value of the input
+
+Implementation:
+    This module implements a simple combinational pass-through connection. The output signal_out is continuously assigned the current value of the input signal_in with no delay or modification. There is no clocking, state, or reset logic involved. The module acts as a direct wire connection, making the output immediately follow any changes on the input.

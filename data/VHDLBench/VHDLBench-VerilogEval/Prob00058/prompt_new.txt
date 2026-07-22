@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a module that demonstrates three different methods of implementing an XOR gate in VHDL, each producing a distinct output to illustrate different coding styles and their resulting hardware.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock input, single bit, used for the synchronous XOR implementation
+    a: First XOR operand, single bit
+    b: Second XOR operand, single bit
+
+Output ports:
+    out_assign: XOR result using concurrent signal assignment, single bit
+    out_always_comb: XOR result using combinational process, single bit
+    out_always_ff: XOR result using clocked process, single bit (registered output)
+
+Implementation:
+    This module demonstrates three distinct VHDL coding approaches for implementing the same logical XOR operation. The first method uses a concurrent signal assignment to directly compute the XOR of inputs a and b and assign the result to out_assign. This represents pure combinational logic with no intermediate storage.
+
+    The second method employs a combinational process with a sensitivity list containing both input operands. Within this process, the XOR operation is computed and assigned to out_always_comb. This also produces combinational logic functionally equivalent to the first method, but uses the process construct instead of concurrent assignment.
+
+    The third method uses a clocked process that is sensitive to the clock signal. The XOR operation is performed and assigned to out_always_ff only on the rising edge of the clock. This creates a fundamentally different circuit: a flip-flop is inferred to register the XOR result, introducing a one-clock-cycle delay between the input changes and the corresponding output update. This demonstrates the difference between combinational and sequential logic implementation of the same operation.
+
+    All three outputs compute the same logical function (XOR of a and b), but out_assign and out_always_comb respond immediately to input changes (combinational), while out_always_ff updates only on clock edges and holds its value between clock cycles (sequential/registered).

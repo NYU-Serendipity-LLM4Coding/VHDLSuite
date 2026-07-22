@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library, which provides the fundamental logic types and operations for VHDL designs. Specifically, the std_logic_1164 package is needed to support single-bit logic signals and the logical AND operation between them.

@@ -1,0 +1,20 @@
+Please act as a professional VHDL designer.
+
+Implement a module that functions as a 256-to-1 multiplexer with a 4-bit wide output.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    signal_in: 1024-bit input vector containing 256 concatenated 4-bit values (bits 1023 downto 0)
+    sel: 8-bit selection signal (bits 7 downto 0) to choose one of the 256 possible 4-bit groups
+
+Output ports:
+    signal_out: 4-bit output (bits 3 downto 0) representing the selected 4-bit group from the input vector
+
+Implementation:
+    This module implements a wide multiplexer that selects one 4-bit slice from a large input vector based on an 8-bit selector. The 1024-bit input vector is conceptually divided into 256 groups of 4 consecutive bits each. The sel input determines which of these 256 groups is routed to the output.
+
+    The selection mechanism works as follows: when sel equals 0, the output presents bits 3 downto 0 of the input vector; when sel equals 1, the output presents bits 7 downto 4; when sel equals 2, the output presents bits 11 downto 8, and so forth. In general, for any value of sel ranging from 0 to 255, the output corresponds to the 4-bit slice starting at bit position (sel × 4) and extending through bit position (sel × 4 + 3).
+
+    Internally, the design calculates a base index by multiplying the unsigned interpretation of sel by 4. This base index determines the starting position within the input vector. The architecture then extracts a 4-bit slice from the input vector using this computed index, ensuring that the correct group of bits is assigned to the output. The design operates purely combinationally with no clock or reset, providing immediate selection based on the current value of sel.

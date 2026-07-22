@@ -1,0 +1,22 @@
+Please act as a professional VHDL designer.
+
+Implement a module that functionally behaves like a dual-edge triggered flip-flop.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit
+    d: Data input, 1-bit
+
+Output ports:
+    q: Data output, 1-bit
+
+Implementation:
+    This design emulates dual-edge triggered flip-flop behavior using standard FPGA primitives. Since FPGAs do not natively support flip-flops that trigger on both rising and falling clock edges, this module implements an equivalent circuit using two separate flip-flops and multiplexing logic.
+
+    The module employs two internal signals, qp and qn, each capturing the input data d on opposite clock edges. One signal captures d on the rising edge of clk, while the other captures d on the falling edge of clk. These two captured values are then combined through a multiplexer controlled by the current clock level.
+
+    When the clock is high, the output q reflects the value captured on the most recent rising edge. When the clock is low, the output q reflects the value captured on the most recent falling edge. This multiplexing arrangement ensures that any transition of the clock—whether rising or falling—causes the output to update with the current input value, thereby achieving the functional behavior of a dual-edge triggered flip-flop.
+
+    The design uses three concurrent processes: one synchronous process sensitive to rising edges for capturing data into qp, another synchronous process sensitive to falling edges for capturing data into qn, and a combinational process that continuously selects between qp and qn based on the instantaneous clock level to drive the output q.

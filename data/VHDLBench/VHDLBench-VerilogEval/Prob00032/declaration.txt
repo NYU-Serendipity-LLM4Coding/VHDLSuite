@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the fundamental digital logic types and operations used throughout the module. Specifically, the std_logic_1164 package is necessary to provide the std_logic type for individual signal representation and the std_logic_vector type for grouped multi-bit signals. These types enable the design to handle both vector-based and bit-level signal assignments, which are essential for implementing the vector passthrough and bit extraction functionality of this module.

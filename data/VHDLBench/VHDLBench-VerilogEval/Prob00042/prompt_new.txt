@@ -1,0 +1,15 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs sign extension of an 8-bit signed number to a 32-bit signed number while preserving its signed value.
+
+Module name:
+    TopModule
+
+Input ports:
+    signal_in: 8-bit input vector representing a signed number in two's complement format
+
+Output ports:
+    signal_out: 32-bit output vector representing the sign-extended value of the input
+
+Implementation:
+    This module implements sign extension by replicating the most significant bit of the input (the sign bit located at position 7) to fill the upper 24 bits of the output, while the lower 8 bits directly contain the original input value. The sign bit replication ensures that positive numbers (sign bit 0) are extended with leading zeros, while negative numbers (sign bit 1) are extended with leading ones, thereby maintaining the correct signed value in the wider 32-bit representation. For example, an 8-bit value representing decimal 5 would extend to a 32-bit value still representing 5, while an 8-bit value representing decimal -3 would extend to a 32-bit value still representing -3. The operation is purely combinational with no clock or reset signals involved.

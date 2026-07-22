@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the std_logic type system used for all port signals. The ieee.std_logic_1164 package provides the fundamental logic types including std_logic for representing individual signal values and the associated logical operators such as 'and' for combining boolean conditions. These standard library components enable the implementation of combinational logic selection and conditional signal assignments within the VHDL architecture.

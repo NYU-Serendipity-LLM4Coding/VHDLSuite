@@ -1,0 +1,24 @@
+Please act as a professional VHDL designer.
+
+Implement a module that detects positive edge transitions (0-to-1 changes) for each bit in an 8-bit input vector.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, active on the rising edge
+    signal_in: 8-bit input vector to monitor for edge transitions
+
+Output ports:
+    pedge: 8-bit output vector indicating detected positive edges; each bit is asserted high for one clock cycle when the corresponding bit in signal_in transitions from 0 to 1
+
+Implementation:
+    This module operates as an 8-bit positive edge detector, monitoring each bit of the input vector independently for 0-to-1 transitions.
+
+    On each rising edge of the clock, the module samples the current state of signal_in and compares it with the previous state stored in an internal register. For each bit position, a positive edge is detected when the current bit value is 1 and the previous bit value was 0.
+
+    The detection logic operates synchronously with the clock. When a bit transitions from 0 to 1, the corresponding output bit in pedge is asserted high for exactly one clock cycle (the cycle immediately following the transition). If a bit remains at 0, remains at 1, or transitions from 1 to 0, no edge is detected and the corresponding output bit remains low.
+
+    The module uses an internal 8-bit register to store the previous state of the input vector, which is updated on every clock cycle. The edge detection is performed by computing the logical AND between the current input value and the bitwise NOT of the previous value, ensuring that only 0-to-1 transitions produce a high output.
+
+    This design provides cycle-accurate edge detection suitable for synchronous digital systems requiring event detection or pulse generation based on input signal transitions.

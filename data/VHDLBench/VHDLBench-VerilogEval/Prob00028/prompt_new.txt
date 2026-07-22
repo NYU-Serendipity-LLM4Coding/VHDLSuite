@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a D latch using a process block.
+
+Module name:
+    TopModule
+
+Input ports:
+    d: Data input, 1-bit
+    ena: Enable signal, 1-bit, active high
+
+Output ports:
+    q: Latch output, 1-bit
+
+Implementation:
+    This module implements a level-sensitive D latch. The latch operates in a transparent mode when the enable signal is asserted high. When ena is '1', the output q follows the data input d, immediately reflecting any changes on d. When ena transitions to '0', the latch enters hold mode, retaining the last value of d that was present when ena was high. The latch is implemented using a process block that is sensitive to both d and ena signals, ensuring combinational behavior during the transparent phase and memory retention during the hold phase.

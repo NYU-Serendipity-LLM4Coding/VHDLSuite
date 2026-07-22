@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a module that creates eight D flip-flops with synchronous positive-edge triggered behavior.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit, active on rising edge
+    d: Data input, 8-bit vector (7 downto 0)
+
+Output ports:
+    q: Data output, 8-bit vector (7 downto 0)
+
+Implementation:
+    This module implements eight D flip-flops that operate in parallel. On each rising edge of the clock signal, the 8-bit input data is captured and transferred to the output. The design uses a synchronous process sensitive to the clock signal, where the rising_edge function detects the positive clock transition. An internal register signal stores the captured data, which is then continuously driven to the output port. There is no asynchronous reset or enable control; the flip-flops simply sample and hold the input data on every positive clock edge. All eight bits are updated simultaneously, making this suitable for applications requiring synchronous parallel data storage or pipelining.

@@ -1,0 +1,30 @@
+Please act as a professional VHDL designer.
+
+Implement a module of a 64-bit pipelined ripple-carry adder that divides the addition operation into four sequential pipeline stages. The module produces a 65-bit result to accommodate potential carry-out, and provides an output enable signal to indicate result validity.
+
+Module name:  
+    adder_pipe_64bit
+
+Input ports:
+    clk: Clock signal
+    rst_n: Active-low asynchronous reset signal
+    i_en: Input enable signal to initiate addition operation
+    adda: 64-bit input operand A
+    addb: 64-bit input operand B
+
+Output ports:
+    result: 65-bit output containing the sum of adda and addb, including carry-out
+    o_en: Output enable signal indicating valid result availability
+
+Implementation:
+The module implements a four-stage pipelined adder that divides the 64-bit addition into four 16-bit segments. Each segment is processed in a separate pipeline stage, with carries propagating from lower to higher stages.
+
+The input operands are partitioned into four 16-bit slices. In the first pipeline stage, the lowest 16 bits of both operands are added together, producing a 16-bit sum and a carry-out bit. The remaining operand slices are registered and forwarded through pipeline delay registers to align with their respective computation stages.
+
+In subsequent stages, each 16-bit slice is added along with the carry from the previous stage. Stage two processes bits 31 through 16, stage three handles bits 47 through 32, and stage four computes bits 63 through 48. Each stage uses registered versions of its operand slices that have been delayed appropriately through flip-flops to maintain pipeline alignment.
+
+The partial sum results from earlier stages are also registered and propagated forward through delay chains. This ensures that when the final stage completes, all four 16-bit sum segments are temporally aligned and can be concatenated to form the complete 65-bit result.
+
+A set of pipeline stage control signals tracks the progression of valid data through the pipeline. The input enable signal advances through three stage registers, and the output enable signal is asserted when valid data reaches the final stage, indicating that a complete result is available.
+
+The reset signal initializes all pipeline registers, stage controls, carry bits, and partial sums to zero. All operations are synchronized to the rising edge of the clock. The design ensures proper data alignment across pipeline stages and maintains synchronization between operand segments, partial results, and control signals throughout the four-stage computation.

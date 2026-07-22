@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to provide the fundamental logic type std_logic for representing individual bit values. Additionally, the numeric_std package is necessary to support arithmetic operations on unsigned vector types, including addition and resizing functions used in the half adder computation.

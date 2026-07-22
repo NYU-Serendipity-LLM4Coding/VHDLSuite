@@ -1,0 +1,15 @@
+Please act as a professional VHDL designer.
+
+Implement a module that produces a constant logic low output.
+
+Module name:
+    TopModule
+
+Input ports:
+    None
+
+Output ports:
+    signal_out: A single-bit output that continuously drives logic low ('0')
+
+Implementation:
+    This module implements a simple combinational circuit with no inputs and a single output. The output signal_out is permanently assigned to logic low ('0'). There is no clocking, reset, or conditional logic involved. The module serves as a constant source of a logic low level, which can be useful in system integration where a fixed ground reference or disabled control signal is needed.

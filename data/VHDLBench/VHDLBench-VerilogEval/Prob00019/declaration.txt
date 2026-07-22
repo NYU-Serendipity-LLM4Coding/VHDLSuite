@@ -1,0 +1,2 @@
+Declaration:
+    This VHDL design requires the IEEE standard logic library to support fundamental digital logic operations. Specifically, the ieee.std_logic_1164 package must be included to provide the std_logic type definitions and associated logical operators. This package enables the use of standard logic values and boolean operations such as AND and NOT, which are essential for implementing combinational logic circuits with inverted inputs.

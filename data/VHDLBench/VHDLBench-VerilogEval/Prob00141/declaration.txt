@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to provide the fundamental logic types used in VHDL, including the std_logic type for representing individual bits and std_logic_vector for representing multi-bit buses. Additionally, the design relies on the numeric standard package to enable arithmetic operations on std_logic_vector types by treating them as unsigned binary values, which is necessary for incrementing the BCD digit counters within the clock implementation.

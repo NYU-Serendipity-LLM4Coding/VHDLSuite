@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the fundamental logic types and operations used in digital design. Specifically, the std_logic_1164 package is necessary to provide the std_logic type for representing signal values and the std_logic_vector type for representing buses and multi-bit registers. These types enable proper modeling of synchronous sequential logic elements such as shift registers with clock-driven behavior and reset functionality.

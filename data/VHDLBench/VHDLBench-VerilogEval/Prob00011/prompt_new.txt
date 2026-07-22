@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs a logical NOR operation on two single-bit input signals.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    a: Single-bit input operand (std_logic, active high)
+    b: Single-bit input operand (std_logic, active high)
+
+Output ports:
+    signal_out: Single-bit output result (std_logic, active high)
+
+Implementation:
+    This module implements a combinational NOR gate. The output signal_out is the logical NOR of the two input signals a and b. The NOR operation produces a high output (logic '1') only when both inputs are low (logic '0'). In all other cases (when either or both inputs are high), the output is low (logic '0'). This is a purely combinational design with no clock or reset signals, meaning the output responds immediately to any change in the input signals.

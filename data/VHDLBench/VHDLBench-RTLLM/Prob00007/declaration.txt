@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to define the fundamental logic types used throughout the module. Specifically, it uses the std_logic_1164 package to support multi-valued logic signals and vectors. Additionally, the numeric_std package is required to enable arithmetic comparison operations on unsigned vector representations of the input operands. These standard libraries provide the necessary type definitions and operators for comparing binary values and generating logic-level outputs based on relational conditions.

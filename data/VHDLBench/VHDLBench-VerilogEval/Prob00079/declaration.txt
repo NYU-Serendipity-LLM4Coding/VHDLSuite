@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types and vector operations. Specifically, the std_logic_1164 package is necessary to define std_logic and std_logic_vector types, which are used for all input and output ports in the module. These types enable representation of signal states beyond simple binary values and provide the logical operators (and, or, not) used in the combinational logic expressions that implement the state transition and output functions.

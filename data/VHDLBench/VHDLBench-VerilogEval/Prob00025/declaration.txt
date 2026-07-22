@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the std_logic and std_logic_vector types used for the input byte and output parity signal. Specifically, the ieee.std_logic_1164 package provides the fundamental logic type definitions and operations necessary for modeling digital circuits, including support for multi-valued logic states and bitwise logical operations such as XOR. No additional libraries or packages are needed for this simple combinational parity computation.

@@ -1,0 +1,20 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a synchronous decade counter counting from 0 to 999 with automatic wraparound.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock signal, single bit, active on rising edge
+    reset: Synchronous reset signal, single bit, active high
+
+Output ports:
+    q: 10-bit counter value output, std_logic_vector ranging from 0 to 999
+
+Implementation:
+    This module implements a modulo-1000 counter with a period of 1000 clock cycles. The counter operates synchronously on the rising edge of the clock signal. An internal register q_reg of type unsigned with 10 bits maintains the current count value. 
+
+    On each rising clock edge, the design checks two conditions: if the synchronous reset signal is asserted high, or if the counter has reached its maximum value of 999. When either condition is true, the counter resets to 0. Otherwise, the counter increments by 1.
+
+    The internal unsigned counter value is converted to a std_logic_vector for the output port q. This ensures the counter continuously cycles through the range 0 to 999, wrapping back to 0 after reaching the maximum count. The reset input provides synchronous control to restart the counting sequence at any time during operation.

@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a 256-to-1 multiplexer with 1-bit wide output.
+
+Module name:  
+    TopModule
+
+Input ports:
+    signal_in: 256-bit wide input vector containing all multiplexer input channels, indexed from 255 downto 0
+    sel: 8-bit wide selection signal that determines which input bit is routed to the output
+
+Output ports:
+    signal_out: 1-bit output that carries the selected input bit
+
+Implementation:
+    This module implements a 256-to-1 multiplexer using a single concurrent signal assignment. The sel input acts as an index into the signal_in vector to select which bit is forwarded to signal_out. When sel equals 0, the output receives signal_in(0); when sel equals 1, the output receives signal_in(1), and so forth up to sel equal to 255 selecting signal_in(255). The selection is performed by converting the sel signal from a std_logic_vector to an unsigned integer type, which is then used to index the signal_in array. This design is purely combinational with no clock or reset requirements, providing immediate output response to any change in either the sel or signal_in inputs.

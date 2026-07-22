@@ -1,0 +1,22 @@
+Please act as a professional VHDL designer.
+
+Implement a combinational module that decodes 8-bit keyboard scancodes for numeric keys 0 through 9.
+
+Module name:
+    TopModule
+
+Input ports:
+    code: 8-bit keyboard scancode input to be decoded
+
+Output ports:
+    signal_out: 4-bit decoded value representing the numeric key (0-9)
+    valid: 1-bit flag indicating whether the input scancode corresponds to a recognized numeric key (active high)
+
+Implementation:
+    This module implements a pure combinational decoder that translates specific keyboard scancodes into their corresponding numeric values. The design uses a lookup table approach to map ten predefined scancode patterns to decimal digits.
+
+    The module recognizes the following scancode-to-digit mappings: scancode 0x45 maps to digit 0, scancode 0x16 maps to digit 1, scancode 0x1e maps to digit 2, scancode 0x26 maps to digit 3, scancode 0x25 maps to digit 4, scancode 0x2e maps to digit 5, scancode 0x36 maps to digit 6, scancode 0x3d maps to digit 7, scancode 0x3e maps to digit 8, and scancode 0x46 maps to digit 9.
+
+    The decoding logic operates as follows: when the input scancode matches one of the ten recognized patterns, the signal_out port presents the corresponding 4-bit binary representation of the digit, and the valid flag is asserted high to indicate successful recognition. When the input scancode does not match any of the recognized patterns, the signal_out is driven to zero and the valid flag is deasserted low to signal that the scancode is not a numeric key.
+
+    The design ensures deterministic combinational behavior by providing default assignments at the beginning of the decode process, which are then conditionally overridden based on pattern matching. This guarantees that all outputs have defined values for every possible input combination, preventing unintended latching behavior in synthesis.

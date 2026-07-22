@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library, which provides the fundamental logic types and operations necessary for digital circuit description. Specifically, the std_logic_1164 package is needed to support single-bit logic signals and the complete set of Boolean operations including AND, OR, XOR, NAND, NOR, XNOR, and NOT functions used throughout the combinational logic implementation.

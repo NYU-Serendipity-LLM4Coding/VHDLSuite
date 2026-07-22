@@ -1,0 +1,19 @@
+Please act as a professional VHDL designer.
+
+Implement a module that computes an even parity bit for an 8-bit input byte.
+
+Module name:
+    TopModule
+
+Input ports:
+    signal_in: 8-bit input data vector (std_logic_vector, bits 7 downto 0) for which the parity bit is calculated
+
+Output ports:
+    parity: 1-bit output (std_logic) representing the even parity bit of the input data
+
+Implementation:
+    This module implements a simple even parity generator for error detection in data transmission applications. The circuit computes a single parity bit that, when combined with the 8-bit input data, ensures an even number of logic high bits in the resulting 9-bit word.
+
+    The parity calculation is performed by XORing all eight bits of the input vector together. Specifically, the module cascades XOR operations across all bits from bit 7 down to bit 0 of signal_in. This XOR reduction produces a logic high output when an odd number of input bits are high, and a logic low output when an even number of input bits are high, thereby generating the ninth bit needed to maintain even parity.
+
+    The design is purely combinational with no clock or reset signals. The parity output updates immediately in response to any change in the signal_in input, with the propagation delay determined only by the combinational logic path through the XOR chain.

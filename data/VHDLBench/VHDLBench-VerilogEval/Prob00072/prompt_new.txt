@@ -1,0 +1,26 @@
+Please act as a professional VHDL designer.
+
+Implement a module that controls a heating/cooling thermostat system which manages a heater, an air conditioner, and a blower fan based on temperature conditions and operating mode.
+
+Module name:
+    TopModule
+
+Input ports:
+    mode: 1-bit signal that selects the operating mode (1 = heating mode, 0 = cooling mode)
+    too_cold: 1-bit signal indicating the temperature is below the desired threshold (active high)
+    too_hot: 1-bit signal indicating the temperature is above the desired threshold (active high)
+    fan_on: 1-bit signal for manual fan control request from the user (active high)
+
+Output ports:
+    heater: 1-bit control signal for the heating element (active high)
+    aircon: 1-bit control signal for the air conditioning unit (active high)
+    fan: 1-bit control signal for the blower fan (active high)
+
+Implementation:
+    The thermostat operates in two distinct modes controlled by the mode input. In heating mode, the heater activates when the too_cold condition is asserted, while the air conditioner remains off regardless of temperature. Conversely, in cooling mode, the air conditioner activates when the too_hot condition is asserted, while the heater remains disabled.
+
+    The fan control logic implements automatic and manual operation. The fan automatically turns on whenever either the heater or air conditioner is active to circulate conditioned air. Additionally, the fan can be manually activated via the fan_on input, allowing the user to run the fan independently even when neither heating nor cooling is required.
+
+    The heater output is activated only when both the mode signal indicates heating mode and the too_cold condition is true. The aircon output is activated only when the mode signal indicates cooling mode and the too_hot condition is true. The fan output activates under three conditions: when heating is active, when cooling is active, or when manually requested through fan_on.
+
+    This design ensures mutually exclusive operation of heating and cooling systems while providing flexible fan control for optimal air circulation and user comfort.

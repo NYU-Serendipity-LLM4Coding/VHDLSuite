@@ -1,0 +1,27 @@
+Please act as a professional VHDL designer.
+
+Implement a series-parallel conversion circuit that receives a serial input signal along with a control signal indicating the validity of the input data. The module operates on the rising edge of the clock signal and uses a synchronous design with asynchronous active-low reset. The circuit accumulates single-bit serial data and produces an 8-bit parallel output when a complete byte has been received. The serial input values are sequentially placed in the parallel output from the most significant bit to the least significant bit.
+
+Module name:  
+    serial2parallel          
+
+Input ports:
+    clk: Clock signal used to synchronize all operations.
+    rst_n: Asynchronous reset signal (active low).
+    din_serial: Serial input data (single bit).
+    din_valid: Validity signal for input data (active high).
+
+Output ports:
+    dout_parallel: Parallel output data (8 bits wide, std_logic_vector ranging from 7 downto 0).
+    dout_valid: Validity signal for the output data (active high).
+
+Implementation:
+The module employs three separate synchronous processes to implement the serial-to-parallel conversion functionality:
+
+A counter mechanism tracks the number of valid serial input bits received using a 4-bit unsigned counter. When the validity signal is asserted, the counter increments on each clock cycle. The counter resets to zero either when eight bits have been accumulated or when the validity signal is deasserted. This ensures proper synchronization with the incoming serial data stream.
+
+A shift register accumulates the incoming serial bits. When valid data is present and the count is seven or less, each new serial bit is shifted into the least significant position while existing bits shift toward the most significant positions. This creates the desired MSB-first ordering in the final parallel output. The shift register maintains its current value when not actively receiving valid data within the accumulation window.
+
+An output control mechanism monitors the counter state. When the counter reaches eight, indicating a complete byte has been received, the accumulated data from the shift register is transferred to the parallel output port and the validity flag is asserted for one clock cycle. At all other times, the validity flag remains deasserted. The parallel output register holds its value until the next complete byte becomes available.
+
+All three processes respond to the asynchronous active-low reset by clearing their respective registers to known initial states, ensuring predictable startup behavior.

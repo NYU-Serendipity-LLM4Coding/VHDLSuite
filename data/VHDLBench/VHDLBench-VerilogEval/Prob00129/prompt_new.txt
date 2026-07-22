@@ -1,0 +1,23 @@
+Please act as a professional VHDL designer.
+
+Implement a Mealy-type finite state machine that recognizes the sequence "101" on an input signal named x. Your FSM should have an output signal z that is asserted to logic-1 when the "101" sequence is detected. Your FSM should also have an asynchronous reset that is active-low. You may only have 3 states in your state machine. Your FSM should recognize overlapping sequences.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal for synchronous state transitions (rising edge triggered)
+    aresetn: Asynchronous reset signal, active-low
+    x: Serial input signal to be monitored for the "101" sequence
+
+Output ports:
+    z: Output signal that asserts to logic-1 when the "101" sequence is detected
+
+Implementation:
+    The module implements a three-state Mealy finite state machine that detects the pattern "101" in the input stream. The state machine uses an asynchronous active-low reset to initialize to the starting state. On each rising clock edge, the FSM transitions between states based on the current state and the value of input x.
+
+    The three states represent the progress of pattern recognition: an initial state representing no progress or reset condition, a state indicating that a "1" has been seen, and a state indicating that "10" has been seen. The state transitions are designed to handle overlapping sequences, meaning that if "101" is detected, the final "1" can serve as the beginning of a new potential "101" sequence.
+
+    The output z is generated combinationally based on both the current state and the current input value, which is characteristic of a Mealy machine. The output asserts to logic-1 only when the state machine is in the state representing "10" and the input x is logic-1, thereby completing the "101" pattern. In all other state and input combinations, the output remains at logic-0.
+
+    The asynchronous reset allows the state machine to immediately return to the initial state whenever aresetn is asserted low, independent of the clock signal. This ensures predictable initialization and recovery behavior.

@@ -1,0 +1,35 @@
+Please act as a professional VHDL designer.
+
+Implement a finite state machine that receives serial data bytes using a common serial protocol format. The module identifies and validates each byte in a continuous stream of bits, extracting correctly-received data bytes.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal for synchronous operation
+    signal_in: Serial data input stream (1-bit)
+    reset: Active-high synchronous reset signal
+
+Output ports:
+    out_byte: Received data byte (8 bits), valid when done is asserted
+    done: Indicates successful byte reception (1-bit, active-high)
+
+Implementation:
+    The module implements a finite state machine that decodes serial data using a protocol where each byte is framed by a start bit and a stop bit. The serial line is held at logic high when idle. Each transmitted byte consists of one start bit (logic 0), followed by 8 data bits transmitted least-significant-bit first, and concludes with one stop bit (logic 1).
+
+    The FSM operates through the following states to process incoming bits:
+    - START state: Waits for the start bit (transition from idle high to logic 0)
+    - B0 through B7 states: Sequentially receive the 8 data bits
+    - STOP state: Verifies the stop bit is logic 1
+    - ST_DONE state: Indicates successful byte reception
+    - ERR state: Error recovery when stop bit verification fails
+
+    Upon reset, the FSM initializes to the START state. When signal_in transitions to logic 0 while in START state, the FSM begins receiving a byte by advancing to B0. The FSM then progresses through states B1, B2, B3, B4, B5, B6, and B7, capturing one data bit per clock cycle.
+
+    A 10-bit shift register (byte_r) continuously shifts in the signal_in value on each clock edge, capturing the incoming bit stream. Since the protocol transmits the least significant bit first, the shift register accumulates bits in the proper order.
+
+    After collecting all 8 data bits in state B7, the FSM advances to the STOP state. If signal_in is logic 1 (valid stop bit), the FSM transitions to ST_DONE and asserts the done output. If signal_in is logic 0 (invalid stop bit), the FSM enters the ERR state and waits until signal_in returns to logic 1 before attempting to receive the next byte.
+
+    The done output is asserted high only when the FSM is in the ST_DONE state, indicating that a valid byte has been received. The out_byte output presents bits 8 downto 1 from the shift register when done is asserted, providing the 8 data bits in correct order. When done is not asserted, out_byte is driven to don't-care values.
+
+    From the ST_DONE state, if signal_in remains high, the FSM returns to START to wait for the next start bit. If signal_in is low, the FSM immediately begins receiving the next byte by transitioning to B0, interpreting the low signal as a new start bit.

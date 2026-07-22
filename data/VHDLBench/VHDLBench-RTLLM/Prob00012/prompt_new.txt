@@ -1,0 +1,29 @@
+Please act as a professional VHDL designer.
+
+Implement a module of an 8-bit multiplier based on shifting and adding operations.
+
+Module name:  
+    multi_8bit               
+
+Input ports:
+    A (7 downto 0): First 8-bit input operand representing the multiplicand in the multiplication operation.
+    B (7 downto 0): Second 8-bit input operand representing the multiplier in the multiplication operation.
+
+Output ports:
+    product (15 downto 0): 16-bit output representing the product of the two 8-bit inputs (A × B).
+
+Implementation:
+The module implements an 8-bit multiplier using a combinational shift-and-add algorithm. The design operates purely combinationally without any clock or reset signals.
+
+Multiplication Algorithm: The core functionality is based on the shift-and-add method, which processes each bit of the multiplier sequentially:
+- A temporary accumulator is initialized to zero to collect the partial products.
+- The multiplicand is extended to 16 bits to match the output width and prevent overflow during intermediate calculations.
+- The algorithm iterates through all 8 bits of the multiplier (B), examining each bit position from least significant to most significant.
+- For each bit position where the multiplier bit is '1', the multiplicand is left-shifted by the current bit position and added to the accumulator.
+- A shift counter tracks the current bit position, incrementing after each iteration to determine the appropriate shift amount.
+
+Shifting Mechanism: The left-shift operation is applied to the extended multiplicand based on the current bit position being processed. This simulates the traditional paper-and-pencil multiplication method where each partial product is shifted according to its digit position.
+
+Output Generation: After all eight iterations complete, the accumulated result is converted from unsigned format to a standard logic vector and assigned to the product output port. The 16-bit width accommodates the maximum possible product value (255 × 255 = 65025).
+
+The design uses unsigned arithmetic internally to handle the multiplication operations correctly, with appropriate type conversions at the input and output boundaries.

@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the `std_logic` and `std_logic_vector` data types used for clock, reset, and output signals. Additionally, the `numeric_std` package is necessary to enable arithmetic operations on unsigned vectors, specifically for incrementing the counter and performing numerical comparisons against constant values. These libraries provide the foundational types and operations needed for synchronous digital logic design with arithmetic capabilities.

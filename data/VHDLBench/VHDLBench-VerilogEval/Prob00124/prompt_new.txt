@@ -1,0 +1,37 @@
+Please act as a professional VHDL designer.
+
+Implement a module that simulates a one-dimensional Rule 110 cellular automaton with 512 cells.
+
+Module name:  
+    TopModule
+
+Input ports:
+    clk: Clock signal, active on rising edge
+    load: Synchronous load control signal, active high, 1-bit
+    data: Parallel load data for initializing all 512 cells, 512-bit vector (511 downto 0)
+
+Output ports:
+    q: Current state of all 512 cells, 512-bit vector (511 downto 0)
+
+Implementation:
+    This module implements a 512-cell Rule 110 cellular automaton that evolves on each rising clock edge. Rule 110 is a one-dimensional cellular automaton where each cell's next state depends on its current state and the states of its two immediate neighbors (left and right).
+
+    The Rule 110 transition table defines the next state based on the triplet (left neighbor, current cell, right neighbor):
+    - (1,1,1) → 0
+    - (1,1,0) → 1
+    - (1,0,1) → 1
+    - (1,0,0) → 0
+    - (0,1,1) → 1
+    - (0,1,0) → 1
+    - (0,0,1) → 1
+    - (0,0,0) → 0
+
+    On each rising edge of clk, the module operates in one of two modes:
+    - When load is high, all 512 cells are synchronously loaded with the value from the data input.
+    - When load is low, the automaton advances one time step by computing the next state of each cell according to Rule 110.
+
+    For boundary conditions, cells at the edges assume their non-existent neighbors are zero. Specifically, cell 0 treats its right neighbor (index -1) as 0, and cell 511 treats its left neighbor (index 512) as 0.
+
+    The computation iterates through all 512 cells. For each cell at index i, the module identifies the left neighbor (index i+1), the center cell (index i), and the right neighbor (index i-1). The Rule 110 logic is applied by evaluating the negation of the OR of three specific triplet patterns: all three bits high, all three bits low, or left high with center and right low. This produces the correct next state for each cell.
+
+    The internal register q_reg holds the current state of all cells and is updated synchronously. The output q continuously reflects the value of q_reg.

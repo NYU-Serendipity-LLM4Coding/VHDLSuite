@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the fundamental digital logic types and operations used throughout the implementation. Specifically, the std_logic_1164 package is necessary to provide the std_logic type for representing individual signal values and logic vectors. This package enables the use of multi-valued logic levels including standard binary states, high-impedance conditions, and uninitialized or unknown values, which are essential for modeling the finite state machine's control signals and state transitions.

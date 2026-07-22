@@ -1,0 +1,2 @@
+Declaration:
+This design requires the IEEE standard logic library to support multi-valued logic types and vector operations. Specifically, it uses the std_logic_1164 package to define std_logic and std_logic_vector types for representing digital signals and buses. The numeric_std package is included to provide support for arithmetic and type conversion operations on standard logic vectors, enabling interpretation of vectors as numeric values when needed for selection and comparison logic.

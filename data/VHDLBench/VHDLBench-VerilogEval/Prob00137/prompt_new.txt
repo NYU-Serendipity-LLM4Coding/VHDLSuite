@@ -1,0 +1,29 @@
+Please act as a professional VHDL designer.
+
+Implement a finite state machine that identifies correctly received bytes in a serial communication protocol with start bit, 8 data bits, and stop bit framing.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit, rising edge active
+    signal_in: Serial data input stream, 1-bit
+    reset: Synchronous reset, 1-bit, active high
+
+Output ports:
+    done: Byte reception complete indicator, 1-bit, active high
+
+Implementation:
+    This module implements a finite state machine that monitors a serial bit stream and validates proper byte framing according to a common serial protocol. The protocol expects each byte transmission to begin with a start bit (logic 0), followed by 8 data bits transmitted least-significant-bit first, and conclude with a stop bit (logic 1). When no transmission is occurring, the line remains at logic 1 (idle state).
+
+    The FSM operates synchronously on the rising edge of the clock. Upon assertion of the active-high reset signal, the state machine initializes to the START state, where it waits for an idle-to-low transition indicating the beginning of a new byte transmission.
+
+    The state machine progresses through the following sequence:
+    - In the START state, the FSM monitors the serial input. When a start bit (logic 0) is detected, it transitions to state B0 to begin receiving the data bits. If the line remains high, it stays in START, waiting for a valid start condition.
+    - States B0 through B7 represent the reception of the eight data bits. The FSM advances through these states sequentially on each clock cycle, regardless of the input value, as each state corresponds to sampling one bit of the data byte.
+    - After state B7, the FSM transitions to the STOP state to verify the stop bit.
+    - In the STOP state, if the serial input is logic 1 (valid stop bit), the FSM moves to DONE_STATE, indicating successful byte reception. If the input is logic 0 (invalid stop bit), the FSM enters the ERR state to handle the framing error.
+    - The DONE_STATE asserts the done output for one clock cycle. From this state, if the input is high (idle), the FSM returns to START to await the next byte. If the input is low, it immediately begins receiving a new byte by transitioning to B0.
+    - The ERR state handles framing errors by waiting until the serial line returns to logic 1 (idle or valid stop bit) before returning to the START state. If the line remains low, the FSM stays in ERR.
+
+    The done output signal is asserted high only when the state machine is in DONE_STATE, providing a one-cycle pulse indicating that a complete, properly-framed byte has been received. This signal can be used by downstream logic to capture or process the received data bits.

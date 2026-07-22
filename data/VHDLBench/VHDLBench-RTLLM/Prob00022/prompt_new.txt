@@ -1,0 +1,30 @@
+Please act as a professional VHDL designer.
+
+Implement a module of an 8-bit ring counter for cyclic state sequences.
+
+Module name:
+    ring_counter
+
+Input ports:
+    clk: Clock signal that drives the state transitions of the ring counter.
+    reset: Asynchronous active-high reset signal to initialize the counter to its starting state.
+
+Output ports:
+    o [7:0]: 8-bit output representing the current state of the ring counter. Only one bit is set high at any time, and the set bit cycles through the 8-bit output.
+
+Implementation:
+    The ring counter implements a cyclic pattern where exactly one bit is set to '1' in the output at any given time, and this '1' shifts to the next bit position with each clock cycle.
+
+    Initialization and Reset Behavior:
+    - When the reset signal is asserted high, the counter is asynchronously initialized to its starting state, with the least significant bit (LSB) of o set to '1' (i.e., o = "00000001").
+    - The reset has priority over clock events, ensuring immediate initialization regardless of clock state.
+
+    State Transition Logic:
+    - On each rising edge of the clock signal (when reset is not asserted), the internal state performs a left rotation.
+    - The rotation shifts all bits one position to the left, with the most significant bit (MSB) wrapping around to become the new LSB.
+    - This creates a continuous cyclic sequence: "00000001" → "00000010" → "00000100" → "00001000" → "00010000" → "00100000" → "01000000" → "10000000" → "00000001" (and repeats).
+
+    Output Assignment:
+    - The output o directly reflects the internal state register, providing the current position of the active bit in the ring sequence.
+
+Give me the complete code.

@@ -1,0 +1,15 @@
+Please act as a professional VHDL designer.
+
+Implement a module that reverses the bit ordering of an 8-bit input vector.
+
+Module name:
+    TopModule
+
+Input ports:
+    signal_in: 8-bit input vector (std_logic_vector(7 downto 0)) whose bit ordering is to be reversed
+
+Output ports:
+    signal_out: 8-bit output vector (std_logic_vector(7 downto 0)) containing the bit-reversed result
+
+Implementation:
+    This is a purely combinational module that performs bit reversal on an 8-bit vector. The module takes an 8-bit input and reverses the order of its bits to produce an 8-bit output. Specifically, the most significant bit of the input becomes the least significant bit of the output, and vice versa. Each bit position in the input maps directly to its corresponding reversed position in the output: the bit at position 7 maps to position 0, position 6 maps to position 1, position 5 maps to position 2, and so forth, continuing symmetrically through all eight bit positions. This operation is performed through direct concurrent signal assignments with no clocking, registers, or state retention. The module operates continuously, with the output reflecting the reversed bit pattern of the input at all times.

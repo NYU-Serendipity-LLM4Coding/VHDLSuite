@@ -1,0 +1,24 @@
+Please act as a professional VHDL designer.
+
+Implement a module that computes the next-state logic for bit Y2 of a finite state machine.
+
+Module name:  
+    TopModule
+
+Input ports:
+    y: 3-bit current state vector, bits indexed from 3 downto 1, representing the current FSM state encoding
+    w: 1-bit input signal that drives state transitions
+
+Output ports:
+    Y2: 1-bit output representing the next-state value for state bit y(2)
+
+Implementation:
+    This module implements combinational logic to determine the next value of state bit 2 (Y2) for a finite state machine. The FSM uses a 3-bit state encoding where states are represented by values from 000 to 101, corresponding to six distinct states labeled A through F.
+
+    The module operates purely combinationally, with no clock or registers. It evaluates the current state (captured in the 3-bit vector y) along with the input w to produce the appropriate next-state value for bit position 2.
+
+    Internally, the design concatenates the current state vector y with the input w to form a 4-bit selection value. This combined value is then used as the discriminant in a case statement that maps each possible combination to the correct next-state bit value for Y2.
+
+    The case statement covers twelve specific combinations corresponding to valid state-input pairs in the FSM specification. For each combination, Y2 is assigned either logic '0' or logic '1' according to the FSM's next-state transition table. Any combination not explicitly covered results in Y2 being assigned the value 'X' to indicate an undefined or don't-care condition.
+
+    The mapping implements the second bit of the next-state logic derived from the FSM's transition structure, where state transitions depend on both the current state encoding and the value of input w. This allows the module to serve as part of a larger FSM implementation where separate logic blocks compute each bit of the next state.

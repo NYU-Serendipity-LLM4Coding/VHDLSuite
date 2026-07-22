@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a module that detects and captures 1-to-0 transitions on each bit of a 32-bit input vector. Once a falling edge is detected on any bit position, that bit in the output remains asserted until a synchronous reset occurs.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, active on rising edge
+    reset: Synchronous reset signal, active high
+    signal_in: 32-bit input vector to monitor for falling edge transitions
+
+Output ports:
+    signal_out: 32-bit output vector that captures and holds detected transitions
+
+Implementation:
+    This module operates as a 32-bit edge detector with persistent capture functionality. Each bit position operates independently to detect falling edges (transitions from logic '1' to logic '0') on the corresponding bit of the input vector.
+
+    The design uses a registered delay element to store the previous state of the input vector. On each rising clock edge, the current input is sampled and stored for use in the next cycle. By comparing the delayed input with the current input, the module identifies when a bit transitions from '1' to '0'.
+
+    When a falling edge is detected on any bit position (current input is '0' while the delayed input was '1'), that bit position in the output register is set to '1'. Once set, the output bit remains high regardless of subsequent changes to the input, creating a "sticky" or latching behavior.
+
+    The output register can only be cleared through the synchronous reset input. When reset is asserted high during a rising clock edge, all 32 bits of the output are cleared to '0', allowing the module to begin capturing new transitions.
+
+    Each bit position operates in parallel with identical logic, making this a fully vectorized implementation where all 32 channels function simultaneously and independently. The capture mechanism uses a bitwise OR operation to accumulate detected transitions, ensuring that once a bit is set in the output, it persists until reset.

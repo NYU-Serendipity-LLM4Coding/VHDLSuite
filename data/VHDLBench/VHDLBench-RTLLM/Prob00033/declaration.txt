@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to provide the fundamental digital logic types and operations. Specifically, it uses the standard logic package for defining signal types that can represent digital states, and the numeric standard package for performing arithmetic operations on unsigned vector types. These libraries enable the declaration of logic signals, unsigned counters, and support for integer arithmetic including comparison and increment operations necessary for the frequency division implementation.

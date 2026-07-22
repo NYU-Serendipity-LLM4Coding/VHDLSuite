@@ -1,0 +1,15 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs a combinational wire connection, directly passing the input signal to the output without any modification or delay.
+
+Module name:
+    TopModule
+
+Input ports:
+    signal_in: Single-bit input signal (std_logic), active high
+
+Output ports:
+    signal_out: Single-bit output signal (std_logic), active high
+
+Implementation:
+    This module implements a simple combinational buffer that connects the input directly to the output. The output signal_out is continuously assigned to the same value as the input signal_in through a concurrent signal assignment. There is no clocking, state storage, or logic transformation involved. The propagation from input to output occurs combinationally with only the inherent gate delay of the assignment. This design serves as a basic wire connection or buffer element in larger systems.

@@ -1,0 +1,35 @@
+Please act as a professional VHDL designer.
+
+Implement a module of a 32-bit floating-point multiplier for IEEE-754 standard single-precision arithmetic.
+The float_multi module is designed to perform high-precision multiplication of 32-bit single-precision floating-point numbers, following the IEEE 754 standard. This module enables accurate arithmetic operations essential for various computational applications.
+
+Module name:
+    float_multi
+
+Input ports:
+    clk: Clock signal for synchronization, std_logic type.
+    rst: Reset signal, active high, std_logic type.
+    a: First operand in IEEE 754 format, 32-bit std_logic_vector (31 downto 0).
+    b: Second operand in IEEE 754 format, 32-bit std_logic_vector (31 downto 0).
+
+Output ports:
+    z: Result of the multiplication in IEEE 754 format, 32-bit std_logic_vector (31 downto 0).
+
+Implementation:
+    The module operates as a pipelined floating-point multiplier with seven sequential stages controlled by a 3-bit counter that increments on each clock cycle and resets to zero when the rst signal is asserted.
+
+    Stage 1 (counter = "001"): Input extraction phase where the mantissas, exponents, and sign bits are separated from the input operands. The 23-bit mantissas are extended to 24 bits. The 8-bit exponents are extracted, converted to signed 10-bit values, and biased by subtracting 127 to obtain the true exponent values.
+
+    Stage 2 (counter = "010"): Special case detection and handling. The module checks for Not-a-Number conditions by examining if either exponent equals 128 with a non-zero mantissa. It detects infinity by checking for exponent value 128, and handles the special case where infinity multiplied by zero produces NaN. Zero operands are identified when the exponent is -127 and the mantissa is zero. For normal numbers, denormalized operands are adjusted by setting their exponent to -126, while normalized operands have their implicit leading bit set to 1.
+
+    Stage 3 (counter = "011"): Normalization of mantissas. If either mantissa lacks a leading 1 in bit position 23, it is left-shifted by one position and its corresponding exponent is decremented to maintain the correct value.
+
+    Stage 4 (counter = "100"): Core multiplication operations. The result sign is computed by XORing the input signs. The result exponent is calculated by adding the two operands' exponents plus one for bias adjustment. The mantissas are multiplied together and the 50-bit product is left-shifted by two positions to align for subsequent rounding.
+
+    Stage 5 (counter = "101"): Extraction of the result mantissa and rounding control bits. The upper 24 bits of the product become the result mantissa. The guard bit, round bit, and sticky bit are extracted from specific product bit positions, with the sticky bit set if any of the lower 24 bits are non-zero.
+
+    Stage 6 (counter = "110"): Rounding and denormalization adjustments. If the exponent is below -126, the result is denormalized by right-shifting the mantissa and adjusting rounding bits accordingly. If the mantissa lacks a leading 1, it is normalized by left-shifting and decrementing the exponent. Round-to-nearest-even rounding is applied when the guard bit is set and additional conditions indicate rounding up is needed, with overflow detection incrementing the exponent if the mantissa reaches its maximum value.
+
+    Stage 7 (counter = "111"): Final output assembly. The result is packed into IEEE 754 format with the 23-bit mantissa fraction, 8-bit biased exponent (obtained by adding 127), and sign bit. Special handling ensures denormalized numbers have a zero exponent field. Overflow detection sets the result to signed infinity by clearing the mantissa and setting all exponent bits when the exponent exceeds 127.
+
+    The design maintains internal signals for mantissas as 24-bit unsigned values, exponents as 10-bit signed values, and uses a 50-bit unsigned product register for the intermediate multiplication result. All operations are synchronized to the rising edge of the clock signal.

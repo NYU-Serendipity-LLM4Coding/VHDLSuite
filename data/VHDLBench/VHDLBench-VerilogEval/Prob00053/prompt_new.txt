@@ -1,0 +1,22 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a D flip-flop with XOR-based feedback. The flip-flop captures the result of an XOR operation between an external input and its own output, creating a simple toggle-based sequential circuit.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock input, 1-bit, active on rising edge
+    signal_in: External data input, 1-bit
+
+Output ports:
+    signal_out: Registered output, 1-bit
+
+Implementation:
+    The module implements a single-bit register with combinational feedback through an XOR gate. On each rising edge of the clock signal, the internal register captures the XOR result of the current external input (signal_in) and the register's own current value. This creates a feedback loop where the next state depends on both the external stimulus and the previous state.
+
+    The design operates as follows: The internal register (out_reg) is initialized to logic low. On every rising clock edge, the register updates to the XOR of signal_in and its previous value. The output signal_out continuously reflects the current state of this internal register.
+
+    There is no asynchronous or synchronous reset mechanism. The register relies on its initial value for deterministic startup behavior. The XOR operation causes the output to toggle whenever signal_in is high and to remain unchanged when signal_in is low, effectively implementing a conditional toggle flip-flop.
+
+    This circuit can be used for parity generation, frequency division by variable ratios, or as a building block in larger sequential logic designs where controlled state toggling is required.

@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs 4-bit unsigned addition with overflow detection.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    x: 4-bit unsigned addend input
+    y: 4-bit unsigned addend input
+
+Output ports:
+    sum: 5-bit unsigned sum output, where the most significant bit represents the overflow (carry-out) from the 4-bit addition
+
+Implementation:
+    This module implements a simple 4-bit unsigned adder that produces a 5-bit result to capture any overflow condition. The design accepts two 4-bit unsigned input operands and performs their arithmetic addition. To accommodate the potential carry-out that may result from adding two 4-bit values, both inputs are extended to 5 bits before the addition operation. The result is a 5-bit sum where bit 4 (the most significant bit) indicates whether an overflow occurred during the addition of the original 4-bit operands. The addition logic is purely combinational with no clock or reset requirements, providing the sum output directly based on the current values of the x and y inputs.

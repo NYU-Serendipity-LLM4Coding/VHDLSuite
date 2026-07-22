@@ -1,0 +1,29 @@
+Please act as a professional VHDL designer.
+
+Implement a module that creates simple wire connections between three input signals and four output signals.
+
+Module name:
+    TopModule
+
+Input ports:
+    a: Single-bit input signal
+    b: Single-bit input signal
+    c: Single-bit input signal
+
+Output ports:
+    w: Single-bit output signal
+    x: Single-bit output signal
+    y: Single-bit output signal
+    z: Single-bit output signal
+
+Implementation:
+    This module implements straightforward combinational logic by directly connecting input signals to output signals without any intermediate processing or state retention. The module operates asynchronously with no clock or reset requirements.
+
+    The connection mapping is as follows:
+    - Input signal a drives output w
+    - Input signal b drives both outputs x and y simultaneously
+    - Input signal c drives output z
+
+    Since these are direct wire-like connections, any change on an input signal propagates immediately to its corresponding output(s). The signal b is fan-out to two separate outputs, meaning both x and y will always carry identical values matching the current state of b.
+
+    This design is purely combinational with zero latency, making it suitable for applications requiring immediate signal routing or distribution without any timing dependencies.

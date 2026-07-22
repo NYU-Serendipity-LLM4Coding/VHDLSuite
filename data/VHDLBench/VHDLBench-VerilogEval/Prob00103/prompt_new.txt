@@ -1,0 +1,28 @@
+Please act as a professional VHDL designer.
+
+Implement a module that computes a combinational logic function based on four single-bit inputs.
+
+Module name:  
+    TopModule
+
+Input ports:
+    a: Single-bit input (std_logic), active high
+    b: Single-bit input (std_logic), active high
+    c: Single-bit input (std_logic), active high
+    d: Single-bit input (std_logic), active high
+
+Output ports:
+    q: Single-bit output (std_logic), result of the combinational logic function
+
+Implementation:
+    This is a purely combinational circuit with no clock or reset signals. The module computes the output q based on the four input signals a, b, c, and d.
+
+    The logic function implements an inverted multi-input XOR operation. Specifically, the output q is the negation of the XOR of all four inputs. This can be understood as an XNOR-like function extended to four inputs.
+
+    The behavior can be described as follows:
+    - First, all four inputs (a, b, c, d) are XORed together.
+    - The result of this XOR chain is then inverted to produce the final output q.
+
+    This means the output q will be high (logic '1') when an even number of inputs are high (including zero), and low (logic '0') when an odd number of inputs are high. This is characteristic of an even-parity function with inverted sense.
+
+    Since this is a combinational circuit, the output responds immediately to any change in the input signals, with only the propagation delay inherent to the logic gates.

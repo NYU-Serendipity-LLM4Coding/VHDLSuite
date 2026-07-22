@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the fundamental digital logic types, including single-bit and multi-bit logic vectors. Additionally, it uses the numeric standard package to enable arithmetic operations and conversions on standard logic vectors, particularly for handling vector initialization and potential numeric manipulations within the data width conversion logic.

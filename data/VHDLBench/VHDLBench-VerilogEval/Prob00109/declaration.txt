@@ -1,0 +1,2 @@
+Declaration:
+    This VHDL design requires the IEEE standard logic library to support digital logic types and operations. Specifically, the std_logic_1164 package is needed to provide the std_logic type for representing signal states, including logic levels and multi-valued logic suitable for synthesizable hardware description. This package enables the declaration and manipulation of single-bit and multi-bit logic signals used throughout the state machine implementation.

@@ -1,0 +1,2 @@
+Declaration:
+    The design requires the IEEE standard logic library to support digital logic types and operations. Specifically, it uses the std_logic_1164 package to define single-bit and multi-bit logic signals with standard resolution functions. Additionally, the numeric_std package is required to enable arithmetic and relational operations on unsigned vector types, which are used for state encoding and comparison in the finite state machine implementation.

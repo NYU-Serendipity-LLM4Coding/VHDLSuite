@@ -1,0 +1,22 @@
+Please act as a professional VHDL designer.
+
+Implement a Linear Feedback Shift Register (LFSR) module for generating pseudo-random sequences. This 4-bit LFSR uses a specific feedback mechanism to produce a sequence of bits that appears random.
+
+Module name:
+    LFSR
+
+Input ports:
+    clk: Clock signal to synchronize the shifting operation.
+    rst: Active high reset signal to initialize the register.
+
+Output ports:
+    lfsr_out [3:0]: 4-bit output representing the current state of the LFSR.
+
+Implementation:
+    The LFSR operates on the principle of shifting bits and applying feedback based on the XOR of specific bits in the register.
+    
+    The feedback is calculated by XORing bit 3 and bit 2 of the internal register state. The result is inverted to produce the feedback signal.
+    
+    On the rising edge of the clock (clk), if the reset (rst) is active high, the internal register is initialized to all zeros. Otherwise, the bits in the register are shifted left by one position, and the newly calculated feedback value is inserted at the least significant bit position (bit 0).
+    
+    The 4-bit internal register state is continuously assigned to the output port lfsr_out, providing the current pseudo-random sequence value.

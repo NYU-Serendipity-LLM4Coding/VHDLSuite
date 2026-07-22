@@ -1,0 +1,20 @@
+Please act as a professional VHDL designer.
+
+Implement a module that provides a constant logic high output.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    None
+
+Output ports:
+    one_output: A single-bit output signal that continuously drives logic high ('1')
+
+Implementation:
+    This module implements a simple combinational circuit with no inputs and a single output. The output signal is permanently tied to logic high ('1'), providing a constant source of the active logic level. This type of module is commonly used for:
+    - Providing a constant enable signal
+    - Generating a fixed logic level for testing purposes
+    - Serving as a placeholder or default signal source in larger designs
+    
+    The output assignment is purely combinational with no clock or reset dependency. The one_output signal will always present a stable logic '1' value regardless of any external conditions.

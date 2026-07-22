@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a 4-bit binary counter which counts from 0 through 15, inclusive, with a period of 16. The counter includes a synchronous reset capability that resets the count value to 0.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock input signal (std_logic), active on the rising edge
+    reset: Synchronous reset input signal (std_logic), active high
+
+Output ports:
+    q: 4-bit counter output (std_logic_vector, 3 downto 0), representing the current count value
+
+Implementation:
+    The module implements a free-running 4-bit binary counter. An internal register maintains the current count state as an unsigned 4-bit value. On each rising edge of the clock, the module checks the reset input. When reset is asserted high, the counter is synchronously cleared to zero. When reset is deasserted, the counter increments by one on each clock cycle. The counter automatically wraps around from 15 back to 0 due to the 4-bit width limitation, creating a repeating count sequence with a period of 16 clock cycles. The internal unsigned count value is converted to a standard logic vector for the output port q.

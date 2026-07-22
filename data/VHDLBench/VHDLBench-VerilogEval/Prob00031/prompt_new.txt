@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a single positive edge-triggered D flip-flop.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit, active on rising edge
+    d: Data input, 1-bit
+
+Output ports:
+    q: Data output, 1-bit
+
+Implementation:
+    This module implements a standard D flip-flop that captures the value present on the data input and transfers it to the output on each rising edge of the clock signal. The flip-flop uses synchronous operation, meaning all state changes occur in response to the clock's rising edge. When a rising edge of clk occurs, the current value of d is sampled and stored. This stored value then appears at the output q. Between clock edges, the output q maintains its previous state regardless of changes on the input d. The design uses an internal register to hold the flip-flop state, which is then continuously assigned to the output port. The initial state of the internal register is undefined until the first rising clock edge occurs.

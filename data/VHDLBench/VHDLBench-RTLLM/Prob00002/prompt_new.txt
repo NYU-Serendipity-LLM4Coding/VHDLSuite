@@ -1,0 +1,26 @@
+Please act as a professional VHDL designer.
+
+Implement a module of a 16-bit full adder in combinational logic using a hierarchical ripple-carry architecture.
+
+Module name:  
+    adder_16bit
+
+Input ports:
+    a: 16-bit input operand A, represented as a std_logic_vector(15 downto 0).
+    b: 16-bit input operand B, represented as a std_logic_vector(15 downto 0).
+    Cin: Carry-in input, single bit of type std_logic.
+
+Output ports:
+    y: 16-bit output representing the sum of A and B, represented as a std_logic_vector(15 downto 0).
+    Co: Carry-out output, single bit of type std_logic.
+
+Implementation:
+The design implements a 16-bit adder through a hierarchical structure that builds progressively from 1-bit full adders up to the complete 16-bit adder. This modular approach divides the addition operation into smaller, manageable components.
+
+At the base level, a 1-bit full adder computes both the sum and carry-out for single-bit operands with a carry-in. The sum output is derived from combinational logic that evaluates the XOR relationship between the three inputs. The carry-out is generated using majority logic, determining when at least two of the three inputs are high.
+
+The hierarchy continues with 2-bit, 4-bit, and 8-bit adder components, each constructed by instantiating two instances of the next-smaller adder. Each level follows a ripple-carry structure where the lower-order bits are added first, producing an intermediate carry signal. This intermediate carry then feeds into the higher-order bit addition as the carry-in.
+
+In the top-level 16-bit adder, two 8-bit adder instances are connected in series. The lower 8 bits of both operands are added together with the external carry-in input. The carry-out from this lower-byte addition propagates as the carry-in to the upper 8 bits. The upper 8-bit adder then produces the final carry-out for the entire 16-bit operation.
+
+The carry propagates sequentially from the least significant bit to the most significant bit through all hierarchical levels, ensuring correct arithmetic addition across the full 16-bit width. All logic is purely combinational with no clock or reset requirements.

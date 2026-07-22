@@ -1,0 +1,2 @@
+Declaration:
+This design requires the IEEE standard logic library to support multi-bit logic vector types and operations. Specifically, the `ieee.std_logic_1164` package is needed to declare and manipulate `std_logic_vector` signals for representing the 16-bit input word and the two 8-bit output bytes. No additional arithmetic, conversion, or specialized packages are necessary, as the module performs only combinational signal slicing without numerical computation or type conversion.

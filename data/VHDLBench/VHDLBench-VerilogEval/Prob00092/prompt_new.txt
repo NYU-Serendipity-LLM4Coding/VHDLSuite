@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a module that analyzes relationships between adjacent bits in a 100-bit input vector.
+
+Module name:
+    TopModule
+
+Input ports:
+    signal_in: 100-bit input vector (99 downto 0)
+
+Output ports:
+    out_both: 99-bit output vector (98 downto 0) where each bit indicates whether both the corresponding input bit and its left neighbor are '1'
+    out_any: 99-bit output vector (99 downto 1) where each bit indicates whether either the corresponding input bit or its right neighbor is '1'
+    out_different: 100-bit output vector (99 downto 0) where each bit indicates whether the corresponding input bit differs from its left neighbor
+
+Implementation:
+    This module performs three parallel bitwise comparisons on a 100-bit input vector to determine relationships between neighboring bits.
+
+    For the out_both output, each bit position performs a logical AND operation between the input bit at that position and the input bit immediately to its left (higher index). The output range is 98 downto 0 because bit position 99 has no left neighbor. For example, out_both(98) is '1' only when both signal_in(98) and signal_in(99) are '1'.
+
+    For the out_any output, each bit position performs a logical OR operation between the input bit at that position and the input bit immediately to its right (lower index). The output range is 99 downto 1 because bit position 0 has no right neighbor. For example, out_any(2) is '1' when either signal_in(2) or signal_in(1) is '1'.
+
+    For the out_different output, each bit position performs a logical XOR operation between the input bit at that position and the input bit to its left, treating the vector as circular (wrapping around). This means signal_in(99) is compared with signal_in(0), signal_in(98) is compared with signal_in(99), and so on. The output has the same width as the input (99 downto 0). A bit in out_different is '1' when the corresponding input bit differs from its left neighbor.
+
+    All three operations execute purely combinationally with no clock or reset requirements, providing immediate outputs based on the current input state.

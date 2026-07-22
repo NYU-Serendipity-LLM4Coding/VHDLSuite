@@ -1,0 +1,2 @@
+Declaration:
+This design requires the IEEE standard logic library to support fundamental digital logic types and operations. Specifically, the std_logic_1164 package is necessary to provide the std_logic data type for representing signal values and to enable basic logical operations including AND, OR, XOR, NOT, and XNOR functions used throughout the hierarchical module structure.

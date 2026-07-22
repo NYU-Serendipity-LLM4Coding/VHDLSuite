@@ -1,0 +1,35 @@
+Please act as a professional VHDL designer.
+
+Implement a simplified radix-2 divider on 8-bit signed or unsigned integers. The module accepts a dividend and a divisor as inputs and provides a 16-bit result containing both the quotient and the remainder. The design supports both signed and unsigned division operations.
+
+Module name:  
+    TopModule
+
+Input ports:
+    clk: Clock signal used for synchronous operation.
+    rst: Active-high reset signal to initialize or reset the module.
+    sign: 1-bit control signal indicating if the operation is signed (1) or unsigned (0).
+    dividend: 8-bit input signal representing the dividend for division.
+    divisor: 8-bit input signal representing the divisor for division.
+    opn_valid: 1-bit signal indicating that a valid operation request is present.
+    res_ready: 1-bit handshake signal indicating the downstream consumer is ready to accept the result.
+
+Output ports:
+    res_valid: 1-bit output signal indicating the result is valid and ready.
+    result: 16-bit output containing the remainder in the upper 8 bits (bits 15 downto 8) and the quotient in the lower 8 bits (bits 7 downto 0).
+
+Implementation:
+
+Operation Start:
+When opn_valid is high, res_valid is low, and the module is not currently processing, the module captures the inputs dividend and divisor into internal save registers. It initializes the shift register SR with the absolute value of the dividend, shifted left by one bit position, occupying bits 8 downto 1, with zeros in the upper and lower positions. The negated absolute value of the divisor is stored in a 9-bit register NEG_DIVISOR. A 4-bit counter cnt is set to 1, and a start_cnt flag is asserted to begin the division process.
+
+Division Process:
+While start_cnt is high, the module performs iterative division steps. On each clock cycle, the counter cnt is incremented. The module adds the upper 8 bits of the shift register (representing the current partial remainder) to NEG_DIVISOR using a 10-bit adder to capture the carry-out. The carry-out bit CO indicates whether the subtraction was successful. A multiplexer selects the subtraction result if CO is high, otherwise it retains the original partial remainder. The shift register SR is updated by shifting left and inserting the carry-out bit CO into the least significant position. When the most significant bit of cnt (bit 3) becomes high, indicating 8 iterations have completed, the division process terminates. The counter and start_cnt flag are cleared, and the shift register is updated with the final remainder and quotient values.
+
+Sign Correction:
+After the division completes, the module applies sign correction based on the saved dividend and divisor signs. If the operation is signed and the dividend was negative, the remainder is negated using two's complement arithmetic. If the operation is signed and the dividend and divisor had opposite signs, the quotient is negated. The final result is formed by concatenating the corrected remainder and quotient.
+
+Result Validity:
+The res_valid signal is controlled by a registered output. It is cleared on reset, set to high when cnt bit 3 becomes high (indicating completion), and cleared when both res_valid and res_ready are high (indicating successful handshake with the downstream consumer).
+
+Give me the complete code.

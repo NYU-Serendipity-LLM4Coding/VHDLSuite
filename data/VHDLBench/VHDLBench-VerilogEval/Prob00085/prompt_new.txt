@@ -1,0 +1,30 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a 4-bit shift register with right shift capability, featuring asynchronous reset and synchronous load and enable controls.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock signal, positive edge triggered
+    areset: Asynchronous reset signal, active high
+    load: Synchronous load control signal, active high
+    ena: Synchronous enable signal for shift operation, active high
+    data: 4-bit input data bus (3 downto 0) for loading values into the shift register
+
+Output ports:
+    q: 4-bit output bus (3 downto 0) representing the current contents of the shift register
+
+Implementation:
+    The module implements a 4-bit right shift register with priority-based control logic. The register operates on the rising edge of the clock signal and responds to an asynchronous reset.
+
+    The asynchronous reset (areset) has the highest priority. When areset is asserted high, the shift register immediately clears to "0000" regardless of the clock state.
+
+    On each rising clock edge, the module evaluates the synchronous control signals with the following priority scheme:
+    - If load is asserted high, the shift register captures the 4-bit value present on the data input, overriding any shift operation.
+    - If load is low and ena is asserted high, the register performs a right shift operation. During a right shift, a zero is shifted in from the left (most significant bit position), the existing bits shift one position to the right, and the least significant bit is shifted out and lost.
+    - If neither load nor ena is asserted, the register contents remain unchanged.
+
+    The load signal has higher priority than the enable signal, ensuring that when both are asserted simultaneously, the load operation takes precedence over the shift operation.
+
+    The output q continuously reflects the current state of the internal shift register, providing the 4-bit shifted or loaded value to external logic.

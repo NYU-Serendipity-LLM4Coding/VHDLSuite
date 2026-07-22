@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types and vector operations. Specifically, it uses the std_logic_1164 package to define std_logic and std_logic_vector types, which provide the necessary signal representations for synchronous digital logic. The package also supplies logical operators (and, not) that operate on these types, enabling bitwise operations on vectors. No additional libraries or packages beyond the IEEE standard logic support are necessary for this design.

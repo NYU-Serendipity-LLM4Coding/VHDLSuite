@@ -1,0 +1,31 @@
+Please act as a professional VHDL designer.
+
+Implement a multi-bit MUX-based clock domain crossing synchronizer. This entity transfers 4-bit data from clock domain A to clock domain B using an enable-based handshaking mechanism. The input data_in remains constant while data_en is asserted, with data_en guaranteed to be high for at least 3 clk_b clock cycles. The data change frequency is very low, with at least 10 clk_b clock cycles between adjacent data transitions.
+
+Module name:  
+    synchronizer  
+
+Input ports:
+    clk_a: Clock signal for the source domain A, used to capture input data and enable signals.
+    clk_b: Clock signal for the destination domain B, used for synchronization and output generation.
+    arstn: Active-low asynchronous reset signal for clock domain A. When '0', resets domain A registers; when '1', normal operation.
+    brstn: Active-low asynchronous reset signal for clock domain B. When '0', resets domain B registers; when '1', normal operation.
+    data_in: 4-bit input data signal in clock domain A that requires synchronization to domain B.
+    data_en: Single-bit enable signal in clock domain A that indicates when data_in is valid and stable for transfer.
+
+Output ports:
+    dataout: 4-bit output data signal in clock domain B, representing the synchronized version of data_in.
+
+Implementation:
+The entity implements a safe clock domain crossing mechanism using a two-stage synchronizer chain for the enable signal combined with a MUX-based data capture approach.
+
+Data Capture in Domain A:
+Two registers operate in clock domain A, both triggered on the rising edge of clk_a with asynchronous reset controlled by arstn. The data_reg register captures the 4-bit data_in signal, continuously updating on each clock cycle. The en_data_reg register captures the data_en enable signal, also updating on each clock cycle. When arstn is '0', both registers are reset to their initial values ('0000' for data_reg and '0' for en_data_reg).
+
+Enable Synchronization Chain:
+A two-stage synchronizer chain transfers the enable signal from domain A to domain B. Two sequential registers, en_clap_one and en_clap_two, operate in clock domain B, triggered on the rising edge of clk_b with asynchronous reset controlled by brstn. On each clock cycle, en_clap_one captures the value of en_data_reg, and en_clap_two captures the value of en_clap_one, creating a two-flip-flop synchronizer that mitigates metastability risks. When brstn is '0', both synchronizer registers are reset to '0'.
+
+Output Data Capture:
+The dataout_reg register operates in clock domain B, triggered on the rising edge of clk_b with asynchronous reset controlled by brstn. This register implements a multiplexer-based hold function: when en_clap_two is '1', indicating that synchronized valid data is available, dataout_reg loads the value from data_reg; otherwise, it retains its current value. When brstn is '0', the register resets to '0000'. The output port dataout is continuously assigned the value of dataout_reg.
+
+The design ensures safe clock domain crossing by delaying the enable signal through two synchronization stages before using it to control when data is captured into the output register. This approach relies on the guarantee that data_in remains stable while data_en is asserted, allowing the data to be safely sampled in domain B after the enable signal has been properly synchronized.

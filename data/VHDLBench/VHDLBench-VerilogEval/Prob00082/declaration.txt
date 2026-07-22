@@ -1,0 +1,2 @@
+Declaration:
+This design requires the IEEE standard logic library to define the fundamental logic types used throughout the module, including std_logic for individual signal bits and std_logic_vector for multi-bit bus signals. Additionally, the numeric_std package is needed to support vector manipulation operations and potential arithmetic conversions, ensuring proper handling of the 32-bit shift register state and bitwise operations inherent to the linear feedback shift register implementation.

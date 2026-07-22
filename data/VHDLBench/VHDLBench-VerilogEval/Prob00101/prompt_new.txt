@@ -1,0 +1,18 @@
+Please act as a professional VHDL designer.
+
+Implement a combinational logic circuit that performs a simple two-input OR operation.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    a: Single-bit input (std_logic), not used in the logic function
+    b: Single-bit input (std_logic), one operand of the OR operation
+    c: Single-bit input (std_logic), one operand of the OR operation
+    d: Single-bit input (std_logic), not used in the logic function
+
+Output ports:
+    q: Single-bit output (std_logic), result of the OR operation between inputs b and c
+
+Implementation:
+    This is a purely combinational circuit with no sequential elements or clocking. The module computes a simple logical OR function between two of its inputs. Specifically, the output q is asserted (logic high) whenever either input b or input c (or both) is high. The output is de-asserted (logic low) only when both b and c are simultaneously low. Inputs a and d are present in the interface but do not influence the output; they are effectively unused in the logic function. The circuit has zero propagation delay in the behavioral model and responds immediately to any change in inputs b or c.

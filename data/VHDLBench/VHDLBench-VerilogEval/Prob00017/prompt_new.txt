@@ -1,0 +1,17 @@
+Please act as a professional VHDL designer.
+
+Implement a module that functions as a 100-bit wide 2-to-1 multiplexer.
+
+Module name:
+    TopModule
+
+Input ports:
+    a: 100-bit data input (std_logic_vector, 99 downto 0), first selectable input
+    b: 100-bit data input (std_logic_vector, 99 downto 0), second selectable input
+    sel: 1-bit select control signal (std_logic), determines which input is routed to output
+
+Output ports:
+    signal_out: 100-bit data output (std_logic_vector, 99 downto 0), carries the selected input
+
+Implementation:
+    This module implements a combinational 2-to-1 multiplexer with 100-bit wide data paths. The select signal determines which input is routed to the output. When the select signal is logic low ('0'), input a is propagated to signal_out. When the select signal is logic high ('1'), input b is propagated to signal_out. The multiplexing operation occurs purely combinationally with no clock or storage elements involved. All 100 bits of the selected input are transferred in parallel to the output.

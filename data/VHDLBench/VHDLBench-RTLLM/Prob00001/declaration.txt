@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types for ports and internal signals. The numeric standard unsigned package is necessary to provide arithmetic operations on unsigned vector types, including addition and comparison of unsigned values. Additionally, the resize function from this package is used to extend the width of data values while preserving their numerical interpretation during accumulation operations.

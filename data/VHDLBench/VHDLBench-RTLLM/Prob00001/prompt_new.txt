@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a module to achieve serial input data accumulation output, where 8-bit input data values are accumulated. The module accumulates exactly four valid input data samples and outputs their sum. Whenever the module completes accumulating 4 input data values, the data_out port outputs the accumulated result and valid_out is asserted high for exactly 1 clock cycle.
+
+Module name:  
+    accu
+
+Input ports:
+    clk: Clock input signal for synchronous operation.
+    rst_n: Active-low asynchronous reset signal.
+    data_in[7:0]: 8-bit input data to be accumulated.
+    valid_in: Input control signal indicating that data_in contains valid data to be processed.
+
+Output ports:
+    valid_out: Output flag signal that pulses high for one clock cycle when the accumulation of 4 input samples is complete.
+    data_out[9:0]: 10-bit output data representing the accumulated sum of four input values.
+
+Implementation:
+The module operates as a serial accumulator that processes valid input data samples and produces an output after collecting exactly four samples. An internal 2-bit counter tracks how many valid samples have been received, counting from 0 to 3. When valid_in is asserted high, the module treats data_in as valid and processes it.
+
+On the first valid sample (when the counter equals 0), the accumulator register is initialized with the current input value extended to 10 bits. For subsequent valid samples (counter values 1, 2, and 3), the input value is added to the running accumulator. When the fourth valid sample arrives (counter reaches 3 and valid_in is high), the end condition is detected, causing the valid_out signal to pulse high for one clock cycle and the counter to reset to 0 for the next accumulation cycle.
+
+The data_out port continuously reflects the current accumulated value stored in the internal accumulator register. The output width of 10 bits provides sufficient range to hold the sum of four 8-bit values without overflow.
+
+The module uses synchronous logic with asynchronous active-low reset. When rst_n is asserted low, all internal registers including the counter, accumulator, and valid_out flag are cleared to zero. All state updates occur on the rising edge of the clock signal, ensuring predictable timing behavior.

@@ -1,0 +1,31 @@
+Please act as a professional VHDL designer.
+
+Implement a finite state machine with six states (A, B, C, D, E, F) that transitions based on an input signal and produces an output based on the current state.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit, rising edge active
+    reset: Synchronous reset signal, 1-bit, active high
+    w: State transition control input, 1-bit
+
+Output ports:
+    z: State indicator output, 1-bit, active high
+
+Implementation:
+    The module implements a finite state machine with six distinct states labeled A through F. The states are encoded using 3-bit unsigned values ranging from 0 to 5. The state machine operates synchronously on the rising edge of the clock signal.
+
+    On the rising edge of the clock, if the reset signal is asserted high, the state machine transitions to state A regardless of the current state. Otherwise, the state machine updates to the next state determined by the combinational next-state logic.
+
+    The next-state logic determines state transitions based on the current state and the input w:
+    - From state A: transitions to state A when w is high, or to state B when w is low
+    - From state B: transitions to state D when w is high, or to state C when w is low
+    - From state C: transitions to state D when w is high, or to state E when w is low
+    - From state D: transitions to state A when w is high, or to state F when w is low
+    - From state E: transitions to state D when w is high, or remains in state E when w is low
+    - From state F: transitions to state D when w is high, or to state C when w is low
+
+    The output z is a combinational signal that indicates whether the state machine is currently in one of two specific states. The output z is asserted high when the current state is either E or F, and is driven low for all other states (A, B, C, D).
+
+    The design uses two processes: one clocked process for the state register with synchronous reset capability, and one combinational process for computing the next state based on current state and input conditions.

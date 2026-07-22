@@ -1,0 +1,16 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs a logical XNOR operation on two input signals.
+
+Module name:
+    TopModule
+
+Input ports:
+    a: Single-bit input signal (std_logic)
+    b: Single-bit input signal (std_logic)
+
+Output ports:
+    signal_out: Single-bit output signal (std_logic), produces the XNOR result of inputs a and b
+
+Implementation:
+    This module implements a combinational XNOR (exclusive-NOR) gate. The output signal_out is asserted high (logic '1') when both inputs a and b have the same logical value (both '0' or both '1'). The output is driven low (logic '0') when the inputs differ. The XNOR operation is realized through a combination of XOR and NOT logic, resulting in the inverse of the exclusive-OR function. This is a purely combinational design with no clock or reset signals, providing immediate response to input changes.

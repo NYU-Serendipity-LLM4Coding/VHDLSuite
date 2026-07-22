@@ -1,0 +1,20 @@
+Please act as a professional VHDL designer.
+
+Implement a module that serves as an instruction register for capturing and processing CPU instructions. The module holds incoming instructions from multiple sources and separates them into distinct fields for downstream processing.
+
+Module name:
+    instr_reg
+
+Input ports:
+    clk: Clock signal for synchronous operation
+    rst: Active-low asynchronous reset signal to initialize internal registers
+    fetch (2 bits): Control signal selecting the instruction source ("01" for register source, "10" for RAM/ROM source)
+    data (8 bits): Input data bus carrying the instruction to be captured
+
+Output ports:
+    ins (3 bits): Upper portion of the first instruction register, representing the opcode or operation type
+    ad1 (5 bits): Lower portion of the first instruction register, representing the register address field
+    ad2 (8 bits): Complete contents of the second instruction register
+
+Implementation:
+    The module maintains two internal 8-bit registers (ins_p1 and ins_p2) to store instructions from different sources. The design uses asynchronous reset and synchronous update logic. When the reset signal is asserted low, both internal registers are cleared to zero. On each rising clock edge with reset inactive, the fetch control signal determines the operation: when fetch equals "01", the data input is loaded into ins_p1 while ins_p2 retains its current value; when fetch equals "10", the data input is loaded into ins_p2 while ins_p1 retains its current value; for any other fetch value, both registers maintain their existing contents. The output ins is continuously driven by bits 7 through 5 of ins_p1, providing the instruction opcode. The output ad1 is continuously driven by bits 4 through 0 of ins_p1, providing the register address. The output ad2 is continuously driven by the complete 8-bit contents of ins_p2, providing secondary instruction data.

@@ -1,0 +1,24 @@
+Please act as a professional VHDL designer.
+
+Implement a module that controls a shift register enable signal for exactly four clock cycles following a synchronous reset.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock input signal (1-bit, rising edge active)
+    reset: Synchronous reset signal (1-bit, active high)
+
+Output ports:
+    shift_ena: Shift register enable signal (1-bit, active high)
+
+Implementation:
+    This module implements a finite state machine that generates a shift enable pulse lasting exactly four clock cycles. The FSM operates synchronously with the clock and responds to an active-high synchronous reset.
+
+    The state machine consists of five states that form a linear progression. Upon assertion of the synchronous reset signal, the FSM enters its initial state and begins a four-cycle counting sequence. During the first four states of this sequence, the shift enable output is asserted high. After completing the four-cycle count, the FSM transitions to a terminal state where the shift enable output remains deasserted low indefinitely, until the next reset event occurs.
+
+    The next-state logic is implemented combinationally, determining state transitions based solely on the current state. Each of the first four states automatically advances to the subsequent state on the next clock cycle. The terminal state is self-holding, maintaining the FSM in that state until reset.
+
+    The state register updates on the rising edge of the clock. When reset is asserted high, the state register is synchronously loaded with the initial state. Otherwise, it advances to the next state as determined by the combinational logic.
+
+    The output logic derives the shift enable signal directly from the current state. The signal is asserted high whenever the FSM resides in any of the first four states, and deasserted low when in the terminal state. This ensures precise four-cycle enable behavior following each reset event.

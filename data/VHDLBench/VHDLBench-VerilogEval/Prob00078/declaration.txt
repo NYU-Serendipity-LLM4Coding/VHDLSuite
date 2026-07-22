@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types and edge-detection functions. Specifically, the std_logic_1164 package provides the std_logic type for representing signal values and the rising_edge and falling_edge functions for detecting clock transitions. These are essential for implementing synchronous logic elements that respond to specific clock edges.

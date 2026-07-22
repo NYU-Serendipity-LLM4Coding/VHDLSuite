@@ -1,0 +1,28 @@
+Please act as a professional VHDL designer.
+
+Implement a module of perpetual calendar. The starting value of Secs, Mins, and Hours are all 0. Both Secs and Mins loop continuously from 0 to 59. When Secs=59, Mins increases by 1 at the next cycle, and when Mins=59 && Secs=59, Hours increases by 1 at the next cycle. Hours is counted from the 0-23 cycle.
+
+Module name:  
+    calendar  
+                 
+Input ports:
+    CLK: Clock input, active on rising edge
+    RST: Asynchronous active high reset signal
+
+Output ports:
+    Hours: 6-bit output representing the current hours (0-23)
+    Mins: 6-bit output representing the current minutes (0-59)
+    Secs: 6-bit output representing the current seconds (0-59)
+
+Implementation:
+The calendar module uses three synchronous processes with asynchronous reset to maintain and update the time counters for seconds, minutes, and hours. Each process operates independently but coordinates through conditional logic to ensure proper time progression.
+
+The seconds process triggers on the rising edge of the clock or when the reset signal is asserted. When reset is active, the seconds counter is cleared to zero. On each clock cycle, if the seconds counter reaches 59, it wraps back to 0; otherwise, it increments by 1. This creates a continuous 0-59 counting cycle.
+
+The minutes process also responds to the rising edge of the clock and asynchronous reset. Upon reset, the minutes counter initializes to zero. During normal operation, if both minutes and seconds are at 59, the minutes counter wraps to 0 on the next clock edge. If only seconds equals 59, the minutes counter increments by 1. Otherwise, the minutes value remains unchanged.
+
+The hours process follows the same clock and reset sensitivity. When reset is asserted, hours initializes to zero. The hours counter increments by 1 when both minutes and seconds reach 59. When hours reaches 23 and both minutes and seconds are at 59, the hours counter wraps back to 0, completing a full 24-hour cycle. In all other cases, the hours value is preserved.
+
+Internal registers maintain the current state of each counter as unsigned values, which are then converted to standard logic vectors for the output ports. This design ensures accurate timekeeping with proper wraparound behavior at each boundary condition.
+
+Give me the complete code.

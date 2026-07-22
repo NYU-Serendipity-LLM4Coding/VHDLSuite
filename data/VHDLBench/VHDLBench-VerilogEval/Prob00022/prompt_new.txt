@@ -1,0 +1,17 @@
+Please act as a professional VHDL designer.
+
+Implement a module that functions as a one-bit wide, 2-to-1 multiplexer.
+
+Module name:
+    TopModule
+
+Input ports:
+    a: First data input, 1-bit wide
+    b: Second data input, 1-bit wide
+    sel: Selection control input, 1-bit wide
+
+Output ports:
+    signal_out: Multiplexer output, 1-bit wide
+
+Implementation:
+    This module implements a combinational 2-to-1 multiplexer. The sel input acts as the control signal to select between the two data inputs. When sel is logic '0', the output signal_out reflects the value of input a. When sel is logic '1', the output signal_out reflects the value of input b. The multiplexer operates purely combinationally with no clock or reset requirements, providing immediate propagation of the selected input to the output based on the current state of the selection signal.

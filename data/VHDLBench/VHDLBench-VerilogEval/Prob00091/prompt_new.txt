@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a module that generates the next-state logic for two specific state flip-flops in a finite state machine using one-hot encoding.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    y: 6-bit current state vector (one-hot encoded), active high
+    w: 1-bit input signal that determines state transitions, active high
+
+Output ports:
+    Y1: 1-bit next-state signal for state flip-flop y(1), active high
+    Y3: 1-bit next-state signal for state flip-flop y(3), active high
+
+Implementation:
+    This module implements combinational logic to compute the next-state inputs for two specific flip-flops within a six-state finite state machine. The state machine uses a one-hot encoding scheme where each bit of the state vector represents a unique state.
+
+    The state encoding follows the pattern where y(0) through y(5) represent six distinct states. The input signal w controls the transition paths between states, with different transitions occurring based on whether w is asserted or deasserted.
+
+    The Y1 output represents the next-state logic for the flip-flop at bit position 1. This output is asserted when the current state is at bit position 0 and the input w is high, indicating a transition from the initial state to the second state.
+
+    The Y3 output represents the next-state logic for the flip-flop at bit position 3. This output is asserted when the current state is at bit positions 1, 2, 4, or 5 and the input w is low. This captures multiple transition paths from various states that converge to the state represented by bit position 3 when the input condition is not met.
+
+    The module uses purely combinational logic with no sequential elements, clocks, or resets. It serves as the next-state decoder portion of a larger state machine implementation where the actual state storage would be handled by separate flip-flops.

@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the fundamental logic types used throughout the module. The std_logic_1164 package provides the std_logic and std_logic_vector types necessary for representing the input scancode and output digit values. Additionally, the numeric_std package is included to enable arithmetic operations and type conversions on standard logic vectors, supporting the interpretation of hexadecimal constant values and binary-encoded outputs in the scancode-to-digit mapping logic.

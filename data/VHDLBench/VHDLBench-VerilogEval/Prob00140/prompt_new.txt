@@ -1,0 +1,32 @@
+Please act as a professional VHDL designer.
+
+Implement a module that performs synchronous HDLC framing by decoding a continuous bit stream to recognize specific bit patterns indicating frame boundaries, bit-stuffing removal, and error conditions.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock signal, single bit, active on rising edge
+    reset: Synchronous reset signal, single bit, active high
+    signal_in: Serial input bit stream, single bit
+
+Output ports:
+    disc: Bit discard indicator, single bit, active high when a stuffed bit should be discarded
+    flag: Frame boundary flag, single bit, active high when a frame delimiter is detected
+    err: Error indicator, single bit, active high when an illegal bit sequence is detected
+
+Implementation:
+    This module implements a Moore-type finite state machine that monitors the incoming serial bit stream to detect three critical HDLC framing patterns. The FSM operates synchronously on the rising edge of the clock.
+
+    The state machine tracks consecutive ones in the input stream. It begins in an initial state (equivalent to having seen a zero) and progresses through states as consecutive ones are received. When a zero is encountered in most states, the machine returns to the initial state.
+
+    The module recognizes three distinct sequences:
+    - After detecting five consecutive ones followed by a zero (pattern 0111110), it signals that a stuffed bit must be discarded by asserting the disc output for one complete clock cycle.
+    - After detecting six consecutive ones followed by a zero (pattern 01111110), it signals a frame boundary by asserting the flag output for one complete clock cycle.
+    - After detecting seven or more consecutive ones (pattern 01111111...), it signals an error condition by asserting the err output and continues to assert err while additional ones are received.
+
+    The state machine is designed such that all output signals are asserted beginning on the clock cycle immediately following the detection of their respective conditions. Only one output is active at any given time, as the states producing these outputs are mutually exclusive.
+
+    When the synchronous reset signal is asserted high, the state machine immediately returns to its initial state on the next rising clock edge, regardless of the current state or input value. This ensures deterministic behavior at system startup or during error recovery.
+
+    The FSM contains multiple internal states to count consecutive ones, plus dedicated output states that generate the disc, flag, and err signals. The architecture ensures proper recognition of overlapping patterns and correct handling of transitions between different sequence types.

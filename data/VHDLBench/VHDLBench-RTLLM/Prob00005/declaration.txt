@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support multi-valued logic types for digital circuit representation. Additionally, it requires the numeric standard library to enable arithmetic operations on vector types, including unsigned integer addition and comparison. These libraries provide the necessary type definitions and operations for implementing binary coded decimal arithmetic with carry propagation.

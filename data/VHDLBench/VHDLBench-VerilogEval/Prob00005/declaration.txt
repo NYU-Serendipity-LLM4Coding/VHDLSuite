@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library, which provides the fundamental logic types and operators for VHDL designs. Specifically, the std_logic_1164 package is necessary to support single-bit logic signals and the logical NOT operation used in this module.

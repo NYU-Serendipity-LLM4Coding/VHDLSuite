@@ -1,0 +1,34 @@
+Please act as a professional VHDL designer.
+
+Implement an ALU (Arithmetic Logic Unit) for a 32-bit MIPS-ISA CPU. The ALU performs various arithmetic, logical, and shift operations based on a 6-bit opcode. The two operands are provided through inputs, and the result along with several status flags are generated as outputs. The ALU supports operations including addition, subtraction, bitwise logic, comparison, and shifting with both signed and unsigned variants.
+
+Module name:  
+    alu
+
+Input ports:
+    a: a 32-bit input operand (also used as shift amount for certain shift operations)
+    b: a 32-bit input operand (the value to be shifted in shift operations)
+    aluc: a 6-bit control signal selecting the operation to be performed
+
+Output ports:
+    r: a 32-bit output representing the result of the ALU operation
+    zero: a 1-bit flag indicating whether the result is zero (active high)
+    carry: a 1-bit flag for carry indication (currently driven to high-impedance)
+    negative: a 1-bit flag for negative result indication (currently driven to high-impedance)
+    overflow: a 1-bit flag for overflow indication (currently driven to high-impedance)
+    flag: a 1-bit output set based on comparison operations, specifically for set-less-than instructions
+
+Implementation:
+The ALU uses internal constants to define operation codes corresponding to MIPS instructions. These operations include signed and unsigned addition and subtraction, bitwise AND, OR, XOR, and NOR, set-less-than comparisons (both signed and unsigned), logical and arithmetic shifts (immediate and variable), and load-upper-immediate.
+
+Internally, the module maintains signed views of the input operands to support signed arithmetic and comparison operations. A 33-bit internal result signal is used to capture potential carry or overflow bits from arithmetic operations, though the lower 32 bits form the primary result output.
+
+The core ALU logic is implemented using a combinational process that decodes the opcode and performs the corresponding operation:
+- Arithmetic operations (addition and subtraction) are performed with appropriate sign extension to 33 bits to detect carries and overflows.
+- Bitwise logical operations combine the operands directly, with the result extended to 33 bits.
+- Comparison operations evaluate the relative magnitude of operands (signed or unsigned as specified) and produce a result of 1 if the condition is true, otherwise 0.
+- Shift operations use the shift amount derived from operand a (either the full value or the lower 5 bits for variable shifts). Logical shifts treat the operand as unsigned, while arithmetic right shifts preserve the sign bit. Shift amounts beyond 31 bits result in all zeros for logical shifts or sign-extended values for arithmetic shifts.
+- The load-upper-immediate operation concatenates the lower 16 bits of operand a with 16 zeros to form the result.
+- Unrecognized opcodes drive the result to high-impedance.
+
+The zero flag is set when the lower 32 bits of the result are all zeros. The flag output is driven based on comparison operations: it reflects the result of set-less-than comparisons (signed or unsigned), and is set to high-impedance for other operations. The carry, negative, and overflow outputs are currently set to high-impedance, indicating incomplete implementation of these status signals in the reference design.

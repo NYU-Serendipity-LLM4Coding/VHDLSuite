@@ -1,0 +1,32 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a gshare branch predictor with 7-bit program counter and 7-bit global history, hashed using XOR into a 7-bit index to access a 128-entry table of two-bit saturating counters.
+
+Module name:  
+    TopModule
+
+Input ports:
+    clk: Clock signal for synchronous operation
+    areset: Asynchronous reset signal, active-high
+    predict_valid: Active-high signal indicating a prediction request is being made
+    predict_pc: 7-bit program counter value for the instruction requiring a branch prediction
+    train_valid: Active-high signal indicating a training request is being made
+    train_taken: Actual branch outcome (1 for taken, 0 for not taken) used during training
+    train_mispredicted: Active-high signal indicating the branch being trained was mispredicted and requires pipeline recovery
+    train_history: 7-bit global branch history register value at the time the branch being trained was predicted
+    train_pc: 7-bit program counter value for the branch being trained
+
+Output ports:
+    predict_taken: Predicted branch direction (1 for taken, 0 for not taken) based on the current pattern history table state
+    predict_history: 7-bit current state of the global branch history register used to make the prediction
+
+Implementation:
+    The module maintains a 128-entry pattern history table where each entry contains a 2-bit saturating counter. The counters represent four states: strongly not-taken, likely not-taken, likely taken, and strongly taken. Upon asynchronous reset, all pattern history table entries are initialized to the likely not-taken state, and the global branch history register is cleared to zero.
+
+    For prediction operations, when predict_valid is asserted, the module computes a 7-bit index by XORing the current global branch history register with predict_pc. This index selects an entry from the pattern history table. The most significant bit of the selected counter determines the branch prediction: if set, the branch is predicted taken; otherwise, not taken. The current global branch history register value is also output. On the next rising clock edge, if predict_valid was asserted, the global branch history register shifts left by one bit, with the predicted branch direction inserted as the least significant bit.
+
+    For training operations, when train_valid is asserted, the module computes a 7-bit index by XORing train_history with train_pc. This index selects the pattern history table entry to be trained. On the next rising clock edge, if the actual branch was taken and the counter value is less than three, the counter increments by one. If the actual branch was not taken and the counter value is greater than zero, the counter decrements by one. This implements the saturating counter behavior that adapts predictions based on actual branch outcomes.
+
+    When train_mispredicted is asserted during a training request, the module performs branch history recovery. On the next rising clock edge, the global branch history register is restored to the state immediately after the mispredicted branch completes execution. This is accomplished by shifting train_history left by one bit and inserting the actual branch outcome as the least significant bit.
+
+    Concurrent training and prediction operations are handled with specific precedence rules. If both train_valid and predict_valid are asserted in the same cycle and train_mispredicted is also asserted, the training operation takes precedence for updating the global branch history register because the predicted instruction will be discarded during the pipeline flush. However, when training and prediction access the same pattern history table entry in the same cycle, the prediction observes the table state before training updates occur, since training modifications only take effect on the subsequent rising clock edge.

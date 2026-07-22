@@ -1,0 +1,29 @@
+Please act as a professional VHDL designer.
+
+Implement a module modeling a Lemmings critter brain using a Moore finite state machine that controls directional walking behavior with collision-based direction switching.
+
+Module name:
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit, active on rising edge
+    areset: Asynchronous reset signal, 1-bit, active high
+    bump_left: Left collision detection signal, 1-bit, active high
+    bump_right: Right collision detection signal, 1-bit, active high
+
+Output ports:
+    walk_left: Walking left indicator, 1-bit, active high
+    walk_right: Walking right indicator, 1-bit, active high
+
+Implementation:
+    This module implements a Moore finite state machine with two states representing the walking direction of a Lemming critter. The state machine transitions between walking left and walking right based on collision inputs.
+
+    The design uses two states: one for walking left and one for walking right. The state machine operates synchronously on the rising edge of the clock, with asynchronous reset capability.
+
+    Upon asynchronous reset assertion, the state machine initializes to the walking left state, regardless of the clock edge.
+
+    The next-state logic operates combinationally, evaluating the current state and collision inputs. When in the walking left state, the machine transitions to walking right if a left collision is detected. When in the walking right state, the machine transitions to walking left if a right collision is detected. If no collision occurs, the machine remains in its current state. If both collision signals are asserted simultaneously, the machine still switches direction according to the current state's transition rule.
+
+    The state register updates on each rising clock edge, capturing the next state value, unless overridden by the asynchronous reset.
+
+    The output logic is purely combinational and directly decodes the current state. The walk_left output is asserted high when the state machine is in the walking left state, and the walk_right output is asserted high when in the walking right state. At any given time, exactly one output is high, indicating the current walking direction.

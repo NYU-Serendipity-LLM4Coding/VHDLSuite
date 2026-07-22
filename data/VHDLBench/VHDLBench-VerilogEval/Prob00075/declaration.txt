@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to provide the fundamental logic types and operations for digital design in VHDL. Specifically, it uses the std_logic_1164 package to define standard logic values and vectors for representing digital signals and ports. Additionally, the numeric_std package is required to support arithmetic operations on unsigned vector types, enabling increment and decrement operations as well as numerical comparisons against integer literals.

@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to define the fundamental digital logic types used throughout the module, including the std_logic type for individual signals and std_logic_vector for multi-bit buses. Additionally, the numeric_std package is necessary to provide arithmetic operations on unsigned vector types, enabling increment functionality and numerical comparisons within the counter logic.

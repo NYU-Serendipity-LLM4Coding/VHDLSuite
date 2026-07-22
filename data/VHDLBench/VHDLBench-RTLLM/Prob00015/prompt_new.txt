@@ -1,0 +1,42 @@
+Please act as a professional VHDL designer.
+
+Implement a module of an unsigned 8-bit multiplier based on pipelined processing. The design accepts two 8-bit operands and produces a 16-bit product through a multi-stage pipeline architecture. It utilizes a clock signal, an active-low reset signal, an input enable signal, and provides an output enable signal along with the multiplication result.
+
+Module name:  
+    multi_pipe_8bit 
+
+Input ports:
+    clk: Clock signal used for synchronous operation of all pipeline stages.
+    rst_n: Active-low asynchronous reset signal. When '0', the module is reset; when '1', normal operation proceeds.
+    mul_en_in: Input enable signal that controls when a valid multiplication operation begins. Active high (1-bit).
+    mul_a: First operand (multiplicand) with a data width of 8 bits.
+    mul_b: Second operand (multiplier) with a data width of 8 bits.
+
+Output ports:
+    mul_en_out: Output enable signal indicating that a valid multiplication result is available at the output. Active high (1-bit).
+    mul_out: Product output signal with a data width of 16 bits, representing the unsigned multiplication result of mul_a and mul_b.
+
+Implementation:
+The module implements a pipelined unsigned multiplier that decomposes the multiplication into multiple stages to improve throughput and timing performance. The pipeline consists of four primary stages:
+
+Enable Signal Pipeline:
+A 3-bit shift register tracks the enable signal through the pipeline stages. On each rising clock edge, the input enable signal is shifted into this register. The output enable signal is derived from the most significant bit of this shift register, indicating when a valid result emerges from the pipeline after the appropriate number of clock cycles.
+
+Input Sampling Stage:
+The multiplicand and multiplier inputs are registered at the pipeline entry. When the input enable signal is active, the operands are captured into internal registers; otherwise, these registers are cleared to zero. This stage ensures clean data propagation and prevents spurious activity when no operation is requested.
+
+Partial Product Generation:
+The module generates eight partial products using the shift-and-add multiplication algorithm. For each bit position of the multiplier, a corresponding partial product is formed by conditionally selecting a shifted version of the multiplicand. If a multiplier bit is '1', the multiplicand is shifted left by the appropriate bit position and zero-extended to 16 bits; if the bit is '0', the partial product is zero. This combinational logic produces all eight partial products in parallel.
+
+Partial Sum Accumulation Stage:
+The eight partial products are grouped into four pairs, and each pair is summed in a registered stage. Four 16-bit sum registers hold these intermediate results, updated synchronously on each clock edge. This pairwise reduction reduces the critical path length and prepares the data for final summation.
+
+Final Product Calculation Stage:
+All four partial sums are added together in a final registered stage to produce the complete 16-bit product. This accumulated result is stored in an internal register and updated on every clock cycle.
+
+Output Control Stage:
+The final output is conditionally assigned based on the pipelined enable signal. When the enable signal at the third pipeline stage indicates a valid result, the accumulated product is presented at the output. Otherwise, the output is driven to zero, ensuring that invalid or stale data is not propagated downstream.
+
+The entire pipeline operates synchronously with the clock and responds to the asynchronous active-low reset by clearing all internal state to zero. The design achieves high throughput by allowing a new multiplication to be initiated on every clock cycle, with results emerging after a fixed latency determined by the pipeline depth.
+
+Give me the complete code.

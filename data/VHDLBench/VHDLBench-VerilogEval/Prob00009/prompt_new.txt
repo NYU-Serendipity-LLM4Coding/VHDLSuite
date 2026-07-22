@@ -1,0 +1,15 @@
+Please act as a professional VHDL designer.
+
+Implement a module that counts the number of '1' bits in a 3-bit input vector (population count circuit).
+
+Module name:  
+    TopModule
+
+Input ports:
+    signal_in: 3-bit input vector (std_logic_vector, bits 2 downto 0) whose '1' bits are to be counted
+
+Output ports:
+    signal_out: 2-bit output (std_logic_vector, bits 1 downto 0) representing the count of '1' bits in the input vector
+
+Implementation:
+    The module performs a population count operation by summing the individual bits of the 3-bit input vector. Each bit of signal_in is treated as an unsigned value (either 0 or 1), extended to 2 bits to prevent overflow, and then added together. The result is a 2-bit unsigned count representing how many bits in the input are '1'. This count ranges from 0 (no bits set) to 3 (all bits set). The final count is converted to a std_logic_vector and assigned to signal_out. The design is purely combinational with no clock or reset signals, providing immediate output based on the current input state.

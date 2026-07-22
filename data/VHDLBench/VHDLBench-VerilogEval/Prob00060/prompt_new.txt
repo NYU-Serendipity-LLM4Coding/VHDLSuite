@@ -1,0 +1,17 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a 4-bit shift register with active-low synchronous reset functionality.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock signal, 1-bit, active on rising edge
+    resetn: Synchronous reset signal, 1-bit, active-low
+    signal_in: Serial data input, 1-bit
+
+Output ports:
+    signal_out: Serial data output, 1-bit
+
+Implementation:
+    This module implements a 4-stage shift register using a 4-bit internal register. On each rising edge of the clock, the module performs one of two operations based on the reset signal. When the active-low reset signal is asserted (logic low), the internal 4-bit register is synchronously cleared to all zeros. When the reset signal is deasserted (logic high), the shift register performs a left-shift operation: the three lower bits of the register shift upward by one position, and the serial input is loaded into the least significant bit position. The most significant bit of the internal register drives the serial output continuously. This configuration creates a serial-in, serial-out shift register with a depth of four stages, commonly used for data serialization, deserialization, or delay line applications in digital systems.

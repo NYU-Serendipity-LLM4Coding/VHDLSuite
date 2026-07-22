@@ -1,0 +1,2 @@
+Declaration:
+This design requires the IEEE standard logic library to define the fundamental logic types used throughout the module. Specifically, it uses the std_logic_1164 package to support multi-valued logic signals and vectors. Additionally, the numeric_std package is required to provide arithmetic operations on unsigned vector types, including addition and resizing functions that enable proper handling of multi-bit operands and results with extended bit-widths.

@@ -1,0 +1,2 @@
+Declaration:
+This design requires the IEEE standard logic library to support multi-valued logic types including std_logic and std_logic_vector, which are necessary for representing individual bits and four-bit vectors in the shift register and counter implementation. Additionally, the IEEE numeric_std package is required to enable arithmetic operations on std_logic_vector types by providing unsigned type conversions and subtraction functionality needed for the decrement operation during down-counting mode.

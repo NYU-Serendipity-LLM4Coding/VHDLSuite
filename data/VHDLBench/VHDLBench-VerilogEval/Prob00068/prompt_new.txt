@@ -1,0 +1,25 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a 4-digit BCD (binary-coded decimal) counter with synchronous reset and digit enable outputs.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock input, active on rising edge
+    reset: Synchronous reset input, active-high
+
+Output ports:
+    ena: 3-bit enable signal vector (bits 3 downto 1), indicating when each upper digit should be incremented
+    q: 16-bit output vector representing four BCD digits, where bits [3:0] encode the ones digit, bits [7:4] encode the tens digit, bits [11:8] encode the hundreds digit, and bits [15:12] encode the thousands digit
+
+Implementation:
+    This module implements a 4-digit BCD counter that counts from 0000 to 9999 in decimal. Each decimal digit is encoded in 4 bits using binary-coded decimal representation, where valid values range from 0 (0000) to 9 (1001).
+
+    The counter operates synchronously on the rising edge of the clock signal. When the reset input is asserted high, all four digits are cleared to zero on the next clock edge.
+
+    The module generates internal enable signals for each of the four digit positions. The ones digit is always enabled. The tens digit enable becomes active when the ones digit reaches 9. The hundreds digit enable becomes active when both the ones and tens digits are at 9 (forming the value 99). The thousands digit enable becomes active when the lower three digits form the value 999.
+
+    On each rising clock edge, each digit position is evaluated independently. If reset is active or if the current digit equals 9 and its enable is active, that digit wraps around to 0. Otherwise, if the enable is active, the digit increments by 1. This cascading enable mechanism ensures proper BCD counting behavior where higher-order digits only increment when all lower-order digits roll over from 9 to 0.
+
+    The ena output provides the enable signals for the three upper digits (tens, hundreds, thousands), allowing external logic to observe when each digit position is about to increment. This is useful for detecting carry conditions or synchronizing with other counting operations.

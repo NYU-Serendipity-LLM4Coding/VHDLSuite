@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support fundamental digital logic types including single-bit signals and multi-bit vectors. Additionally, the numeric standard packages are necessary to provide arithmetic operations on both unsigned and signed vector types, including addition, subtraction, multiplication, comparison operations, resizing functions, and bit-shifting capabilities essential for manipulating mantissas and exponents in floating-point arithmetic.

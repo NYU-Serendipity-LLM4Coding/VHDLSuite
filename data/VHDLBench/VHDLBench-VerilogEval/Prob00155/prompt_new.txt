@@ -1,0 +1,37 @@
+Please act as a professional VHDL designer.
+
+Implement a module that models a Lemming character's behavior using a Moore finite state machine. The Lemming can walk left or right, fall, dig, and potentially splatter if it falls too far.
+
+Module name:                 
+    TopModule
+
+Input ports:
+    clk: Clock signal (1-bit, rising edge active)
+    areset: Asynchronous reset signal (1-bit, active high)
+    bump_left: Indicates the Lemming bumped into an obstacle on its left side (1-bit, active high)
+    bump_right: Indicates the Lemming bumped into an obstacle on its right side (1-bit, active high)
+    ground: Indicates whether ground is present beneath the Lemming (1-bit, active high when ground exists)
+    dig: Command signal to start digging (1-bit, active high)
+
+Output ports:
+    walk_left: Indicates the Lemming is walking left (1-bit, active high)
+    walk_right: Indicates the Lemming is walking right (1-bit, active high)
+    aaah: Indicates the Lemming is falling (1-bit, active high)
+    digging: Indicates the Lemming is digging (1-bit, active high)
+
+Implementation:
+    The module implements a Moore finite state machine with seven distinct states: walking left, walking right, falling left, falling right, digging left, digging right, and dead. The state machine controls the Lemming's behavior based on environmental inputs and commands.
+
+    When the asynchronous reset signal is asserted, the state machine initializes to the walking left state. During normal operation, the Lemming walks in one direction until it encounters a condition that triggers a state change.
+
+    While walking on solid ground, the Lemming responds to bump inputs by reversing direction. A bump on the left causes it to switch from walking left to walking right, and vice versa for bumps on the right. If bumped on both sides simultaneously, it still changes direction.
+
+    The state machine prioritizes falling over other actions. When the ground signal becomes inactive, the Lemming immediately transitions to a falling state, maintaining its directional orientation (falling left or falling right). During the fall, a 5-bit counter tracks the number of clock cycles spent falling. This counter increments each cycle while in a falling state and resets to zero in all other states.
+
+    If the Lemming hits the ground after falling for more than twenty clock cycles, it transitions to the dead state where all outputs remain inactive permanently. If it lands before reaching this threshold, it resumes walking in the same direction it was traveling before the fall.
+
+    The dig command has the second-highest priority after falling. When the dig signal is active and the Lemming is walking on solid ground, it enters a digging state corresponding to its current direction. The Lemming continues digging until the ground signal becomes inactive, at which point it transitions to the appropriate falling state. Dig commands received while falling or when no ground is present are ignored.
+
+    Bumps received during falling or digging have no effect on the Lemming's directional state. The walking direction is only affected by bumps when the Lemming is actively walking on solid ground.
+
+    The four output signals directly reflect the current state: walk_left is active only in the walking left state, walk_right only in the walking right state, aaah is active in both falling states, and digging is active in both digging states. All outputs remain low in the dead state.

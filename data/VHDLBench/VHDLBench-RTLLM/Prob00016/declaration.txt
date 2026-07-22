@@ -1,0 +1,2 @@
+Declaration:
+    The design requires the IEEE standard logic library to support multi-valued logic types for representing digital signals and vectors. Additionally, it requires numeric packages that provide arithmetic operations on unsigned vector types, including addition, subtraction, and relational comparisons. These packages enable the conversion between standard logic vectors and unsigned numeric types, which is essential for performing magnitude-based arithmetic operations on the fractional and integer portions of the fixed-point operands.

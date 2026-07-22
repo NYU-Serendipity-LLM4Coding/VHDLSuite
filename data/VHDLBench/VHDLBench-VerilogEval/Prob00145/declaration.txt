@@ -1,0 +1,2 @@
+Declaration:
+This design requires the IEEE standard logic library to support multi-valued logic types including 'std_logic' for representing digital signals with values such as '0', '1', 'X' (unknown), and 'Z' (high-impedance). The design utilizes edge-sensitive detection and level-sensitive logic, necessitating the standard logic package for signal declarations and operations. No arithmetic operations or type conversions beyond basic logic are required, so only the fundamental IEEE standard logic support is necessary.

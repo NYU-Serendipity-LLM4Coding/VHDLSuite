@@ -1,0 +1,2 @@
+Declaration:
+This design requires the IEEE standard logic library to support fundamental digital logic types including single-bit signals and multi-bit vectors. The numeric standard package is necessary to provide arithmetic operations on unsigned integer representations, enabling counter manipulation, numeric comparisons, and conversions between different numeric formats used throughout the traffic light controller implementation.

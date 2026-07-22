@@ -1,0 +1,27 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a Mealy state machine for computing the 2's complement of a serial bit stream.
+
+Module name:  
+    TopModule
+
+Input ports:
+    clk: Clock signal for synchronous state transitions (rising edge triggered)
+    areset: Asynchronous reset signal (active-high), forces the machine into the initial state
+    x: Serial input bit stream to be complemented
+
+Output ports:
+    z: Serial output bit stream representing the 2's complement of the input
+
+Implementation:
+    This module implements a 2's complementer as a Mealy finite state machine with two states. The machine processes a serial bit stream from least significant bit to most significant bit and produces the 2's complement output.
+
+    The state machine operates as follows:
+    - Upon asynchronous reset (areset active-high), the machine enters state A, which is the initial state.
+    - In state A, the machine waits for the first '1' bit in the input stream. When x is '0', the machine remains in state A and outputs '0'. When x is '1', the machine transitions to state B and outputs '1'.
+    - In state B, the machine inverts all subsequent input bits. When x is '0', the machine remains in state B and outputs '1'. When x is '1', the machine remains in state B and outputs '0'.
+    - Once in state B, the machine never returns to state A until reset.
+
+    The output z is computed combinationally based on both the current state and the current input x (Mealy machine characteristic). Specifically, z is asserted ('1') when either the machine is in state A and x is '1', or when the machine is in state B and x is '0'.
+
+    The state transitions occur synchronously on the rising edge of clk, while the reset is asynchronous and takes immediate effect regardless of the clock. The design uses a single-bit state register to represent the two states, where state A is encoded as '0' and state B is encoded as '1'.

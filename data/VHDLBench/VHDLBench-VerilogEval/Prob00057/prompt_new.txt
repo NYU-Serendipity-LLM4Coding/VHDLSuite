@@ -1,0 +1,26 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes a combinational logic function defined by a four-variable Karnaugh map.
+
+Module name:  
+    TopModule
+
+Input ports:
+    a: Single-bit input signal representing one of the four Boolean variables
+    b: Single-bit input signal representing one of the four Boolean variables
+    c: Single-bit input signal representing one of the four Boolean variables
+    d: Single-bit input signal representing one of the four Boolean variables
+
+Output ports:
+    signal_out: Single-bit output signal representing the Boolean function result
+
+Implementation:
+    This module implements a purely combinational logic circuit that evaluates a four-input Boolean function. The function is derived from a Karnaugh map with inputs a, b, c, and d, producing a single-bit output.
+
+    The logic function is expressed as a sum-of-products form, combining four product terms through logical OR operations. The output signal_out is asserted (logic high) when any of the following conditions are met:
+    - Both c and b are low (negated)
+    - Both d and a are low (negated)
+    - All three signals a, c, and d are high
+    - All three signals b, c, and d are high
+
+    The circuit operates asynchronously with no clock or reset signals. The output responds immediately to any change in the input signals according to the propagation delays of the combinational logic gates. This implementation provides a minimal sum-of-products realization of the specified truth table, optimized for the given Karnaugh map groupings.

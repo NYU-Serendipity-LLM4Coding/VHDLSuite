@@ -1,0 +1,2 @@
+Declaration:
+    This design requires the IEEE standard logic library to support the fundamental digital logic types used throughout the implementation. Specifically, the std_logic_1164 package provides the std_logic and std_logic_vector types necessary for representing single-bit and multi-bit digital signals. Additionally, the numeric_std package is included to enable arithmetic and type conversion operations on standard logic vectors, supporting potential synthesis and simulation of numeric computations involving the input vector.

@@ -1,0 +1,20 @@
+Please act as a professional VHDL designer.
+
+Implement a module that generates a square wave signal with variable frequency control.
+
+Module name:  
+    square_wave
+                 
+Input ports:
+    clk: Clock signal that drives the module, active on the rising edge.
+    freq: 8-bit frequency control vector (7 downto 0), specifying the period of the square wave toggle in clock cycles.
+
+Output ports:
+    wave_out: Square wave output signal (std_logic).
+
+Implementation:
+    The module generates a square wave by toggling an output signal at intervals determined by the freq input. An internal 8-bit unsigned counter tracks clock cycles. On each rising edge of the clock, the counter increments. When the counter reaches a value equal to (freq - 1), two actions occur: the counter resets to zero and the output wave signal toggles its state. If the counter has not yet reached this threshold, it simply increments by one.
+
+    The relationship between freq and output frequency is inverse: a larger freq value results in a longer period between toggles, producing a lower frequency square wave. Conversely, a smaller freq value causes more frequent toggling, yielding a higher frequency output.
+
+    The output signal is driven by an internal register that maintains its state between toggles, ensuring clean transitions synchronized to the clock. Both the counter and output register are initialized to zero, so the wave starts in a low state and begins toggling after the first period defined by freq elapses.

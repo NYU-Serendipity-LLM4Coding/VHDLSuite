@@ -1,0 +1,27 @@
+Please act as a professional VHDL designer.
+
+Implement a module that realizes the combinational logic portion of a Moore state machine with one input, one output, and four states using one-hot encoding.
+
+Module name:
+    TopModule
+
+Input ports:
+    signal_in: 1-bit control input that determines state transitions
+    state: 4-bit current state vector representing the one-hot encoded state (A=0001, B=0010, C=0100, D=1000)
+
+Output ports:
+    next_state: 4-bit vector representing the next state in one-hot encoding
+    signal_out: 1-bit output signal
+
+Implementation:
+    This module implements the combinational logic for a Moore finite state machine operating with one-hot encoding. The design uses four states labeled A, B, C, and D, where each state corresponds to a specific bit position in the state vector: A is bit 0, B is bit 1, C is bit 2, and D is bit 3.
+
+    The state transition logic computes the next state based on the current state and the input signal. Each bit of the next state vector is derived from Boolean expressions that implement the state transition table:
+    - Bit A of next_state is asserted when the machine is in state A or C and the input is low
+    - Bit B of next_state is asserted when the machine is in state A, B, or D and the input is high
+    - Bit C of next_state is asserted when the machine is in state B or D and the input is low
+    - Bit D of next_state is asserted when the machine is in state C and the input is high
+
+    The output logic follows the Moore machine principle where the output depends solely on the current state. The output signal_out is asserted high only when the machine is in state D, and remains low for all other states.
+
+    The design assumes that the state vector input follows proper one-hot encoding with exactly one bit set at any time. The module contains only combinational logic with no sequential elements, clocking, or reset functionality.
