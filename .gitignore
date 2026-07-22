@@ -1,6 +1,7 @@
 # ---- data: ignore everything except the released benchmark ----
 data/*
 !data/VHDLBench/
+!data/RTLLM_merged_folders
 
 # ---- secrets ----
 key.txt
