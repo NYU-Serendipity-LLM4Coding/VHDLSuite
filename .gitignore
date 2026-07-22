@@ -1,22 +1,32 @@
+
 # ---- data: ignore everything except the released benchmark ----
+# The pipeline writes downloads, intermediate folders, and experiment runs under
+# data/. Only the curated VHDLBench dataset is version-controlled.
 data/*
 !data/VHDLBench/
 !data/RTLLM_merged_folders
-
+ 
 # ---- secrets ----
 key.txt
-
-# ---- runtime artifacts (written into the repo root by run.py / VUnit) ----
+ 
+# ---- runtime artifacts written into the repo root ----
+# summary.txt is emitted by the VHDL testbench; the rest by run.py / VUnit / GHDL.
 summary.txt
 single_experiment_log.txt
 vunit_out/
 work-obj08.cf
-
+ 
 # ---- Python ----
 __pycache__/
-*.pyc
+*.py[cod]
 .venv/
 venv/
-
+*.egg-info/
+ 
 # ---- OS / editor ----
 .DS_Store
+.idea/
+.vscode/
+ 
+
+
