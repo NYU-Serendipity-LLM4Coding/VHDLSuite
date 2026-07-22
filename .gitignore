@@ -1,14 +1,21 @@
+# ---- data: ignore everything except the released benchmark ----
 data/*
-!data/VHDLBench
+!data/VHDLBench/
 
-
+# ---- secrets ----
 key.txt
 
+# ---- runtime artifacts (written into the repo root by run.py / VUnit) ----
 summary.txt
-
 single_experiment_log.txt
-
 vunit_out/
+work-obj08.cf
 
-experiments_TB/*
+# ---- Python ----
+__pycache__/
+*.pyc
+.venv/
+venv/
 
+# ---- OS / editor ----
+.DS_Store
