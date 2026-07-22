@@ -35,6 +35,11 @@ RTLLM_REPO = "https://github.com/hkust-zhiyao/RTLLM"
 RTLLM_DIR = "data/RTLLM"
 OUTPUT_FOLDER = "data/RTLLM_merged_folders"
 
+# Pinned commit for reproducibility. The upstream repo has no v2.0 tag, so the
+# version is fixed by commit hash: cloning plain `main` would drift as upstream
+# changes, breaking the problem numbering and file layout this pipeline assumes.
+RTLLM_COMMIT = "41b26896e33b536940116a975626455eed3de65e"
+
 # Level-1 category directories, in enumeration order.
 # This order determines the assigned Prob### IDs -- do not reorder.
 LEVEL1_FOLDERS = [
@@ -46,7 +51,7 @@ LEVEL1_FOLDERS = [
 
 
 def download_rtllm(rtllm_dir):
-    """Clone the RTLLM benchmark, unless it is already present."""
+    """Clone the RTLLM benchmark at the pinned commit, unless already present."""
     rtllm_path = Path(rtllm_dir)
 
     if rtllm_path.exists():
@@ -56,6 +61,10 @@ def download_rtllm(rtllm_dir):
     rtllm_path.parent.mkdir(parents=True, exist_ok=True)
     print(f"Cloning {RTLLM_REPO} -> {rtllm_dir}")
     subprocess.run(["git", "clone", RTLLM_REPO, str(rtllm_path)], check=True)
+    print(f"Checking out pinned commit {RTLLM_COMMIT}")
+    subprocess.run(
+        ["git", "checkout", RTLLM_COMMIT], cwd=str(rtllm_path), check=True
+    )
     print("Download complete")
 
 

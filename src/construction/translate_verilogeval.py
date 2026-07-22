@@ -75,6 +75,10 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 VERILOGEVAL_REPO = "https://github.com/NVlabs/verilog-eval"
 VERILOGEVAL_DIR = REPO_ROOT / "data" / "verilog-eval"
 
+# Pinned commit for reproducibility: cloning plain `main` would drift as
+# upstream changes, altering the problem set and file layout this stage assumes.
+VERILOGEVAL_COMMIT = "c498220d0a52248f8e3fdffe279075215bde2da6"
+
 # File holding the OpenRouter API key, at the repository root and excluded by
 # .gitignore. Override with the VHDLSUITE_API_KEY_PATH environment variable.
 API_KEY_PATH = os.environ.get("VHDLSUITE_API_KEY_PATH", str(REPO_ROOT / "key.txt"))
@@ -102,7 +106,7 @@ SYSTEM_PROMPT = SYSTEM_PROMPT_v022  # noqa: F405
 # ---------------------------------------------------------------------------
 
 def download_verilogeval(dest=VERILOGEVAL_DIR):
-    """Clone the VerilogEval benchmark, unless it is already present."""
+    """Clone the VerilogEval benchmark at the pinned commit, unless present."""
     if dest.exists():
         print(f"{dest} already exists, skipping download")
         return
@@ -110,6 +114,10 @@ def download_verilogeval(dest=VERILOGEVAL_DIR):
     dest.parent.mkdir(parents=True, exist_ok=True)
     print(f"Cloning {VERILOGEVAL_REPO} -> {dest}")
     subprocess.run(["git", "clone", VERILOGEVAL_REPO, str(dest)], check=True)
+    print(f"Checking out pinned commit {VERILOGEVAL_COMMIT}")
+    subprocess.run(
+        ["git", "checkout", VERILOGEVAL_COMMIT], cwd=str(dest), check=True
+    )
     print("Download complete")
 
 
