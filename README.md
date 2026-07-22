@@ -1,6 +1,6 @@
 # VHDLSuite
 
-> **[Paper Title]**
+> **[VHDLSuite: Unified Pipeline for LLM VHDL Generation with Data Synthesis and Evaluation]**
 > [Authors]
 > MLCAD 2026
 
