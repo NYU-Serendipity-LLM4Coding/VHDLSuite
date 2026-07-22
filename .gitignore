@@ -28,5 +28,6 @@ venv/
 .idea/
 .vscode/
  
+.gitignore
 
 
