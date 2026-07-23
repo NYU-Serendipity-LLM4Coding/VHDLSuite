@@ -1,7 +1,9 @@
 # VHDLSuite
 
 > **[VHDLSuite: Unified Pipeline for LLM VHDL Generation with Data Synthesis and Evaluation]**
-<!-- > [Authors] -->
+
+> [Yijun Shen, Minghao Shao, Yichen Zhao, Zhuoyan Yu, Boyuan Chen, Yik-Cheung Tam, Muhammad Shafique]
+
 > MLCAD 2026
 
 VHDLSuite is a pipeline for building and evaluating a VHDL code-generation
