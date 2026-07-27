@@ -74,10 +74,7 @@ BENCHMARKS = [
     ("RTLLM", 50, RTLLM_BENCHMARK, TABLE_RTLLM),
     ("verilog-eval", 156, VERILOGEVAL_BENCHMARK, TABLE_VERILOGEVAL),
 ]
-BENCHMARKS = [
-    ("RTLLM", 2, RTLLM_BENCHMARK, TABLE_RTLLM),
-    ("verilog-eval", 2, VERILOGEVAL_BENCHMARK, TABLE_VERILOGEVAL),
-]
+
 
 # Issue codes, as classified by src/simulation/run.py.
 ISSUE_COMPILE_FAIL = 1
