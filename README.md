@@ -166,7 +166,7 @@ To reconstruct the benchmark from the original Verilog sources.
 ### 4.1 Preprocess RTLLM
 
 ```bash
-python src/preprocessing/rtllm_data_management.py
+python src/preprocessing/RTLLM_data_management.py
 ```
 
 Clones RTLLM at the pinned commit into `data/RTLLM/` and flattens it into
