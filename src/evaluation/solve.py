@@ -136,10 +136,6 @@ MODELS = [
     "qwen/qwen3-max",
 ]
 
-MODELS = [
-    "anthropic/claude-sonnet-4.5",
-]
-
 # Sampling parameters. Temperature is deliberately high: the reported metric is
 # pass@k over NUM_RUNS independent samples, which needs diversity between runs.
 TEMPERATURE = 0.85
