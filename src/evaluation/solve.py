@@ -347,7 +347,7 @@ Please fix these errors and return both blocks again in the standard format (rea
 # Evaluation driver
 # ---------------------------------------------------------------------------
 
-def test_all(client, model_name, num_problems, vhdlbench_dir, run_dir, mode_name,
+def test_all(client, model_name, num_problems, vhdlbench_dir, run_dir, 
              max_tokens=MAX_TOKENS, temp=TEMPERATURE, top_p=TOP_P,
              stop=["<|end▁of▁sentence|>"], stream=False,
              max_repair_rounds=MAX_REPAIR_ROUNDS):
@@ -492,7 +492,7 @@ def test_all(client, model_name, num_problems, vhdlbench_dir, run_dir, mode_name
                 error_list.pop(-1)
                 break
 
-        print(f"{model_name}, {mode_name}, Prob{i:05d}: Ended")
+        print(f"{model_name}, Prob{i:05d}: Ended")
         for x in range(len(all_accuracy)):
             all_accuracy[x] += 1 if accuracy[x] > 0 else 0
         print("Now the accuracy is:", all_accuracy)
@@ -514,8 +514,6 @@ def main():
         api_key = f.read().strip()
 
     client = OpenAI(api_key=api_key, base_url=API_BASE_URL)
-
-    mode_list = ["code-complete-iccad2023"]
 
     EXPERIMENT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -543,52 +541,50 @@ def main():
             else:
                 file_model_name = model_name
 
-            for mode_name in mode_list:
-                print(mode_name, end="\n\n\n")
-                if mode_name not in ("code-complete-iccad2023", "spec-to-rtl"):
-                    raise ValueError(f"Unsupported mode: {mode_name}")
 
-                resume_dir = None
-                if RESUME_LATEST:
-                    resume_dir = find_resumable_run(
-                        EXPERIMENT_DIR, file_model_name, benchmark_name,
-                        num_problems,
-                    )
 
-                run_accuracies = []
-                for run_idx in range(1, NUM_RUNS + 1):
-                    # The resumed run, if any, is the first: finishing it off
-                    # before spending on new samples means an interruption costs
-                    # nothing beyond what it already cost.
-                    if run_idx == 1 and resume_dir is not None:
-                        run_dir = resume_dir
-                        print(f"Run {run_idx}/{NUM_RUNS}: resuming {run_dir.name}")
-                    else:
-                        # Two runs finishing within the same second would
-                        # otherwise share a directory and silently merge.
-                        while True:
-                            current_time = time.strftime("%Y-%m-%d_%H-%M-%S")
-                            run_dir = EXPERIMENT_DIR / (
-                                f"{file_model_name}_{benchmark_name}_{current_time}"
-                            )
-                            if not run_dir.exists():
-                                break
-                            time.sleep(1)
-                        print(f"Run {run_idx}/{NUM_RUNS}: starting {run_dir.name}")
 
-                    run_dir.mkdir(parents=True, exist_ok=True)
+            resume_dir = None
+            if RESUME_LATEST:
+                resume_dir = find_resumable_run(
+                    EXPERIMENT_DIR, file_model_name, benchmark_name,
+                    num_problems,
+                )
 
-                    all_accuracy, logs, error_list = test_all(
-                        client, model_name, num_problems, vhdlbench_dir,
-                        run_dir, mode_name,
-                        max_tokens=MAX_TOKENS, temp=TEMPERATURE, top_p=TOP_P,
-                        max_repair_rounds=MAX_REPAIR_ROUNDS,
-                    )
-                    print(all_accuracy)
-                    print(error_list)
-                    run_accuracies.append(all_accuracy)
+            run_accuracies = []
+            for run_idx in range(1, NUM_RUNS + 1):
+                # The resumed run, if any, is the first: finishing it off
+                # before spending on new samples means an interruption costs
+                # nothing beyond what it already cost.
+                if run_idx == 1 and resume_dir is not None:
+                    run_dir = resume_dir
+                    print(f"Run {run_idx}/{NUM_RUNS}: resuming {run_dir.name}")
+                else:
+                    # Two runs finishing within the same second would
+                    # otherwise share a directory and silently merge.
+                    while True:
+                        current_time = time.strftime("%Y-%m-%d_%H-%M-%S")
+                        run_dir = EXPERIMENT_DIR / (
+                            f"{file_model_name}_{benchmark_name}_{current_time}"
+                        )
+                        if not run_dir.exists():
+                            break
+                        time.sleep(1)
+                    print(f"Run {run_idx}/{NUM_RUNS}: starting {run_dir.name}")
 
-                results[(benchmark_name, model_name)] = run_accuracies
+                run_dir.mkdir(parents=True, exist_ok=True)
+
+                all_accuracy, logs, error_list = test_all(
+                    client, model_name, num_problems, vhdlbench_dir,
+                    run_dir,
+                    max_tokens=MAX_TOKENS, temp=TEMPERATURE, top_p=TOP_P,
+                    max_repair_rounds=MAX_REPAIR_ROUNDS,
+                )
+                print(all_accuracy)
+                print(error_list)
+                run_accuracies.append(all_accuracy)
+
+            results[(benchmark_name, model_name)] = run_accuracies
 
     print("\n=== Summary ===")
     for (benchmark_name, model_name), run_accuracies in results.items():
