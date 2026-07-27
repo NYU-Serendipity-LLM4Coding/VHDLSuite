@@ -98,6 +98,8 @@ BENCHMARK_RUNS = [
     ),
 ]
 
+
+
 # Where evaluation runs are written (one subdirectory per model/mode/timestamp).
 EXPERIMENT_DIR = REPO_ROOT / "data" / "experiments"
 
@@ -132,6 +134,10 @@ MODELS = [
     "openai/gpt-5.1-codex-max",
     "x-ai/grok-4",
     "qwen/qwen3-max",
+]
+
+MODELS = [
+    "anthropic/claude-sonnet-4.5",
 ]
 
 # Sampling parameters. Temperature is deliberately high: the reported metric is

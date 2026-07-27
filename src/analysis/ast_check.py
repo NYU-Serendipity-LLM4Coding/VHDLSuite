@@ -64,6 +64,7 @@ CONSTRUCTION_DIR = REPO_ROOT / "data" / "experiments_TB"
 RTLLM_BENCHMARK = CONSTRUCTION_DIR / "<model>_<mode>_<timestamp>"
 VERILOGEVAL_BENCHMARK = CONSTRUCTION_DIR / "<model>_<mode>_<timestamp>"
 
+
 # Repair round to score. See the module docstring: the per-problem bookkeeping
 # below assumes one log record per problem, which only holds at 1.
 ATTEMPT_MAX = 1
@@ -72,6 +73,10 @@ ATTEMPT_MAX = 1
 BENCHMARKS = [
     ("RTLLM", 50, RTLLM_BENCHMARK, TABLE_RTLLM),
     ("verilog-eval", 156, VERILOGEVAL_BENCHMARK, TABLE_VERILOGEVAL),
+]
+BENCHMARKS = [
+    ("RTLLM", 2, RTLLM_BENCHMARK, TABLE_RTLLM),
+    ("verilog-eval", 2, VERILOGEVAL_BENCHMARK, TABLE_VERILOGEVAL),
 ]
 
 # Issue codes, as classified by src/simulation/run.py.

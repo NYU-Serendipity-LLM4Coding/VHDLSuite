@@ -99,10 +99,10 @@ API_BASE_URL = "https://openrouter.ai/api/v1"
 # being labeled were generated against these frozen testbenches, so the same
 # directories supply the golden reference the judge compares against.
 VHDLBENCH_DIRS = {
-    "RTLLM": REPO_ROOT / "data" / "experiments_TB"
-    / "claude-sonnet-4.5_code_2025-11-09_02-55-52",
-    "verilog-eval": REPO_ROOT / "data" / "experiments_TB"
-    / "claude-sonnet-4.5_code_2025-11-03_13-45-44",
+    "RTLLM": REPO_ROOT / "data" / "VHDLBench"
+    / "VHDLBench-RTLLM",
+    "verilog-eval": REPO_ROOT / "data" / "VHDLBench"
+    / "VHDLBench-VerilogEval",
 }
 
 # Judge sampling. Kept as the merged-from scripts had them.

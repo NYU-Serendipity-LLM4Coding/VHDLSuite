@@ -66,6 +66,8 @@ API_BASE_URL = "https://openrouter.ai/api/v1"
 # Number of RTLLM designs (RTLLM v2.0 ships 50).
 NUM_PROBLEMS = 50
 
+
+
 # Maximum tokens per completion. Translations of large testbenches are long,
 # so this is well above a typical code-generation budget.
 MAX_TOKENS = 15000
@@ -229,7 +231,7 @@ def test_all(client, model_name, benchmark_name,
     else:
         file_model_name = model_name
 
-    folder_name = base_experiment_dir / f"{file_model_name}_{current_time}"
+    folder_name = base_experiment_dir / f"{file_model_name}_rtll_{current_time}"
     folder_name.mkdir(parents=True, exist_ok=True)
 
     error_list = []
