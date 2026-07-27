@@ -2,7 +2,7 @@
 
 > **[VHDLSuite: Unified Pipeline for LLM VHDL Generation with Data Synthesis and Evaluation]**
 
-> [Yijun Shen, Minghao Shao, Yichen Zhao, Zhuoyan Yu, Boyuan Chen, Yik-Cheung Tam, Muhammad Shafique]
+> Yijun Shen, Minghao Shao, Yichen Zhao, Zhuoyan Yu, Boyuan Chen, Yik-Cheung Tam, Muhammad Shafique
 
 > MLCAD 2026
 
