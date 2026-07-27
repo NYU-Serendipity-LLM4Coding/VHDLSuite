@@ -79,7 +79,7 @@ at a key file elsewhere.
 ```
 src/
   preprocessing/
-    rtllm_data_management.py     Download RTLLM (pinned) and flatten its layout
+    RTLLM_data_management.py     Download RTLLM (pinned) and flatten its layout
   construction/
     translate_rtllm.py           Verilog -> VHDL translation (RTLLM)
     translate_verilogeval.py     Verilog -> VHDL translation (VerilogEval)
